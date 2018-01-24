@@ -12,4 +12,5 @@ import java.sql.SQLException;
  */
 public interface BaseCommand {
     String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException;
+    String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException;
 }

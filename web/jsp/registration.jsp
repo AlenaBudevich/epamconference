@@ -5,6 +5,7 @@
   Time: 15:29
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html><head><title>Registration</title></head>
 <body>
@@ -17,6 +18,14 @@
     <br/>Email:<br/>
     <input type="text" name="email" value=""/>
     <br/>
-    <input type="submit" value="Registration" formaction="controller" formmethod="post"/>
+    <input type="submit" value="Registration" formmethod="post" formaction="controller"/>
 </form><hr/>
+<table>
+    <c:forEach items="${users}" var="current">
+        <tr>
+            <td><c:out value="${current.login}" /><td>
+            <td><c:out value="${current.password}" /><td>
+        </tr>
+    </c:forEach>
+</table>
 </body></html>

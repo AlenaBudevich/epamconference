@@ -91,4 +91,13 @@ public class UserService {
             throw new ServiceException("Can't show user table ", e);
         }
     }
+
+    public void deleteUser(String userId) throws ServiceException, SQLException {
+        try {
+            dao.deleteUser(Long.parseLong(userId));
+        } catch (DAOException e) {
+            throw new ServiceException("Can't delete user in service method ", e);
+        }
+
+    }
 }

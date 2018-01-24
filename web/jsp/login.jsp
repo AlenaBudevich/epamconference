@@ -15,13 +15,8 @@
     <br/>Password:<br/>
     <input type="password" name="password" value=""/>
     <br/>
-    ${errorLoginPassMessage}
-    <br/>
-    ${wrongAction}
-    <br/>
-    ${nullPage}
-    <br/>
     <input type="submit" value="Log in" formaction="controller" formmethod="post"/>
-</form><hr/>
+    <input type="submit" value="Registration" formaction="controller" formmethod="get"/>
+</form>
 </body></html>
 

@@ -22,5 +22,9 @@ public class EmptyCommand implements BaseCommand {
         return null;
     }
 
+    public String getPage(HttpServletRequest request, HttpServletResponse response) {
+        return null;
+    }
+
 
 }

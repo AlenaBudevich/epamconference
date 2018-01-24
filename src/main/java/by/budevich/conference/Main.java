@@ -1,9 +1,8 @@
 package by.budevich.conference;
 
-import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
-import by.budevich.conference.service.UserService;
+import by.budevich.conference.service.ReportService;
 
 import java.sql.SQLException;
 
@@ -13,8 +12,6 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException, DAOException, ServiceException {
         System.out.println("Hi");
-        User user = UserService.getInstance().findUserById("3");
-        System.out.println(user);
+        ReportService.getInstance().deleteReport("1");
     }
-
 }

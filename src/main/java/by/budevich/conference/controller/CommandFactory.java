@@ -16,7 +16,6 @@ public class CommandFactory {
         try{
             CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             command = currentEnum.getCurrentCommand();
-            System.out.println("pleha");
         } catch(IllegalArgumentException e){
             //request.setAttribute(AttributeConst.ATTR_ERROR_MESSAGE, MessageConst.MESSAGE_WRONG_ACTION);
         }

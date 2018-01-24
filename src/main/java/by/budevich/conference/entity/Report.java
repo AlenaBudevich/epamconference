@@ -14,7 +14,8 @@ public class Report  implements Serializable, Cloneable {
 
     public Report () {}
 
-    public Report(long reportId, String reportName, String reportTheses, String reportStatus, String reportContent) {
+    public Report(long reportId, String reportName, String reportTheses, String reportStatus,
+                  String reportContent) {
         this.reportId = reportId;
         this.reportName = reportName;
         this.reportTheses = reportTheses;

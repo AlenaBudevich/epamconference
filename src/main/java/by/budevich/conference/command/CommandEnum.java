@@ -16,6 +16,6 @@ public enum  CommandEnum {
     }
 
     public BaseCommand getCurrentCommand(){
-        return  command;
+        return command;
     }
 }

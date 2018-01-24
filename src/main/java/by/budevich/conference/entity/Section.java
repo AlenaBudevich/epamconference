@@ -1,6 +1,7 @@
 package by.budevich.conference.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,12 +17,13 @@ public class Section implements Serializable, Cloneable{
     private String sectionAddress;
     private String sectionContent;
     private String sectionStatus;
+    private ArrayList <Long> conferencesId;
 
     public Section () {}
 
-    public Section(long sectionId, long conferenceId, String sectionName,
-                   int maxNumberReports, Date sectionBeginning, Date sectionEnd,
-                   String sectionAddress, String sectionContent, String sectionStatus) {
+    public Section(long sectionId, long conferenceId, String sectionName, int maxNumberReports,
+                   Date sectionBeginning, Date sectionEnd, String sectionAddress, String sectionContent,
+                   String sectionStatus, ArrayList<Long> conferencesId) {
         this.sectionId = sectionId;
         this.conferenceId = conferenceId;
         this.sectionName = sectionName;
@@ -31,6 +33,7 @@ public class Section implements Serializable, Cloneable{
         this.sectionAddress = sectionAddress;
         this.sectionContent = sectionContent;
         this.sectionStatus = sectionStatus;
+        this.conferencesId = conferencesId;
     }
 
     public Section (long conferenceId, String sectionName){
@@ -110,6 +113,14 @@ public class Section implements Serializable, Cloneable{
         this.sectionStatus = sectionStatus;
     }
 
+    public ArrayList<Long> getConferencesId() {
+        return conferencesId;
+    }
+
+    public void setConferencesId(ArrayList<Long> conferencesId) {
+        this.conferencesId = conferencesId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,7 +139,9 @@ public class Section implements Serializable, Cloneable{
             return false;
         if (sectionContent != null ? !sectionContent.equals(section.sectionContent) : section.sectionContent != null)
             return false;
-        return sectionStatus != null ? sectionStatus.equals(section.sectionStatus) : section.sectionStatus == null;
+        if (sectionStatus != null ? !sectionStatus.equals(section.sectionStatus) : section.sectionStatus != null)
+            return false;
+        return conferencesId != null ? conferencesId.equals(section.conferencesId) : section.conferencesId == null;
 
     }
 
@@ -143,6 +156,7 @@ public class Section implements Serializable, Cloneable{
         result = 31 * result + (sectionAddress != null ? sectionAddress.hashCode() : 0);
         result = 31 * result + (sectionContent != null ? sectionContent.hashCode() : 0);
         result = 31 * result + (sectionStatus != null ? sectionStatus.hashCode() : 0);
+        result = 31 * result + (conferencesId != null ? conferencesId.hashCode() : 0);
         return result;
     }
 
@@ -158,6 +172,7 @@ public class Section implements Serializable, Cloneable{
                 ", sectionAddress='" + sectionAddress + '\'' +
                 ", sectionContent='" + sectionContent + '\'' +
                 ", sectionStatus='" + sectionStatus + '\'' +
+                ", conferencesId=" + conferencesId +
                 '}';
     }
 }

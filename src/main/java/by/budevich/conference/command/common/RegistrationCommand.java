@@ -26,8 +26,19 @@ public class RegistrationCommand implements BaseCommand {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        UserService.getInstance().addUser(login, password, email);
-        if (UserService.getInstance().findUserByLogin(login) != null) return "jsp/Good.jsp";
-        else return "jsp/Bad.jsp";
+
+        if (UserService.getInstance().findUserByLogin(login)!=null) {
+            System.out.println("мы лохи, всё плохо");
+            return "jsp/Bad.jsp";
+        }
+        else
+            {
+                UserService.getInstance().addUser(login, password, email);
+                return "jsp/Good.jsp";}
+
+    }
+
+    public String getPage(HttpServletRequest request, HttpServletResponse response) {
+        return null;
     }
 }

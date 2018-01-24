@@ -44,6 +44,8 @@ public class UserDAO implements BaseUserDAO {
             "role, phoneNumber, avatar, firstName, lastName, surname " +
             "FROM user ";
 
+    private static final String SQL_DELETE_USER = " DELETE FROM user WHERE userID = ?";
+
     public void addUser(User user) throws DAOException, SQLException {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_USER);
@@ -58,6 +60,13 @@ public class UserDAO implements BaseUserDAO {
             preparedStatement.setString(9, user.getLastName());
             preparedStatement.setString(10, user.getSurname());
             preparedStatement.executeUpdate();
+    }
+
+    public void deleteUser(long userId) throws DAOException, SQLException {
+        Connection connection = ConnectionPool.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER);
+        preparedStatement.setLong(1, userId);
+        preparedStatement.executeUpdate();
     }
 
     public User findUserByLogin (String login) throws DAOException, SQLException {
@@ -97,7 +106,6 @@ public class UserDAO implements BaseUserDAO {
         preparedStatement.setString(6, user.getSurname());
         preparedStatement.setLong(7, user.getUserId());
         preparedStatement.executeUpdate();
-        System.out.println(findUserById(user.getUserId()).toString());
     }
 
     public void assignRoleToUser(long userId, String role) throws DAOException, SQLException {
