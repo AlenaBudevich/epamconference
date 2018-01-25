@@ -1,14 +1,15 @@
 package by.budevich.conference.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 /**
  * Created by Asus on 15.01.2018.
  */
 public class Message implements Serializable, Cloneable{
     private long messageId;
-    private Date messageTime;
+    private Timestamp messageTime;
     private String messageText;
     private String messageContent;
     private long sendId;
@@ -16,7 +17,7 @@ public class Message implements Serializable, Cloneable{
 
     public Message (){}
 
-    public Message(long messageId, Date messageTime, String messageText, String messageContent,
+    public Message(long messageId, Timestamp messageTime, String messageText, String messageContent,
                    long sendId, long receiveId) {
         this.messageId = messageId;
         this.messageTime = messageTime;
@@ -40,11 +41,11 @@ public class Message implements Serializable, Cloneable{
         this.messageId = messageId;
     }
 
-    public Date getMessageTime() {
+    public Timestamp getMessageTime() {
         return messageTime;
     }
 
-    public void setMessageTime(Date messageTime) {
+    public void setMessageTime(Timestamp messageTime) {
         this.messageTime = messageTime;
     }
 

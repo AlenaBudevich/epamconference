@@ -7,8 +7,8 @@ import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Asus on 24.01.2018.
@@ -31,7 +31,7 @@ public class ConferenceService {
     }
 
     public void updateConferenceInfo(String  conferenceId, String conferenceName, String conferenceDescription,
-                                     String maxNumberParticipiants, Date conferenceBeginning, Date conferenceEnd,
+                                     String maxNumberParticipiants, Timestamp conferenceBeginning, Timestamp conferenceEnd,
                                      String conferenceCountry, String conferenceCity, String conferenceAddress,
                                      String conferenceContent)
             throws ServiceException, SQLException {

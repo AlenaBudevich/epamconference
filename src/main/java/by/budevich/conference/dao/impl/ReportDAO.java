@@ -72,7 +72,7 @@ public class ReportDAO implements BaseReportDAO {
             " WHERE conferencereport.conferenceID = ?";
 
     private static final String SQL_ADD_REPORT_TO_USER =
-            "INSERT INTO reportuser (reportID, userID) VALUES (?,?)";
+            "INSERT INTO reportuser (userID, reportID) VALUES (?,?)";
 
     private static final String SQL_ADD_REPORT_TO_SECTION =
             "INSERT INTO sectionreport (sectionID, reportID) VALUES (?,?)";
@@ -177,7 +177,7 @@ public class ReportDAO implements BaseReportDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void addReportTo(String entity, long reportId, long id) throws SQLException {
+    public void addReportTo(String entity, long id, long reportId) throws SQLException {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement;
         if (entity.equalsIgnoreCase(EntityEnum.USER.name())) {
@@ -187,8 +187,8 @@ public class ReportDAO implements BaseReportDAO {
         } else if (entity.equalsIgnoreCase(EntityEnum.CONFERENCE.name())) {
             preparedStatement = connection.prepareStatement(SQL_ADD_REPORT_TO_CONFERENCE);
         } else return;
-        preparedStatement.setLong(1, reportId);
-        preparedStatement.setLong(2, id);
+        preparedStatement.setLong(1, id);
+        preparedStatement.setLong(2, reportId);
         preparedStatement.executeUpdate();
     }
 

@@ -18,6 +18,6 @@ public interface BaseReportDAO {
     ArrayList<Report> showReportsByAnyId(String entity, long id) throws DAOException, SQLException;
     Report findReportById(long id) throws DAOException, SQLException;
     ArrayList<Report> findReportByName(String reportName) throws DAOException, SQLException;
-    void addReportTo (String entity, long reportId, long id) throws SQLException;
+    void addReportTo (String entity, long id, long reportId) throws SQLException;
     void  deleteReportFrom (String entity, long reportId) throws SQLException;
 }

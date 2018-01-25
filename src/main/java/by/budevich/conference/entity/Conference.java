@@ -1,7 +1,7 @@
 package by.budevich.conference.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Asus on 15.01.2018.
@@ -11,18 +11,18 @@ public class Conference implements Serializable, Cloneable{
     private String conferenceName;
     private String conferenceDescription;
     private int maxNumberParticipiants;
-    private Date conferenceBeginning;
-    private Date conferenceEnd;
+    private Timestamp conferenceBeginning;
+    private Timestamp conferenceEnd;
     private String conferenceCountry;
     private String conferenceCity;
     private String conferenceAddress;
     private String conferenceContent;
-    private String conferenceStatus;
+    private String conferenceStatus = "RECRUITED";
 
     public Conference () {}
 
     public Conference(long conferenceId, String conferenceName, String conferenceDescription,
-                      int maxNumberParticipiants, Date conferenceBeginning, Date conferenceEnd,
+                      int maxNumberParticipiants, Timestamp conferenceBeginning, Timestamp conferenceEnd,
                       String conferenceCountry, String conferenceCity, String conferenceAddress,
                       String conferenceContent, String conferenceStatus) {
         this.conferenceId = conferenceId;
@@ -74,19 +74,19 @@ public class Conference implements Serializable, Cloneable{
         this.maxNumberParticipiants = maxNumberParticipiants;
     }
 
-    public Date getConferenceBeginning() {
+    public Timestamp getConferenceBeginning() {
         return conferenceBeginning;
     }
 
-    public void setConferenceBeginning(Date conferenceBeginning) {
+    public void setConferenceBeginning(Timestamp conferenceBeginning) {
         this.conferenceBeginning = conferenceBeginning;
     }
 
-    public Date getConferenceEnd() {
+    public Timestamp getConferenceEnd() {
         return conferenceEnd;
     }
 
-    public void setConferenceEnd(Date conferenceEnd) {
+    public void setConferenceEnd(Timestamp conferenceEnd) {
         this.conferenceEnd = conferenceEnd;
     }
 

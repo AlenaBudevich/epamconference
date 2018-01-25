@@ -18,34 +18,34 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     private static final String SQL_ADD_CONFERENCE =
-            "INSERT INTO conference (conferenceID, conferenceName, conferenceDescription, " +
-                    "muxNumberParticipiants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
+            "INSERT INTO сonference (conferenceID, conferenceName, conferenceDescription, " +
+                    "maxNumberParticipants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
                     "conferenceCity, conferenceAddress, conferenceContent, conferenceStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-    private static final String SQL_UPDATE_CONFERENCE_INFO = "UPDATE conference SET conferenceName = ?, conferenceDescription = ?, " +
-            "muxNumberParticipiants = ?, conferenceBeginning = ?, conferenceEnd = ?, conferenceCountry = ?, " +
+    private static final String SQL_UPDATE_CONFERENCE_INFO = "UPDATE сonference SET conferenceName = ?, conferenceDescription = ?, " +
+            "maxNumberParticipants = ?, conferenceBeginning = ?, conferenceEnd = ?, conferenceCountry = ?, " +
             "conferenceCity = ?, conferenceAddress = ?, conferenceContent = ? " +
             "WHERE conferenceID = ?";
 
-    private static final String SQL_ASSIGN_CONFERENCE_STATUS = "UPDATE conference SET conferenceStatus = ? WHERE conferenceID = ?";
+    private static final String SQL_ASSIGN_CONFERENCE_STATUS = "UPDATE сonference SET conferenceStatus = ? WHERE conferenceID = ?";
 
-    private static final String SQL_DELETE_CONFERENCE = " DELETE FROM conference WHERE conferenceID = ?";
+    private static final String SQL_DELETE_CONFERENCE = " DELETE FROM сonference WHERE conferenceID = ?";
 
     private static final String SQL_VIEW_CONFERENCE_TABLE = "SELECT conferenceID, conferenceName, conferenceDescription, " +
-            "muxNumberParticipiants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
+            "maxNumberParticipants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
             "conferenceCity, conferenceAddress, conferenceContent, conferenceStatus " +
-            "FROM conference ";
+            "FROM сonference ";
 
     private static final String SQL_FIND_CONFERENCE_BY_ID = "SELECT conferenceID, conferenceName, conferenceDescription, " +
-            "muxNumberParticipiants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
+            "maxNumberParticipants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
             "conferenceCity, conferenceAddress, conferenceContent, conferenceStatus " +
-            " FROM conference" +
+            " FROM сonference" +
             " WHERE conferenceID = ?";
 
     private static final String SQL_FIND_CONFERENCE_BY_NAME = "SELECT conferenceID, conferenceName, conferenceDescription, " +
-            "muxNumberParticipiants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
+            "maxNumberParticipants, conferenceBeginning, conferenceEnd, conferenceCountry, " +
             "conferenceCity, conferenceAddress, conferenceContent, conferenceStatus " +
-            " FROM conference" +
+            " FROM сonference" +
             " WHERE conferenceName = ?";
 
     public void addConference(Conference conference) throws SQLException {
@@ -55,8 +55,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
         preparedStatement.setString(2, conference.getConferenceName());
         preparedStatement.setString(3, conference.getConferenceDescription());
         preparedStatement.setInt(4, conference.getMaxNumberParticipiants());
-        preparedStatement.setDate(5, (Date) conference.getConferenceBeginning());
-        preparedStatement.setDate(6, (Date) conference.getConferenceEnd());
+        preparedStatement.setTimestamp(5, conference.getConferenceBeginning());
+        preparedStatement.setTimestamp(6, conference.getConferenceEnd());
         preparedStatement.setString(7, conference.getConferenceCountry());
         preparedStatement.setString(8, conference.getConferenceCity());
         preparedStatement.setString(9, conference.getConferenceAddress());
@@ -72,8 +72,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
         preparedStatement.setString(1, conference.getConferenceName());
         preparedStatement.setString(2, conference.getConferenceDescription());
         preparedStatement.setInt(3, conference.getMaxNumberParticipiants());
-        preparedStatement.setDate(4, (Date) conference.getConferenceBeginning());
-        preparedStatement.setDate(5, (Date) conference.getConferenceEnd());
+        preparedStatement.setTimestamp(4, conference.getConferenceBeginning());
+        preparedStatement.setTimestamp(5, conference.getConferenceEnd());
         preparedStatement.setString(6, conference.getConferenceCountry());
         preparedStatement.setString(7, conference.getConferenceCity());
         preparedStatement.setString(8, conference.getConferenceAddress());
@@ -137,8 +137,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
         conference.setConferenceName(resultSet.getString(2));
         conference.setConferenceDescription(resultSet.getString(3));
         conference.setMaxNumberParticipiants(resultSet.getInt(4));
-        conference.setConferenceBeginning(resultSet.getDate(5));
-        conference.setConferenceEnd(resultSet.getDate(6));
+        conference.setConferenceBeginning(resultSet.getTimestamp(5));
+        conference.setConferenceEnd(resultSet.getTimestamp(6));
         conference.setConferenceCountry(resultSet.getString(7));
         conference.setConferenceCity(resultSet.getString(8));
         conference.setConferenceAddress(resultSet.getString(9));

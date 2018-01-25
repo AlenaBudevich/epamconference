@@ -1,8 +1,8 @@
 package by.budevich.conference.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Asus on 27.12.2017.
@@ -12,17 +12,17 @@ public class Section implements Serializable, Cloneable{
     private long conferenceId;
     private String sectionName;
     private int maxNumberReports;
-    private Date sectionBeginning;
-    private Date sectionEnd;
+    private Timestamp sectionBeginning;
+    private Timestamp sectionEnd;
     private String sectionAddress;
     private String sectionContent;
-    private String sectionStatus;
+    private String sectionStatus = "RECRUITED";
     private ArrayList <Long> conferencesId;
 
     public Section () {}
 
     public Section(long sectionId, long conferenceId, String sectionName, int maxNumberReports,
-                   Date sectionBeginning, Date sectionEnd, String sectionAddress, String sectionContent,
+                   Timestamp sectionBeginning, Timestamp sectionEnd, String sectionAddress, String sectionContent,
                    String sectionStatus, ArrayList<Long> conferencesId) {
         this.sectionId = sectionId;
         this.conferenceId = conferenceId;
@@ -73,19 +73,19 @@ public class Section implements Serializable, Cloneable{
         this.maxNumberReports = maxNumberReports;
     }
 
-    public Date getSectionBeginning() {
+    public Timestamp getSectionBeginning() {
         return sectionBeginning;
     }
 
-    public void setSectionBeginning(Date sectionBeginning) {
+    public void setSectionBeginning(Timestamp sectionBeginning) {
         this.sectionBeginning = sectionBeginning;
     }
 
-    public Date getSectionEnd() {
+    public Timestamp getSectionEnd() {
         return sectionEnd;
     }
 
-    public void setSectionEnd(Date sectionEnd) {
+    public void setSectionEnd(Timestamp sectionEnd) {
         this.sectionEnd = sectionEnd;
     }
 
