@@ -62,13 +62,6 @@ public class UserDAO implements BaseUserDAO {
             preparedStatement.executeUpdate();
     }
 
-    public void deleteUser(long userId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER);
-        preparedStatement.setLong(1, userId);
-        preparedStatement.executeUpdate();
-    }
-
     public User findUserByLogin (String login) throws DAOException, SQLException {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
