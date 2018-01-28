@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public interface BaseUserDAO {
     void addUser(User user) throws DAOException, SQLException;
+    void deleteUser(long userId) throws DAOException, SQLException;
     void updateUserInfo(User user) throws DAOException, SQLException;
     void assignRoleToUser(long userId, String role) throws DAOException, SQLException;
     User findUserByLogin(String login) throws DAOException, SQLException;

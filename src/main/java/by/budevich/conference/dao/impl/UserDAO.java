@@ -23,6 +23,7 @@ public class UserDAO implements BaseUserDAO {
             "INSERT INTO user (userID, login, password, email, role, phoneNumber," +
                     "avatar, firstName, lastName, surname) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
+
     private static final String SQL_FIND_USER_BY_LOGIN = "SELECT userID, login, password, " +
             "email, role, phoneNumber, avatar, firstName, lastName, surname" +
             " FROM user " +
@@ -115,6 +116,13 @@ public class UserDAO implements BaseUserDAO {
         ResultSet result = statement.executeQuery(SQL_VIEW_USER_TABLE);
         ArrayList<User> userList = initUserTable(result);
         return userList;
+    }
+
+    public void deleteUser(long userId) throws DAOException, SQLException {
+        Connection connection = ConnectionPool.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER);
+        preparedStatement.setLong(1, userId);
+        preparedStatement.executeUpdate();
     }
 
     private User initUser(ResultSet resultSet) throws SQLException {

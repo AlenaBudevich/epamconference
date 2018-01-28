@@ -1,4 +1,4 @@
-package by.budevich.conference.command.common;
+package by.budevich.conference.command.impl.common;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.entity.User;
@@ -32,7 +32,7 @@ public class LoginCommand implements BaseCommand{
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        ArrayList <User> users= UserService.getInstance().showUsers();
+        ArrayList<User> users= UserService.getInstance().showUsers();
         request.setAttribute("users", users);
         String page = "jsp/registration.jsp";
         return page;

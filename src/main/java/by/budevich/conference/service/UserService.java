@@ -41,12 +41,15 @@ public class UserService {
         }
     }
 
-    public User checkUser(User user, String password) throws ServiceException, SQLException {
-        User baseUser = findUserByLogin(user.getLogin());
+    public User checkUser(String login, String password) throws ServiceException, SQLException {
+        User baseUser = findUserByLogin(login);
         if (!password.equals(baseUser.getPassword())) {
-            throw new ServiceException("Wrong password ");
+            return null;
+            //throw new ServiceException("Wrong password ");
         }
-        return user;
+        else {
+            return baseUser;
+        }
     }
 
     public void updateUserInfo(String userId, String login, String password, String email,
@@ -90,5 +93,14 @@ public class UserService {
         } catch (DAOException e) {
             throw new ServiceException("Can't show user table ", e);
         }
+    }
+
+    public void deleteUser(String userId) throws ServiceException, SQLException {
+        try {
+            dao.deleteUser(Long.parseLong(userId));
+        } catch (DAOException e) {
+            throw new ServiceException("Can't delete user in service method ", e);
+        }
+
     }
 }

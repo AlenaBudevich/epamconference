@@ -1,4 +1,4 @@
-package by.budevich.conference.command.common;
+package by.budevich.conference.command.impl.common;
 
 import by.budevich.conference.command.BaseCommand;
 
@@ -19,7 +19,8 @@ public class EmptyCommand implements BaseCommand {
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        String page = "/index.jsp";
+        return page;
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) {

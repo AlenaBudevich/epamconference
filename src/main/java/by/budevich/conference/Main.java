@@ -2,7 +2,6 @@ package by.budevich.conference;
 
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
-import by.budevich.conference.service.UserService;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -12,6 +11,5 @@ import java.text.ParseException;
  */
 public class Main {
     public static void main(String[] args) throws SQLException, DAOException, ServiceException, ParseException {
-        UserService.getInstance().deleteUser("2");
     }
 }

@@ -2,7 +2,7 @@ package by.budevich.conference.controller;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.command.CommandEnum;
-import by.budevich.conference.command.common.EmptyCommand;
+import by.budevich.conference.command.impl.common.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +17,7 @@ public class CommandFactory {
             CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             command = currentEnum.getCurrentCommand();
         } catch(IllegalArgumentException e){
-            //request.setAttribute(AttributeConst.ATTR_ERROR_MESSAGE, MessageConst.MESSAGE_WRONG_ACTION);
+            //
         }
         return command;
     }
