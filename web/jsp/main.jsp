@@ -14,11 +14,13 @@
 <body>
 <h1>Main</h1>
 <a href="controller?command=login">Login</a>
+<a href="controller?command=logout">Logout</a>
 <a href="controller?command=registration">Registration</a>
 <br>
 <h5>hi, ${login}</h5>
 <h5>You are ${role}</h5>
 <a href="controller?command=viewprofileinfo">My profile</a>
+<a href="controller?command=viewuserreports">My reports</a>
 <div>
     <table>
         <tr>

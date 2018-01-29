@@ -1,6 +1,7 @@
-package by.budevich.conference.command.impl.common;
+package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;

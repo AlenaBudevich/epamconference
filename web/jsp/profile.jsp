@@ -13,6 +13,9 @@
 <body>
 <a href="controller?command=viewallconferences">MainPage</a>
 <a href="controller?command=changeprofileinfo">ChangeProfileInfoPage</a>
+<a href="controller?command=logout">Logout</a>
+<br>
+<a href="controller?command=viewuserreports">My reports</a>
 <h1>Profile</h1>
 <div>
     <table>

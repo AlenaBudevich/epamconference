@@ -50,9 +50,9 @@ public class ReportService {
         }
     }
 
-    public ArrayList<Report> showReportsByAnyId(String entity, String id) throws ServiceException, SQLException {
+    public ArrayList<Report> showReportsByAnyId(String entity, long id) throws ServiceException, SQLException {
         try {
-            return dao.showReportsByAnyId(entity, Long.parseLong(id));
+            return dao.showReportsByAnyId(entity, id);
         } catch (DAOException e) {
             throw new ServiceException("Can't show report table by such id", e);
         }

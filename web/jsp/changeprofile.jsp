@@ -13,8 +13,10 @@
 <body>
 <h1>Change profile info</h1>
 <a href="controller?command=viewallconferences">MainPage</a>
-<a href="controller?command=viewprofileinfo">My profile</a>
+<a href="controller?command=logout">Logout</a>
 <br>
+<a href="controller?command=viewprofileinfo">My profile</a>
+<a href="controller?command=viewuserreports">My reports</a>
 <form name="changeProfileInfoForm">
     <input type="hidden" name="command" value="changeProfileInfo" />
     <br/>Email:<br/>

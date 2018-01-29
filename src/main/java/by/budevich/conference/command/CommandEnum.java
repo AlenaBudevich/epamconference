@@ -1,19 +1,21 @@
 package by.budevich.conference.command;
 
-import by.budevich.conference.command.impl.common.*;
-import by.budevich.conference.command.impl.user.ChangeProfileInfoCommand;
-import by.budevich.conference.command.impl.user.ViewProfileInfoCommand;
+import by.budevich.conference.command.impl.common.RegistrationCommand;
+import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
+import by.budevich.conference.command.impl.user.*;
 
 /**
  * Created by Asus on 22.01.2018.
  */
 public enum CommandEnum {
-    LOGIN(LoginCommand.getInstance()),
     REGISTRATION (RegistrationCommand.getInstance()),
     VIEWALLCONFERENCES (ViewAllConferencesCommand.getInstance()),
 
+    LOGIN(LoginCommand.getInstance()),
+    LOGOUT (LogoutCommand.getInstance()),
     VIEWPROFILEINFO (ViewProfileInfoCommand.getInstance()),
-    CHANGEPROFILEINFO (ChangeProfileInfoCommand.getInstance());
+    CHANGEPROFILEINFO (ChangeProfileInfoCommand.getInstance()),
+    VIEWUSERREPORTS (ViewUserReportsCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {
