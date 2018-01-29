@@ -10,7 +10,7 @@ public class Conference implements Serializable, Cloneable{
     private long conferenceId;
     private String conferenceName;
     private String conferenceDescription;
-    private int maxNumberParticipiants;
+    private int maxNumberParticipants;
     private Timestamp conferenceBeginning;
     private Timestamp conferenceEnd;
     private String conferenceCountry;
@@ -22,13 +22,13 @@ public class Conference implements Serializable, Cloneable{
     public Conference () {}
 
     public Conference(long conferenceId, String conferenceName, String conferenceDescription,
-                      int maxNumberParticipiants, Timestamp conferenceBeginning, Timestamp conferenceEnd,
+                      int maxNumberParticipants, Timestamp conferenceBeginning, Timestamp conferenceEnd,
                       String conferenceCountry, String conferenceCity, String conferenceAddress,
                       String conferenceContent, String conferenceStatus) {
         this.conferenceId = conferenceId;
         this.conferenceName = conferenceName;
         this.conferenceDescription = conferenceDescription;
-        this.maxNumberParticipiants = maxNumberParticipiants;
+        this.maxNumberParticipants = maxNumberParticipants;
         this.conferenceBeginning = conferenceBeginning;
         this.conferenceEnd = conferenceEnd;
         this.conferenceCountry = conferenceCountry;
@@ -66,12 +66,12 @@ public class Conference implements Serializable, Cloneable{
         this.conferenceDescription = conferenceDescription;
     }
 
-    public int getMaxNumberParticipiants() {
-        return maxNumberParticipiants;
+    public int getMaxNumberParticipants() {
+        return maxNumberParticipants;
     }
 
-    public void setMaxNumberParticipiants(int maxNumberParticipiants) {
-        this.maxNumberParticipiants = maxNumberParticipiants;
+    public void setMaxNumberParticipants(int maxNumberParticipants) {
+        this.maxNumberParticipants = maxNumberParticipants;
     }
 
     public Timestamp getConferenceBeginning() {
@@ -138,7 +138,7 @@ public class Conference implements Serializable, Cloneable{
         Conference that = (Conference) o;
 
         if (conferenceId != that.conferenceId) return false;
-        if (maxNumberParticipiants != that.maxNumberParticipiants) return false;
+        if (maxNumberParticipants != that.maxNumberParticipants) return false;
         if (conferenceName != null ? !conferenceName.equals(that.conferenceName) : that.conferenceName != null)
             return false;
         if (conferenceDescription != null ? !conferenceDescription.equals(that.conferenceDescription) : that.conferenceDescription != null)
@@ -164,7 +164,7 @@ public class Conference implements Serializable, Cloneable{
         int result = (int) (conferenceId ^ (conferenceId >>> 32));
         result = 31 * result + (conferenceName != null ? conferenceName.hashCode() : 0);
         result = 31 * result + (conferenceDescription != null ? conferenceDescription.hashCode() : 0);
-        result = 31 * result + maxNumberParticipiants;
+        result = 31 * result + maxNumberParticipants;
         result = 31 * result + (conferenceBeginning != null ? conferenceBeginning.hashCode() : 0);
         result = 31 * result + (conferenceEnd != null ? conferenceEnd.hashCode() : 0);
         result = 31 * result + (conferenceCountry != null ? conferenceCountry.hashCode() : 0);
@@ -181,7 +181,7 @@ public class Conference implements Serializable, Cloneable{
                 "conferenceId=" + conferenceId +
                 ", conferenceName='" + conferenceName + '\'' +
                 ", conferenceDescription='" + conferenceDescription + '\'' +
-                ", maxNumberParticipiants=" + maxNumberParticipiants +
+                ", maxNumberParticipiants=" + maxNumberParticipants +
                 ", conferenceBeginning=" + conferenceBeginning +
                 ", conferenceEnd=" + conferenceEnd +
                 ", conferenceCountry='" + conferenceCountry + '\'' +

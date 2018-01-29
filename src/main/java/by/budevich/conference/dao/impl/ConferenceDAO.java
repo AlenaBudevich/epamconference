@@ -54,7 +54,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
         preparedStatement.setLong(1, conference.getConferenceId());
         preparedStatement.setString(2, conference.getConferenceName());
         preparedStatement.setString(3, conference.getConferenceDescription());
-        preparedStatement.setInt(4, conference.getMaxNumberParticipiants());
+        preparedStatement.setInt(4, conference.getMaxNumberParticipants());
         preparedStatement.setTimestamp(5, conference.getConferenceBeginning());
         preparedStatement.setTimestamp(6, conference.getConferenceEnd());
         preparedStatement.setString(7, conference.getConferenceCountry());
@@ -71,7 +71,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_CONFERENCE_INFO);
         preparedStatement.setString(1, conference.getConferenceName());
         preparedStatement.setString(2, conference.getConferenceDescription());
-        preparedStatement.setInt(3, conference.getMaxNumberParticipiants());
+        preparedStatement.setInt(3, conference.getMaxNumberParticipants());
         preparedStatement.setTimestamp(4, conference.getConferenceBeginning());
         preparedStatement.setTimestamp(5, conference.getConferenceEnd());
         preparedStatement.setString(6, conference.getConferenceCountry());
@@ -136,7 +136,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
         conference.setConferenceId(resultSet.getLong(1));
         conference.setConferenceName(resultSet.getString(2));
         conference.setConferenceDescription(resultSet.getString(3));
-        conference.setMaxNumberParticipiants(resultSet.getInt(4));
+        conference.setMaxNumberParticipants(resultSet.getInt(4));
         conference.setConferenceBeginning(resultSet.getTimestamp(5));
         conference.setConferenceEnd(resultSet.getTimestamp(6));
         conference.setConferenceCountry(resultSet.getString(7));

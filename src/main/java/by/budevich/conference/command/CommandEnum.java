@@ -6,7 +6,8 @@ import by.budevich.conference.command.impl.common.*;
  */
 public enum CommandEnum {
     LOGIN(LoginCommand.getInstance()),
-    REGISTRATION (RegistrationCommand.getInstance());
+    REGISTRATION (RegistrationCommand.getInstance()),
+    VIEWALLCONFERENCES (ViewAllConferencesCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {

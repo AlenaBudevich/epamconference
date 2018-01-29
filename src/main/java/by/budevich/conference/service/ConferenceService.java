@@ -31,7 +31,7 @@ public class ConferenceService {
     }
 
     public void updateConferenceInfo(String  conferenceId, String conferenceName, String conferenceDescription,
-                                     String maxNumberParticipiants, Timestamp conferenceBeginning, Timestamp conferenceEnd,
+                                     String maxNumberParticipants, Timestamp conferenceBeginning, Timestamp conferenceEnd,
                                      String conferenceCountry, String conferenceCity, String conferenceAddress,
                                      String conferenceContent)
             throws ServiceException, SQLException {
@@ -39,7 +39,7 @@ public class ConferenceService {
         conference.setConferenceId(Long.parseLong(conferenceId));
         conference.setConferenceName(conferenceName);
         conference.setConferenceDescription(conferenceDescription);
-        conference.setMaxNumberParticipiants(Integer.parseInt(maxNumberParticipiants));
+        conference.setMaxNumberParticipants(Integer.parseInt(maxNumberParticipants));
         conference.setConferenceBeginning(conferenceBeginning);
         conference.setConferenceEnd(conferenceEnd);
         conference.setConferenceCountry(conferenceCountry);

@@ -9,7 +9,6 @@ import by.budevich.conference.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * Created by Asus on 22.01.2018.
@@ -26,15 +25,13 @@ public class LoginCommand implements BaseCommand{
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         User user = UserService.getInstance().findUserByLogin(login);
-        if (user==null) return "jsp/Not.jsp";
-        if (user.getPassword().equals(password)) return "jsp/Good.jsp";
+        if (user==null) return "jsp/error.jsp";
+        if (user.getPassword().equals(password)) return "jsp/main.jsp";
         else return "jsp/Bad.jsp";
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        ArrayList<User> users= UserService.getInstance().showUsers();
-        request.setAttribute("users", users);
-        String page = "jsp/registration.jsp";
+        String page = "jsp/login.jsp";
         return page;
     }
 }

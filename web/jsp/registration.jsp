@@ -9,6 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html><head><title>Registration</title></head>
 <body>
+<a href="controller?command=login">LoginPage</a>
+<a href="controller?command=viewallconferences">MainPage</a>
+<br>
 <form name="registrationForm">
     <input type="hidden" name="command" value="registration" />
     Login:<br/>
@@ -20,12 +23,4 @@
     <br/>
     <input type="submit" value="Registration" formmethod="post" formaction="controller"/>
 </form><hr/>
-<table>
-    <c:forEach items="${users}" var="current">
-        <tr>
-            <td><c:out value="${current.login}" /><td>
-            <td><c:out value="${current.password}" /><td>
-        </tr>
-    </c:forEach>
-</table>
 </body></html>

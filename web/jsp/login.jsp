@@ -8,6 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html><head><title>Login</title></head>
 <body>
+<a href="controller?command=registration">RegistrationPage</a>
+<a href="controller?command=viewallconferences">MainPage</a>
+<br>
 <form name="loginForm">
     <input type="hidden" name="command" value="login" />
     Login:<br/>
@@ -16,7 +19,6 @@
     <input type="password" name="password" value=""/>
     <br/>
     <input type="submit" value="Log in" formaction="controller" formmethod="post"/>
-    <input type="submit" value="Registration" formaction="controller" formmethod="get"/>
 </form>
 </body></html>
 

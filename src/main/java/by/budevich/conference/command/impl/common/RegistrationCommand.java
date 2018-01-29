@@ -38,8 +38,9 @@ public class RegistrationCommand implements BaseCommand {
 
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException {
+        String page = "jsp/registration.jsp";
+        return page;
     }
 
 }
