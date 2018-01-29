@@ -14,24 +14,34 @@ import java.sql.SQLException;
  * Created by Asus on 22.01.2018.
  */
 public class LoginCommand implements BaseCommand{
-    public static LoginCommand instance = new LoginCommand ();
-    private LoginCommand (){}
+    public static LoginCommand instance = new LoginCommand();
+    private LoginCommand(){}
 
     public static LoginCommand getInstance () {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         User user = UserService.getInstance().findUserByLogin(login);
         if (user==null) return "jsp/error.jsp";
-        if (user.getPassword().equals(password)) return "jsp/main.jsp";
-        else return "jsp/Bad.jsp";
+        if (user.getPassword().equals(password)) {
+            request.getSession().setAttribute("login", user.getLogin());
+            request.getSession().setAttribute("role", user.getRole());
+            request.getSession().setAttribute("userId", user.getUserId());
+            return ViewAllConferencesCommand.getInstance().getPage(request,response);
+        }
+        else return "jsp/error.jsp";
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        String page = "jsp/login.jsp";
-        return page;
+        if (request.getSession().getAttribute("userId") != null) {
+            return "jsp/error.jsp";
+        }
+        else {
+            return "jsp/login.jsp";
+        }
+
     }
 }

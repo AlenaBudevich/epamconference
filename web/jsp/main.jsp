@@ -16,23 +16,26 @@
 <a href="controller?command=login">Login</a>
 <a href="controller?command=registration">Registration</a>
 <br>
-<div name="command" value="viewallconferences" formmethod="get" formaction="controller">
-<table>
-    <tr>
-        <th>conferenceName</th>
-        <th>conferenceDescription</th>
-        <th>maxNumberParticipants</th>
-        <th>conferenceCountry</th>
-    </tr>
-    <c:forEach items="${conferences}" var="current">
+<h5>hi, ${login}</h5>
+<h5>You are ${role}</h5>
+<a href="controller?command=viewprofileinfo">My profile</a>
+<div>
+    <table>
         <tr>
-            <td><c:out value="${current.conferenceName}" /></td>
-            <td><c:out value="${current.conferenceDescription}" /></td>
-            <td><c:out value="${current.maxNumberParticipants}" /></td>
-            <td><c:out value="${current.conferenceCountry}" /></td>
+            <th>conferenceName</th>
+            <th>conferenceDescription</th>
+            <th>maxNumberParticipants</th>
+            <th>conferenceCountry</th>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach items="${conferences}" var="current">
+            <tr>
+                <td><c:out value="${current.conferenceName}"/></td>
+                <td><c:out value="${current.conferenceDescription}"/></td>
+                <td><c:out value="${current.maxNumberParticipants}"/></td>
+                <td><c:out value="${current.conferenceCountry}"/></td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 </body>
 </html>

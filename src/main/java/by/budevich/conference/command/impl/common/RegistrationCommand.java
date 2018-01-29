@@ -28,19 +28,22 @@ public class RegistrationCommand implements BaseCommand {
         String email = request.getParameter("email");
 
         if (UserService.getInstance().findUserByLogin(login)!=null) {
-            System.out.println("мы лохи, всё плохо");
-            return "jsp/Bad.jsp";
+            return "jsp/error.jsp";
         }
         else
         {
             UserService.getInstance().addUser(login, password, email);
-            return "jsp/Good.jsp";}
+            return "jsp/login.jsp";}
 
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException {
-        String page = "jsp/registration.jsp";
-        return page;
+        if (request.getSession().getAttribute("userId") != null) {
+            return "jsp/error.jsp";
+        }
+        else {
+            return "jsp/registration.jsp";
+        }
     }
 
 }

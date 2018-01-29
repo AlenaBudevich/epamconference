@@ -52,28 +52,18 @@ public class UserService {
         }
     }
 
-    public void updateUserInfo(String userId, String login, String password, String email,
-                               int phoneNumber, String firstName, String lastName, String surname)
+    public void updateUserInfo(User user)
             throws ServiceException, SQLException {
         try {
-            User user = new User();
-            user.setUserId(Long.parseLong(userId));
-            user.setLogin(login);
-            user.setPassword(password);
-            user.setEmail(email);
-            user.setPhoneNumber(phoneNumber);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setSurname(surname);
             dao.updateUserInfo(user);
         } catch (DAOException e) {
             throw new ServiceException("Can't update user in service method ", e);
         }
     }
 
-    public User findUserById(String userId) throws ServiceException, SQLException {
+    public User findUserById(long userId) throws ServiceException, SQLException {
         try {
-            return dao.findUserById(Long.parseLong(userId));
+            return dao.findUserById(userId);
         } catch (DAOException e) {
             throw new ServiceException("Can't find user with such id ", e);
         }

@@ -30,7 +30,6 @@ public class ViewAllConferencesCommand implements BaseCommand{
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
         ArrayList<Conference> conferences= ConferenceService.getInstance().showConferences();
-        System.out.println(conferences.toString());
         request.setAttribute("conferences", conferences);
         String page = "jsp/main.jsp";
         return page;
