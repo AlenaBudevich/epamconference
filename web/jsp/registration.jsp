@@ -9,9 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html><head><title>Registration</title></head>
 <body>
-<a href="controller?command=login">LoginPage</a>
-<a href="controller?command=viewallconferences">MainPage</a>
+<%@include file="header.jsp"%>
 <br>
+<h1>Registration</h1>
 <form name="registrationForm">
     <input type="hidden" name="command" value="registration" />
     Login:<br/>

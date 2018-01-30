@@ -12,8 +12,8 @@
     <title>User reports</title>
 </head>
 <body>
-<a href="controller?command=viewallconferences">MainPage</a>
-<a href="controller?command=viewprofileinfo">My profile</a>
+<%@include file="header.jsp"%>
+<br>
 <h1>${login}'s reports</h1>
 <div>
     <table>
@@ -33,5 +33,7 @@
         </c:forEach>
     </table>
 </div>
+<br>
+<%@include file="usermenu.jsp"%>
 </body>
 </html>

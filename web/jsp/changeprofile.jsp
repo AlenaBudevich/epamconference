@@ -11,12 +11,10 @@
     <title>Change profile info</title>
 </head>
 <body>
-<h1>Change profile info</h1>
-<a href="controller?command=viewallconferences">MainPage</a>
-<a href="controller?command=logout">Logout</a>
+<%@include file="header.jsp"%>
 <br>
-<a href="controller?command=viewprofileinfo">My profile</a>
-<a href="controller?command=viewuserreports">My reports</a>
+<h1>Change profile info</h1>
+<br>
 <form name="changeProfileInfoForm">
     <input type="hidden" name="command" value="changeProfileInfo" />
     <br/>Email:<br/>
@@ -34,5 +32,7 @@
     <br/>
     <input type="submit" value="Change info" formmethod="post" formaction="controller"/>
 </form>
+<br>
+<%@include file="usermenu.jsp"%>
 </body>
 </html>

@@ -12,15 +12,12 @@
     <title>Main</title>
 </head>
 <body>
-<h1>Main</h1>
-<a href="controller?command=login">Login</a>
-<a href="controller?command=logout">Logout</a>
-<a href="controller?command=registration">Registration</a>
+<%@include file="header.jsp" %>
 <br>
+<h1>Main</h1>
 <h5>hi, ${login}</h5>
 <h5>You are ${role}</h5>
-<a href="controller?command=viewprofileinfo">My profile</a>
-<a href="controller?command=viewuserreports">My reports</a>
+<br>
 <div>
     <table>
         <tr>
@@ -39,5 +36,7 @@
         </c:forEach>
     </table>
 </div>
+<br>
+<%@include file="usermenu.jsp" %>
 </body>
 </html>

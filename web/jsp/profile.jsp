@@ -11,11 +11,8 @@
     <title>Profile</title>
 </head>
 <body>
-<a href="controller?command=viewallconferences">MainPage</a>
-<a href="controller?command=changeprofileinfo">ChangeProfileInfoPage</a>
-<a href="controller?command=logout">Logout</a>
+<%@include file="header.jsp"%>
 <br>
-<a href="controller?command=viewuserreports">My reports</a>
 <h1>Profile</h1>
 <div>
     <table>
@@ -53,5 +50,9 @@
         </tr>
     </table>
 </div>
+<br>
+<%@include file="usermenu.jsp"%>
+<br>
+<a href="controller?command=changeprofileinfo">ChangeProfileInfoPage</a>
 </body>
 </html>

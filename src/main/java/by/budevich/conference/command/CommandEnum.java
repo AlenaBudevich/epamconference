@@ -15,7 +15,8 @@ public enum CommandEnum {
     LOGOUT (LogoutCommand.getInstance()),
     VIEWPROFILEINFO (ViewProfileInfoCommand.getInstance()),
     CHANGEPROFILEINFO (ChangeProfileInfoCommand.getInstance()),
-    VIEWUSERREPORTS (ViewUserReportsCommand.getInstance());
+    VIEWUSERREPORTS (ViewUserReportsCommand.getInstance()),
+    SEARCH (SearchCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {

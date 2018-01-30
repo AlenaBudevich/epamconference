@@ -41,17 +41,6 @@ public class UserService {
         }
     }
 
-    public User checkUser(String login, String password) throws ServiceException, SQLException {
-        User baseUser = findUserByLogin(login);
-        if (!password.equals(baseUser.getPassword())) {
-            return null;
-            //throw new ServiceException("Wrong password ");
-        }
-        else {
-            return baseUser;
-        }
-    }
-
     public void updateUserInfo(User user)
             throws ServiceException, SQLException {
         try {
