@@ -15,8 +15,11 @@
 <%@include file="header.jsp" %>
 <br>
 <h1>Main</h1>
-<h5>hi, ${login}</h5>
-<h5>You are ${role}</h5>
+<c:set var="userId" value="${userId}"/>
+<c:if test="${not empty userId}">
+    <h3>hi, ${login}</h3>
+    <h3>You are ${role}</h3>
+</c:if>
 <br>
 <div>
     <table>

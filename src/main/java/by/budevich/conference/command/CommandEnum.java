@@ -16,6 +16,7 @@ public enum CommandEnum {
     VIEWPROFILEINFO (ViewProfileInfoCommand.getInstance()),
     CHANGEPROFILEINFO (ChangeProfileInfoCommand.getInstance()),
     VIEWUSERREPORTS (ViewUserReportsCommand.getInstance()),
+    UPDATEREPORTINFO (UpdateReportInfoCommand.getInstance()),
     SEARCH (SearchCommand.getInstance());
 
     BaseCommand command;

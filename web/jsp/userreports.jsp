@@ -29,6 +29,8 @@
                 <td><c:out value="${current.reportTheses}"/></td>
                 <td><c:out value="${current.reportStatus}"/></td>
                 <td><c:out value="${current.reportContent}"/></td>
+                <td>Update report info</td>
+                <td>Delete report</td>
             </tr>
         </c:forEach>
     </table>
