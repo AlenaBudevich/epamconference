@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.entity.Conference;
+import by.budevich.conference.entity.Report;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ConferenceService;
@@ -30,7 +31,8 @@ public class SearchCommand implements BaseCommand {
         String type = request.getParameter("type");
         ArrayList result;
         if (type.equals("report")) {
-            result = ReportService.getInstance().findReportByName(value);
+            result = new ArrayList<Report>();
+            result.add(ReportService.getInstance().findReportByName(value));
             System.out.println(result.toString());
             request.setAttribute("result", result);
             return "jsp/search.jsp";

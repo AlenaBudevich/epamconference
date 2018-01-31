@@ -10,9 +10,14 @@
 <div class="header">
     <ul>
         <c:set var="userId" value="${userId}"/>
-        <li><c:if test="${empty userId}"><a href="controller?command=login">Log in</a></c:if></li>
-        <li><c:if test="${not empty userId}"><a href="controller?command=logout">Log out</a></c:if></li>
-        <li><c:if test="${empty userId}"><a href="controller?command=registration">Registration</a></c:if></li>
+        <c:if test="${not empty userId}">
+            <li><a href="controller?command=logout">Log out</a></li>
+        </c:if>
+        <c:if test="${empty userId}">
+            <li><a href="controller?command=login">Log in</a></li>
+
+            <li><a href="controller?command=registration">Registration</a></li>
+        </c:if>
         <li><a href="controller?command=viewallconferences">Main</a></li>
     </ul>
 </div>

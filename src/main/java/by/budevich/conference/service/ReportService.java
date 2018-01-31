@@ -32,9 +32,9 @@ public class ReportService {
         }
     }
 
-    public Report findReportById(String reportId) throws ServiceException, SQLException {
+    public Report findReportById(long reportId) throws ServiceException, SQLException {
         try {
-            return dao.findReportById(Long.parseLong(reportId));
+            return dao.findReportById(reportId);
         } catch (DAOException e) {
             throw new ServiceException("Can't find report with such id ", e);
         }
@@ -58,7 +58,7 @@ public class ReportService {
         }
     }
 
-    public ArrayList<Report> findReportByName(String reportName) throws ServiceException, SQLException {
+    public Report findReportByName(String reportName) throws ServiceException, SQLException {
         try {
             return dao.findReportByName(reportName);
         } catch (DAOException e) {
@@ -74,14 +74,9 @@ public class ReportService {
         }
     }
 
-    public void updateReportInfo(String reportId, String reportName, String reportTheses, String reportContent)
+    public void updateReportInfo(Report report)
             throws ServiceException, SQLException {
         try {
-            Report report = new Report();
-            report.setReportId(Long.parseLong(reportId));
-            report.setReportName(reportName);
-            report.setReportTheses(reportTheses);
-            report.setReportContent(reportContent);
             dao.updateReportInfo(report);
         } catch (DAOException e) {
             throw new ServiceException("Can't update report in service method ", e);
@@ -96,8 +91,8 @@ public class ReportService {
         }
     }
 
-    public void addReportTo(String entity, String id, String reportId) throws SQLException {
-        dao.addReportTo(entity, Long.parseLong(id), Long.parseLong(reportId));
+    public void addReportTo(String entity, long id, long reportId) throws SQLException {
+        dao.addReportTo(entity, id, reportId);
     }
 
     public void deleteReportFrom(String entity, String reportId) throws ServiceException, SQLException {

@@ -46,7 +46,6 @@ public class Controller extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CommandFactory commandFactory = new CommandFactory();
         BaseCommand command = commandFactory.defineCommand(request);
-
         String page = null;
         try {
             page = command.getPage(request, response);

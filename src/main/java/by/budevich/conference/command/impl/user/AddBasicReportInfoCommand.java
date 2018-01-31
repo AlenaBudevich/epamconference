@@ -11,33 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 /**
- * Created by Asus on 30.01.2018.
+ * Created by Asus on 31.01.2018.
  */
-public class UpdateReportInfoCommand implements BaseCommand {
-    public static UpdateReportInfoCommand instance = new UpdateReportInfoCommand();
+public class AddBasicReportInfoCommand implements BaseCommand {
+    public static AddBasicReportInfoCommand instance = new AddBasicReportInfoCommand();
 
-    private UpdateReportInfoCommand() {
+    private AddBasicReportInfoCommand() {
     }
 
-    public static UpdateReportInfoCommand getInstance() {
+    public static AddBasicReportInfoCommand getInstance() {
         return instance;
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
-        long reportId = Long.parseLong(request.getParameter("reportId"));
-        Report report = ReportService.getInstance().findReportById(reportId);
-        report.setReportName(request.getParameter("reportName"));
-        report.setReportTheses(request.getParameter("reportTheses"));
-        report.setReportContent(request.getParameter("reportContent"));
-        ReportService.getInstance().updateReportInfo(report);
-
+        String reportName = request.getParameter("reportName");
+        String reportTheses = request.getParameter("reportTheses");
+        ReportService.getInstance().addBasicReportInfo(reportName, reportTheses);
+        Report report = ReportService.getInstance().findReportByName(reportName);
+        long id = (Long) request.getSession().getAttribute("userId");
+        ReportService.getInstance().addReportTo("user", id, report.getReportId());
         return ViewUserReportsCommand.getInstance().getPage(request, response);
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        String reportId = request.getParameter("reportId");
-        Report report = ReportService.getInstance().findReportById(Long.parseLong(reportId));
-        request.setAttribute("report", report);
+        request.setAttribute("addReport", true);
         return ViewUserReportsCommand.getInstance().getPage(request, response);
     }
 }

@@ -14,7 +14,16 @@
 <body>
 <%@include file="header.jsp"%>
 <br>
-<h1>${login}'s reports</h1>
+<c:set var="report" value="${report}"/>
+<c:if test="${not empty report}">
+    <%@include file="updatereportinfo.jsp" %>
+</c:if>
+<br>
+<br>
+<c:set var="addReport" value="${addReport}"/>
+<c:if test="${not empty addReport}">
+    <%@include file="addreport.jsp" %>
+</c:if>
 <div>
     <table>
         <tr>
@@ -22,6 +31,8 @@
             <th>reportTheses</th>
             <th>reportStatus</th>
             <th>reportContent</th>
+            <th></th>
+            <th></th>
         </tr>
         <c:forEach items="${userReports}" var="current">
             <tr>
@@ -29,13 +40,21 @@
                 <td><c:out value="${current.reportTheses}"/></td>
                 <td><c:out value="${current.reportStatus}"/></td>
                 <td><c:out value="${current.reportContent}"/></td>
-                <td>Update report info</td>
-                <td>Delete report</td>
+                <c:url value = "controller?command=updatereportinfo" var = "updateReport">
+                    <c:param name = "reportId" value = "${current.reportId}"/>
+                </c:url>
+                <td><a href=${updateReport}>Update report info</a></td>
+                <c:url value = "controller?command=deletereport" var = "deleteReport">
+                    <c:param name = "reportId" value = "${current.reportId}"/>
+                </c:url>
+                <td><a href=${deleteReport}>Delete report</a></td>
             </tr>
         </c:forEach>
     </table>
 </div>
 <br>
 <%@include file="usermenu.jsp"%>
+<br>
+<a href="controller?command=addbasicreportinfo">Add new report</a>
 </body>
 </html>
