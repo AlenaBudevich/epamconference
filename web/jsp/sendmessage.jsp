@@ -11,7 +11,7 @@
     <br/>User login:<br/>
     <input type="text" name="login" value=""/>
     <br/>Message text:<br/>
-    <input type="text" name="messageText" value=""/>
+    <input type="text" name="messageText" value="null"/>
     <br/>Message content:<br/>
     <input type="text" name="messageContent" value=""/>
     <br/>

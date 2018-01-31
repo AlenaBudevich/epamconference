@@ -25,18 +25,26 @@ public class SendMessageCommand implements BaseCommand {
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
-        long sendId = (Long) request.getSession().getAttribute("userId");
-        String login = request.getParameter("login");
-        long receiveId = UserService.getInstance().findUserByLogin(login).getUserId();
-        String messageText = request.getParameter("messageText");
-        if (sendId != 0 && receiveId != 0 && messageText != null) {
-            Message message = new Message();
-            message.setSendId(sendId);
-            message.setReceiveId(receiveId);
-            message.setMessageText(messageText);
-            message.setMessageContent(request.getParameter("messageContent"));
-            MessageService.getInstance().sendMessage(message);
-            return ViewUserOutgoingMessagesCommand.getInstance().getPage(request, response);
+        if (request.getSession().getAttribute("userId") != null) {
+            long sendId = (Long) request.getSession().getAttribute("userId");
+            String login = request.getParameter("login");
+            if (UserService.getInstance().findUserByLogin(login) != null) {
+                long receiveId = UserService.getInstance().findUserByLogin(login).getUserId();
+                if (!request.getParameter("messageText").equals("null")) {
+                    String messageText = request.getParameter("messageText");
+                    Message message = new Message();
+                    message.setSendId(sendId);
+                    message.setReceiveId(receiveId);
+                    message.setMessageText(messageText);
+                    message.setMessageContent(request.getParameter("messageContent"));
+                    MessageService.getInstance().sendMessage(message);
+                    return ViewUserOutgoingMessagesCommand.getInstance().getPage(request, response);
+                } else {
+                    return "jsp/error.jsp";
+                }
+            } else {
+                return "jsp/error.jsp";
+            }
         } else {
             return "jsp/error.jsp";
         }
