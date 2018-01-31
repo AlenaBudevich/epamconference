@@ -15,5 +15,6 @@ public interface BaseMessageDAO {
     void updateSendedMessage(Message message) throws DAOException, SQLException;
     Message findMessageById(long messageId) throws DAOException, SQLException;
     ArrayList<Message> showUsersDialog(long sendId, long receiveId) throws DAOException, SQLException;
-    ArrayList<Message> showMessagesByUserId(long userId) throws DAOException, SQLException;
+    ArrayList<Message> showIncomingMessagesByUserId(long userId) throws DAOException, SQLException;
+    ArrayList<Message> showOutgoingMessagesByUserId(long userId) throws DAOException, SQLException;
 }

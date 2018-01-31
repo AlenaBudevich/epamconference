@@ -13,6 +13,7 @@
         <ul>
             <li><a href="controller?command=viewprofileinfo">My profile</a></li>
             <li><a href="controller?command=viewuserreports">My reports</a></li>
+            <li><a href="controller?command=viewuserincomingmessages">Messages</a></li>
         </ul>
     </div>
 </c:if>

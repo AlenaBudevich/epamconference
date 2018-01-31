@@ -22,7 +22,14 @@ public enum CommandEnum {
     DELETEREPORT (DeleteReportCommand.getInstance()),
 
     VIEWCONFERENCESECTIONS (ViewConferenceSectionsCommand.getInstance()),
-    VIEWSECTIONREPORTS (ViewSectionReportsCommand.getInstance());
+    VIEWSECTIONREPORTS (ViewSectionReportsCommand.getInstance()),
+
+    VIEWUSERINCOMINGMESSAGES (ViewUserIncomingMessagesCommand.getInstance()),
+    VIEWUSEROUTGOINGMESSAGES (ViewUserOutgoingMessagesCommand.getInstance()),
+
+    SENDMESSAGE (SendMessageCommand.getInstance()),
+    CHANGEMESSAGE (ChangeMessageCommand.getInstance()),
+    DELETEMESSAGE (DeleteMessageCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {

@@ -22,12 +22,12 @@ public class MessageDAO implements BaseMessageDAO {
     }
 
     private static final String SQL_ADD_MESSAGE =
-            "INSERT INTO message (messageID, messageTime, messageText, messageContent, sendID, receiveID)" +
-                    " VALUES (?,?,?,?,?,?)";
+            "INSERT INTO message (messageID, messageText, messageContent, sendID, receiveID)" +
+                    " VALUES (?,?,?,?,?)";
 
     private static final String SQL_DELETE_MESSAGE = " DELETE FROM message WHERE messageID = ?";
 
-    private static final String SQL_UPDATE_SENDED_MESSAGE = "UPDATE message SET messageTime = ?, messageText = ?,"+
+    private static final String SQL_UPDATE_SENDED_MESSAGE = "UPDATE message SET messageText = ?,"+
             " messageContent = ? " +
             "WHERE messageID = ?";
 
@@ -36,17 +36,22 @@ public class MessageDAO implements BaseMessageDAO {
             " FROM message" +
             " WHERE messageID = ?";
 
-    private static final String SQL_SHOW_MESSAGES_BY_USER_ID = "SELECT messageID, messageTime, messageText, " +
+    private static final String SQL_SHOW_INCOMING_MESSAGES_BY_USER_ID = "SELECT messageID, messageTime, messageText, " +
             "messageContent, sendID, receiveID" +
             " FROM message" +
-            " WHERE sendID = ? OR receiveID = ?";
+            " WHERE receiveID = ?";
+
+    private static final String SQL_SHOW_OUTGOING_MESSAGES_BY_USER_ID = "SELECT messageID, messageTime, messageText, " +
+            "messageContent, sendID, receiveID" +
+            " FROM message" +
+            " WHERE sendID = ?";
 
     private static final String SQL_SHOW_USERS_DIALOG = "SELECT messageID, messageTime, messageText, " +
             "messageContent, sendID, receiveID" +
             " FROM message" +
             " WHERE sendID IN (?,?) AND receiveID IN (?,?)";
 
-    private Message initMesage(ResultSet resultSet) throws SQLException {
+    private Message initMessage(ResultSet resultSet) throws SQLException {
         Message message = new Message();
         message.setMessageId(resultSet.getLong(1));
         message.setMessageTime(resultSet.getTimestamp(2));
@@ -61,7 +66,7 @@ public class MessageDAO implements BaseMessageDAO {
         ArrayList<Message> messages = new ArrayList<Message>();
         Message message;
         while (resultSet.next()) {
-            message = initMesage(resultSet);
+            message = initMessage(resultSet);
             messages.add(message);
         }
         return messages;
@@ -71,11 +76,10 @@ public class MessageDAO implements BaseMessageDAO {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_MESSAGE);
         preparedStatement.setLong(1, message.getMessageId());
-        preparedStatement.setTimestamp(2, message.getMessageTime());
-        preparedStatement.setString(3, message.getMessageText());
-        preparedStatement.setString(4, message.getMessageContent());
-        preparedStatement.setLong(5, message.getSendId());
-        preparedStatement.setLong(6, message.getReceiveId());
+        preparedStatement.setString(2, message.getMessageText());
+        preparedStatement.setString(3, message.getMessageContent());
+        preparedStatement.setLong(4, message.getSendId());
+        preparedStatement.setLong(5, message.getReceiveId());
         preparedStatement.executeUpdate();
     }
 
@@ -89,10 +93,9 @@ public class MessageDAO implements BaseMessageDAO {
     public void updateSendedMessage(Message message) throws DAOException, SQLException {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_SENDED_MESSAGE);
-        preparedStatement.setTimestamp(1, message.getMessageTime());
-        preparedStatement.setString(2, message.getMessageText());
-        preparedStatement.setString(3, message.getMessageContent());
-        preparedStatement.setLong(4, message.getMessageId());
+        preparedStatement.setString(1, message.getMessageText());
+        preparedStatement.setString(2, message.getMessageContent());
+        preparedStatement.setLong(3, message.getMessageId());
         preparedStatement.executeUpdate();
     }
 
@@ -102,7 +105,7 @@ public class MessageDAO implements BaseMessageDAO {
         preparedStatement.setLong(1,messageId);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            return initMesage(resultSet);
+            return initMessage(resultSet);
         }
         else {
             return null;
@@ -120,11 +123,18 @@ public class MessageDAO implements BaseMessageDAO {
         return initMessageTable(resultSet);
     }
 
-    public ArrayList<Message> showMessagesByUserId(long userId) throws DAOException, SQLException {
+    public ArrayList<Message> showIncomingMessagesByUserId(long userId) throws DAOException, SQLException {
         Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_MESSAGES_BY_USER_ID);
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_INCOMING_MESSAGES_BY_USER_ID);
         preparedStatement.setLong(1, userId);
-        preparedStatement.setLong(2, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return initMessageTable(resultSet);
+    }
+
+    public ArrayList<Message> showOutgoingMessagesByUserId(long userId) throws DAOException, SQLException {
+        Connection connection = ConnectionPool.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_OUTGOING_MESSAGES_BY_USER_ID);
+        preparedStatement.setLong(1, userId);
         ResultSet resultSet = preparedStatement.executeQuery();
         return initMessageTable(resultSet);
     }
