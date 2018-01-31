@@ -82,7 +82,7 @@ public class ReportDAO implements BaseReportDAO {
 
     private Report initReport(ResultSet resultSet) throws SQLException {
         Report report = new Report();
-        report.setReportId(resultSet.getInt(1));
+        report.setReportId(resultSet.getLong(1));
         report.setReportName(resultSet.getString(2));
         report.setReportTheses(resultSet.getString(3));
         report.setReportStatus(resultSet.getString(4));
@@ -149,7 +149,11 @@ public class ReportDAO implements BaseReportDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_REPORT_BY_NAME);
         preparedStatement.setString(1, reportName);
         ResultSet resultSet = preparedStatement.executeQuery();
-        return initReport(resultSet);
+        if (resultSet.next()) {
+            return initReport(resultSet);
+        } else {
+            return null;
+        }
     }
 
     public void assignStatusToReport(long reportId, String reportStatus) throws DAOException, SQLException {
