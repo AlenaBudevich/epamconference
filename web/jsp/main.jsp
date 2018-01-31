@@ -35,6 +35,12 @@
                 <td><c:out value="${current.conferenceDescription}"/></td>
                 <td><c:out value="${current.maxNumberParticipants}"/></td>
                 <td><c:out value="${current.conferenceCountry}"/></td>
+                <c:if test="${not empty userId}">
+                    <c:url value="controller?command=viewconferencesections" var="viewSections">
+                        <c:param name="conferenceId" value="${current.conferenceId}"/>
+                    </c:url>
+                    <td><a href=${viewSections}>More info>></a></td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>

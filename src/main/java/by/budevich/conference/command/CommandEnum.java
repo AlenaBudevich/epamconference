@@ -21,7 +21,8 @@ public enum CommandEnum {
     UPDATEREPORTINFO (UpdateReportInfoCommand.getInstance()),
     DELETEREPORT (DeleteReportCommand.getInstance()),
 
-    SEARCH (SearchCommand.getInstance());
+    VIEWCONFERENCESECTIONS (ViewConferenceSectionsCommand.getInstance()),
+    VIEWSECTIONREPORTS (ViewSectionReportsCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {
