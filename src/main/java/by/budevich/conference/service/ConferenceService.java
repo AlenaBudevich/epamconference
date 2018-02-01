@@ -25,8 +25,7 @@ public class ConferenceService {
         return instance;
     }
 
-    public void addConference(String conferenceName) throws ServiceException, SQLException, DAOException {
-        Conference conference = new Conference(conferenceName);
+    public void addConference(Conference conference) throws ServiceException, SQLException, DAOException {
         dao.addConference(conference);
     }
 

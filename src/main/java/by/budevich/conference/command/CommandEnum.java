@@ -1,8 +1,6 @@
 package by.budevich.conference.command;
 
-import by.budevich.conference.command.impl.admin.AssignReportStatusCommand;
-import by.budevich.conference.command.impl.admin.AssignUserRoleCommand;
-import by.budevich.conference.command.impl.admin.ViewUsersCommand;
+import by.budevich.conference.command.impl.admin.*;
 import by.budevich.conference.command.impl.common.RegistrationCommand;
 import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
 import by.budevich.conference.command.impl.user.*;
@@ -36,7 +34,11 @@ public enum CommandEnum {
 
     SENDMESSAGE (SendMessageCommand.getInstance()),
     CHANGEMESSAGE (ChangeMessageCommand.getInstance()),
-    DELETEMESSAGE (DeleteMessageCommand.getInstance());
+    DELETEMESSAGE (DeleteMessageCommand.getInstance()),
+
+    ADDCONFERENCE (AddConferenceCommand.getInstance()),
+
+    ADDSECTION (AddSectionCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {

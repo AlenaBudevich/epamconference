@@ -16,6 +16,7 @@
 <br>
 <h1>Main</h1>
 <c:set var="userId" value="${userId}"/>
+<c:set var="role" value="${role}"/>
 <c:if test="${not empty userId}">
     <h3>hi, ${login}</h3>
     <h3>You are ${role}</h3>
@@ -40,6 +41,16 @@
                         <c:param name="conferenceId" value="${current.conferenceId}"/>
                     </c:url>
                     <td><a href=${viewSections}>More info>></a></td>
+                </c:if>
+                <c:if test="${role == 'ADMIN'}">
+                    <c:url value="controller?command=updateconferenceinfo" var="updateConference">
+                        <c:param name="conferenceId" value="${current.conferenceId}"/>
+                    </c:url>
+                    <td><a href=${updateConference}>Update conference</a></td>
+                    <c:url value="controller?command=deleteconference" var="deleteConference">
+                        <c:param name="conferenceId" value="${current.conferenceId}"/>
+                    </c:url>
+                    <td><a href=${deleteConference}>Deleteconference</a></td>
                 </c:if>
             </tr>
         </c:forEach>

@@ -18,6 +18,7 @@
             <c:if test="${role == 'ADMIN'}">
                 <li><a href="controller?command=viewusers">Users</a></li>
                 <li><a href="controller?command=addconference">Add conference</a></li>
+                <li><a href="controller?command=addsection">Add section</a></li>
             </c:if>
         </ul>
     </div>

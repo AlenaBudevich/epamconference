@@ -25,10 +25,10 @@ public class SectionService {
         return instance;
     }
 
-    public void addBasicSectionInfo(String conferenceId, String sectionName) throws ServiceException,
+    public void addBasicSectionInfo(long conferenceId, String sectionName) throws ServiceException,
             SQLException, DAOException {
         try {
-            Section section = new Section(Long.parseLong(conferenceId), sectionName);
+            Section section = new Section(conferenceId, sectionName);
             dao.addSectionInfo(section);
         } catch (DAOException e) {
             throw new ServiceException("Can't add section to a database ", e);
