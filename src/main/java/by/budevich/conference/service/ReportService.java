@@ -66,9 +66,9 @@ public class ReportService {
         }
     }
 
-    public void assignStatusToReport(String reportId, String reportStatus) throws ServiceException, SQLException {
+    public void assignStatusToReport(long reportId, String reportStatus) throws ServiceException, SQLException {
         try {
-            dao.assignStatusToReport(Long.parseLong(reportId), reportStatus);
+            dao.assignStatusToReport(reportId, reportStatus);
         } catch (DAOException e) {
             throw new ServiceException("Can't assign new status for report with id ", e);
         }

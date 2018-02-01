@@ -58,9 +58,9 @@ public class UserService {
         }
     }
 
-    public void assignRoleToUser(String userId, String role) throws ServiceException, SQLException {
+    public void assignRoleToUser(long userId, String role) throws ServiceException, SQLException {
         try {
-            dao.assignRoleToUser(Long.parseLong(userId), role);
+            dao.assignRoleToUser(userId, role);
         } catch (DAOException e) {
             throw new ServiceException("Can't assign new role for user with id ", e);
         }

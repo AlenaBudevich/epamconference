@@ -1,5 +1,8 @@
 package by.budevich.conference.command;
 
+import by.budevich.conference.command.impl.admin.AssignReportStatusCommand;
+import by.budevich.conference.command.impl.admin.AssignUserRoleCommand;
+import by.budevich.conference.command.impl.admin.ViewUsersCommand;
 import by.budevich.conference.command.impl.common.RegistrationCommand;
 import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
 import by.budevich.conference.command.impl.user.*;
@@ -26,6 +29,10 @@ public enum CommandEnum {
 
     VIEWUSERINCOMINGMESSAGES (ViewUserIncomingMessagesCommand.getInstance()),
     VIEWUSEROUTGOINGMESSAGES (ViewUserOutgoingMessagesCommand.getInstance()),
+
+    VIEWUSERS (ViewUsersCommand.getInstance()),
+    ASSIGNUSERROLE (AssignUserRoleCommand.getInstance()),
+    ASSIGNREPORTSTATUS (AssignReportStatusCommand.getInstance()),
 
     SENDMESSAGE (SendMessageCommand.getInstance()),
     CHANGEMESSAGE (ChangeMessageCommand.getInstance()),

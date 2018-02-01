@@ -105,6 +105,7 @@ public class UserDAO implements BaseUserDAO {
     public void assignRoleToUser(long userId, String role) throws DAOException, SQLException {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_ROLE);
+        System.out.println(userId+role);
         preparedStatement.setString(1,role);
         preparedStatement.setLong(2,userId);
         preparedStatement.executeUpdate();

@@ -15,7 +15,9 @@
 <br>
 <h1>Section</h1>
 <h3>${section.sectionName}</h3>
+<c:set var="changeId" value="${changeId}"/>
 <c:set var="reports" value="${reports}"/>
+<c:set var="role" value="${role}"/>
 <div>
     <table>
         <tr>
@@ -59,8 +61,37 @@
                 <tr>
                     <td><c:out value="${current.reportName}"/></td>
                     <td><c:out value="${current.reportTheses}"/></td>
-                    <td><c:out value="${current.reportStatus}"/></td>
                     <td><c:out value="${current.reportContent}"/></td>
+
+                    <c:set var="currentId" value="${current.reportId}"/>
+                    <c:url value="controller?command=assignreportstatus" var="changeStatus">
+                        <c:param name="changeId" value="${current.reportId}"/>
+                        <c:param name="sectionId" value="${section.sectionId}"/>
+                    </c:url>
+
+                    <c:if test="${changeId != currentId}">
+                        <td><c:out value="${current.reportStatus}"/></td>
+                        <c:if test="${role == 'ADMIN'}">
+                            <td><a href=${changeStatus}>Change report status</a></td>
+                        </c:if>
+                    </c:if>
+
+                    <c:if test="${changeId == currentId}">
+                        <td>
+                            <form name="statusForm">
+                                <input type="hidden" name="command" value="assignReportStatus"/>
+                                <select name="status">
+                                    <option value="FREE">FREE</option>
+                                    <option value="REVIEWED">REVIEWED</option>
+                                    <option value="REFUSED">REFUSED</option>
+                                    <option value="ACCEPTED">ACCEPTED</option>
+                                </select>
+                                <input type="hidden" name="sectionId" value="${section.sectionId}"/>
+                                <input type="hidden" name="reportId" value="${currentId}"/>
+                                <input type="submit" value="Change" formmethod="post" formaction="controller"/>
+                            </form>
+                        </td>
+                    </c:if>
                 </tr>
             </c:forEach>
         </table>
