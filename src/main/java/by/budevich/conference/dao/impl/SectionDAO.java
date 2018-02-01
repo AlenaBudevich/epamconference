@@ -29,8 +29,6 @@ public class SectionDAO implements BaseSectionDAO {
 
     private static final String SQL_DELETE_SECTION = "DELETE FROM section WHERE sectionID = ?";
 
-    private static final String SQL_DELETE_SECTIONS_BY_CONFERENCE_ID = "DELETE FROM section WHERE conferenceID = ?";
-
     private static final String SQL_VIEW_SECTIONS = "SELECT sectionID, conferenceID, sectionName, maxNumberReports, sectionBeginning, " +
             "sectionEnd, sectionAddress, sectionContent, sectionStatus" +
             " FROM section";
@@ -108,13 +106,6 @@ public class SectionDAO implements BaseSectionDAO {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_SECTION);
         preparedStatement.setLong(1, sectionId);
-        preparedStatement.executeUpdate();
-    }
-
-    public void deleteSectionsByConference(long conferenceId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_SECTIONS_BY_CONFERENCE_ID);
-        preparedStatement.setLong(1, conferenceId);
         preparedStatement.executeUpdate();
     }
 

@@ -38,9 +38,11 @@ public enum CommandEnum {
 
     ADDCONFERENCE (AddConferenceCommand.getInstance()),
     UPDATECONFERENCEINFO (UpdateConferenceInfoCommand.getInstance()),
+    DELETECONFERENCE (DeleteConferenceCommand.getInstance()),
 
     ADDSECTION (AddSectionCommand.getInstance()),
-    UPDATESECTIONINFO (UpdateSectionInfoCommand.getInstance());
+    UPDATESECTIONINFO (UpdateSectionInfoCommand.getInstance()),
+    DELETESECTION (DeleteSectionCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {

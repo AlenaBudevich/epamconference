@@ -50,14 +50,6 @@ public class SectionService {
         }
     }
 
-    public void deleteSectionsByConference (String conferenceId) throws ServiceException, SQLException {
-        try {
-            dao.deleteSectionsByConference(Long.parseLong(conferenceId));
-        } catch (DAOException e) {
-            throw new ServiceException("Can't delete section in service method by such conferenceId", e);
-        }
-    }
-
     public ArrayList<Section> showSections() throws ServiceException, SQLException {
         try {
             return dao.showSections();
