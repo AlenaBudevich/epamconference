@@ -19,5 +19,6 @@ public interface BaseReportDAO {
     Report findReportById(long id) throws DAOException, SQLException;
     Report findReportByName(String reportName) throws DAOException, SQLException;
     void addReportTo (String entity, long id, long reportId) throws SQLException;
-    void  deleteReportFrom (String entity, long reportId) throws SQLException;
+    void  deleteReportFrom (String entity, long reportId, long id) throws SQLException;
+    int checkUserReport (long reportId, long userId) throws DAOException, SQLException;
 }

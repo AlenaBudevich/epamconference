@@ -95,7 +95,11 @@ public class ReportService {
         dao.addReportTo(entity, id, reportId);
     }
 
-    public void deleteReportFrom(String entity, String reportId) throws ServiceException, SQLException {
-        dao.deleteReportFrom(entity, Long.parseLong(reportId));
+    public void deleteReportFrom(String entity, long reportId, long id) throws ServiceException, SQLException {
+        dao.deleteReportFrom(entity, reportId, id);
+    }
+
+    public int checkUserReport(long reportId, long userId) throws ServiceException, SQLException, DAOException {
+        return dao.checkUserReport(reportId, userId);
     }
 }

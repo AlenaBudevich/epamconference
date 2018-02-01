@@ -137,12 +137,16 @@ public class SectionDAO implements BaseSectionDAO {
         }
     }
 
-    public ArrayList<Section> findSectionsByName(String sectionName) throws DAOException, SQLException {
+    public Section findSectionByName(String sectionName) throws DAOException, SQLException {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_SECTIONS_BY_NAME);
         preparedStatement.setString(1, sectionName);
         ResultSet resultSet = preparedStatement.executeQuery();
-        return initSectionTable(resultSet);
+        if (resultSet.next()) {
+            return initSection(resultSet);
+        } else {
+            return null;
+        }
     }
 
 }

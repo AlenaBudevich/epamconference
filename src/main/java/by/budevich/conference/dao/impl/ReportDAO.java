@@ -47,11 +47,9 @@ public class ReportDAO implements BaseReportDAO {
 
     private static final String SQL_DELETE_REPORT = "DELETE FROM report WHERE reportID = ?";
 
-    private static final String SQL_DELETE_REPORT_FROM_USER = "DELETE FROM reportuser WHERE reportID = ?";
+    private static final String SQL_DELETE_REPORT_FROM_USER = "DELETE FROM reportuser WHERE reportID = ? userID = ?";
 
-    private static final String SQL_DELETE_REPORT_FROM_SECTION = "DELETE FROM sectionreport WHERE reportID = ?";
-
-    private static final String SQL_DELETE_REPORT_FROM_CONFERENCE = "DELETE FROM conferencereport WHERE reportID = ?";
+    private static final String SQL_DELETE_REPORT_FROM_SECTION = "DELETE FROM sectionreport WHERE reportID = ? AND sectionID = ?";
 
     private static final String SQL_VIEW_REPORTS_BY_USER = "SELECT report.reportID, report.reportName," +
             "report.reportTheses, report.reportStatus, report.reportContent" +
@@ -77,8 +75,8 @@ public class ReportDAO implements BaseReportDAO {
     private static final String SQL_ADD_REPORT_TO_SECTION =
             "INSERT INTO sectionreport (sectionID, reportID) VALUES (?,?)";
 
-    private static final String SQL_ADD_REPORT_TO_CONFERENCE =
-            "INSERT INTO conferencereport (conferenceID, reportID) VALUES (?,?)";
+    private static final String SQL_CHECK_USER_REPORT =
+            "SELECT COUNT(reportID) FROM reportuser WHERE reportID = ? AND userID = ? ";
 
     private Report initReport(ResultSet resultSet) throws SQLException {
         Report report = new Report();
@@ -188,25 +186,35 @@ public class ReportDAO implements BaseReportDAO {
             preparedStatement = connection.prepareStatement(SQL_ADD_REPORT_TO_USER);
         } else if (entity.equalsIgnoreCase(EntityEnum.SECTION.name())) {
             preparedStatement = connection.prepareStatement(SQL_ADD_REPORT_TO_SECTION);
-        } else if (entity.equalsIgnoreCase(EntityEnum.CONFERENCE.name())) {
-            preparedStatement = connection.prepareStatement(SQL_ADD_REPORT_TO_CONFERENCE);
         } else return;
         preparedStatement.setLong(1, id);
         preparedStatement.setLong(2, reportId);
         preparedStatement.executeUpdate();
     }
 
-    public void deleteReportFrom(String entity, long reportId) throws SQLException {
+    public void deleteReportFrom(String entity, long reportId, long id) throws SQLException {
         Connection connection = ConnectionPool.getConnection();
         PreparedStatement preparedStatement;
         if (entity.equalsIgnoreCase(EntityEnum.USER.name())) {
             preparedStatement = connection.prepareStatement(SQL_DELETE_REPORT_FROM_USER);
         } else if (entity.equalsIgnoreCase(EntityEnum.SECTION.name())) {
             preparedStatement = connection.prepareStatement(SQL_DELETE_REPORT_FROM_SECTION);
-        } else if (entity.equalsIgnoreCase(EntityEnum.CONFERENCE.name())) {
-            preparedStatement = connection.prepareStatement(SQL_DELETE_REPORT_FROM_CONFERENCE);
         } else return;
         preparedStatement.setLong(1, reportId);
+        preparedStatement.setLong(2, id);
         preparedStatement.executeUpdate();
+    }
+
+    public int checkUserReport(long reportId, long userId) throws DAOException, SQLException {
+        Connection connection = ConnectionPool.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_CHECK_USER_REPORT);
+        preparedStatement.setLong(1, reportId);
+        preparedStatement.setLong(2, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        } else {
+            return 0;
+        }
     }
 }

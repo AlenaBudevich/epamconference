@@ -25,13 +25,12 @@ public enum CommandEnum {
     VIEWCONFERENCESECTIONS (ViewConferenceSectionsCommand.getInstance()),
     VIEWSECTIONREPORTS (ViewSectionReportsCommand.getInstance()),
 
-    VIEWUSERINCOMINGMESSAGES (ViewUserIncomingMessagesCommand.getInstance()),
-    VIEWUSEROUTGOINGMESSAGES (ViewUserOutgoingMessagesCommand.getInstance()),
-
     VIEWUSERS (ViewUsersCommand.getInstance()),
     ASSIGNUSERROLE (AssignUserRoleCommand.getInstance()),
     ASSIGNREPORTSTATUS (AssignReportStatusCommand.getInstance()),
 
+    VIEWUSERINCOMINGMESSAGES (ViewUserIncomingMessagesCommand.getInstance()),
+    VIEWUSEROUTGOINGMESSAGES (ViewUserOutgoingMessagesCommand.getInstance()),
     SENDMESSAGE (SendMessageCommand.getInstance()),
     CHANGEMESSAGE (ChangeMessageCommand.getInstance()),
     DELETEMESSAGE (DeleteMessageCommand.getInstance()),
@@ -42,7 +41,10 @@ public enum CommandEnum {
 
     ADDSECTION (AddSectionCommand.getInstance()),
     UPDATESECTIONINFO (UpdateSectionInfoCommand.getInstance()),
-    DELETESECTION (DeleteSectionCommand.getInstance());
+    DELETESECTION (DeleteSectionCommand.getInstance()),
+
+    ADDSECTIONREPORT (AddSectionReportCommand.getInstance()),
+    DELETESECTIONREPORT (DeleteSectionReportCommand.getInstance());
 
     BaseCommand command;
     CommandEnum(BaseCommand instance) {

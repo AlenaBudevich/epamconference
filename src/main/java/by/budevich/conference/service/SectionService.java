@@ -66,9 +66,9 @@ public class SectionService {
         }
     }
 
-    public ArrayList<Section> findSectionsByName(String sectionName) throws ServiceException, SQLException {
+    public Section findSectionsByName(String sectionName) throws ServiceException, SQLException {
         try {
-            return dao.findSectionsByName(sectionName);
+            return dao.findSectionByName(sectionName);
         } catch (DAOException e) {
             throw new ServiceException("Can't find section(s) with such name ", e);
         }

@@ -16,5 +16,5 @@ public interface BaseSectionDAO {
     ArrayList<Section> showSections() throws DAOException, SQLException;
     ArrayList<Section> showSectionsByConferenceId(long conferenceId) throws DAOException, SQLException;
     Section findSectionById(long sectionId) throws DAOException, SQLException;
-    ArrayList<Section> findSectionsByName (String sectionName) throws DAOException, SQLException;
+    Section findSectionByName (String sectionName) throws DAOException, SQLException;
 }
