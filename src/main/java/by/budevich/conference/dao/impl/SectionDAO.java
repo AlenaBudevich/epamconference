@@ -24,10 +24,8 @@ public class SectionDAO implements BaseSectionDAO {
                     "sectionEnd, sectionAddress, sectionContent, sectionStatus) VALUES (?,?,?,?,?,?,?,?,?)";
 
     private static final String SQL_UPDATE_SECTION_INFO = "UPDATE section SET conferenceID = ?, sectionName = ?, maxNumberReports = ?, " +
-            "sectionBeginning = ?, sectionEnd = ?, sectionAddress = ?, sectionContent = ?" +
+            "sectionBeginning = ?, sectionEnd = ?, sectionAddress = ?, sectionContent = ?, sectionStatus = ?" +
             " WHERE sectionID = ?";
-
-    private static final String SQL_ASSIGN_STATUS_TO_SECTION = "UPDATE section SET sectionStatus = ? WHERE sectionID = ?";
 
     private static final String SQL_DELETE_SECTION = "DELETE FROM section WHERE sectionID = ?";
 
@@ -101,15 +99,8 @@ public class SectionDAO implements BaseSectionDAO {
         preparedStatement.setTimestamp(5, section.getSectionEnd());
         preparedStatement.setString(6, section.getSectionAddress());
         preparedStatement.setString(7, section.getSectionContent());
-        preparedStatement.setLong(8, section.getSectionId());
-        preparedStatement.executeUpdate();
-    }
-
-    public void assignStatusToSection(long sectionId, String sectionStatus) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_STATUS_TO_SECTION);
-        preparedStatement.setString(1, sectionStatus);
-        preparedStatement.setLong(2, sectionId);
+        preparedStatement.setString(8, section.getSectionStatus());
+        preparedStatement.setLong(9, section.getSectionId());
         preparedStatement.executeUpdate();
     }
 

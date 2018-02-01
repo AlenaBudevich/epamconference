@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public interface BaseSectionDAO {
     void addSectionInfo(Section section) throws DAOException, SQLException;
     void updateSectionInfo(Section section) throws DAOException, SQLException;
-    void assignStatusToSection(long sectionId, String sectionStatus) throws DAOException, SQLException;
     void deleteSection(long sectionId) throws DAOException, SQLException;
     void deleteSectionsByConference(long conferenceId) throws DAOException, SQLException;
     ArrayList<Section> showSections() throws DAOException, SQLException;

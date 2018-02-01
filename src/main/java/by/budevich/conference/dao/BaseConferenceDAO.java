@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public interface BaseConferenceDAO {
     void addConference(Conference conference) throws SQLException;
     void updateConferenceInfo(Conference conference) throws SQLException;
-    void assignStatusToConference(long conferenceId, String conferenceStatus) throws SQLException;
     void deleteConference(long conferenceId) throws SQLException;
     ArrayList<Conference> showConferences() throws SQLException;
     Conference findConferenceById(long conferenceId) throws SQLException;

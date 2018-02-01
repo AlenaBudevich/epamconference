@@ -24,10 +24,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
 
     private static final String SQL_UPDATE_CONFERENCE_INFO = "UPDATE сonference SET conferenceName = ?, conferenceDescription = ?, " +
             "maxNumberParticipants = ?, conferenceBeginning = ?, conferenceEnd = ?, conferenceCountry = ?, " +
-            "conferenceCity = ?, conferenceAddress = ?, conferenceContent = ? " +
+            "conferenceCity = ?, conferenceAddress = ?, conferenceContent = ?, conferenceStatus = ?" +
             "WHERE conferenceID = ?";
-
-    private static final String SQL_ASSIGN_CONFERENCE_STATUS = "UPDATE сonference SET conferenceStatus = ? WHERE conferenceID = ?";
 
     private static final String SQL_DELETE_CONFERENCE = " DELETE FROM сonference WHERE conferenceID = ?";
 
@@ -78,15 +76,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
         preparedStatement.setString(7, conference.getConferenceCity());
         preparedStatement.setString(8, conference.getConferenceAddress());
         preparedStatement.setString(9, conference.getConferenceContent());
-        preparedStatement.setLong(10, conference.getConferenceId());
-        preparedStatement.executeUpdate();
-    }
-
-    public void assignStatusToConference(long conferenceId, String conferenceStatus) throws SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_CONFERENCE_STATUS);
-        preparedStatement.setString(1,conferenceStatus);
-        preparedStatement.setLong(2,conferenceId);
+        preparedStatement.setString(10, conference.getConferenceStatus());
+        preparedStatement.setLong(11, conference.getConferenceId());
         preparedStatement.executeUpdate();
     }
 

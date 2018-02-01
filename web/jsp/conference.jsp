@@ -79,6 +79,16 @@
                     </c:url>
                     <td><a href=${viewReports}>More info>></a></td>
 
+                    <c:if test="${role == 'ADMIN'}">
+                        <c:url value="controller?command=updatesectioninfo" var="updateSection">
+                            <c:param name="sectionId" value="${current.sectionId}"/>
+                        </c:url>
+                        <td><a href=${updateSection}>Update section</a></td>
+                        <c:url value="controller?command=deletesection" var="deleteSection">
+                            <c:param name="sectionId" value="${current.sectionId}"/>
+                        </c:url>
+                        <td><a href=${deleteSection}>Delete section</a></td>
+                    </c:if>
                 </tr>
             </c:forEach>
         </table>

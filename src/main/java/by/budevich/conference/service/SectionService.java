@@ -7,7 +7,6 @@ import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -35,30 +34,11 @@ public class SectionService {
         }
     }
 
-    public void updateSectionInfo(String sectionID, String conferenceID, String sectionName, String maxNumberReports,
-                                  Timestamp sectionBeginning, Timestamp sectionEnd, String sectionAddress, String sectionContent)
-            throws ServiceException, SQLException {
+    public void updateSectionInfo(Section section) throws ServiceException, SQLException {
         try {
-            Section section = new Section();
-            section.setSectionId(Long.parseLong(sectionID));
-            section.setConferenceId(Long.parseLong(conferenceID));
-            section.setSectionName(sectionName);
-            section.setMaxNumberReports(Integer.parseInt(maxNumberReports));
-            section.setSectionBeginning(sectionBeginning);
-            section.setSectionEnd(sectionEnd);
-            section.setSectionAddress(sectionAddress);
-            section.setSectionContent(sectionContent);
             dao.updateSectionInfo(section);
         } catch (DAOException e) {
             throw new ServiceException("Can't update section in service method ", e);
-        }
-    }
-
-    public void assignStatusToSection(String sectionId, String sectionStatus) throws ServiceException, SQLException {
-        try {
-            dao.assignStatusToSection(Long.parseLong(sectionId), sectionStatus);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't assign new status for section with id ", e);
         }
     }
 

@@ -50,7 +50,7 @@
                     <c:url value="controller?command=deleteconference" var="deleteConference">
                         <c:param name="conferenceId" value="${current.conferenceId}"/>
                     </c:url>
-                    <td><a href=${deleteConference}>Deleteconference</a></td>
+                    <td><a href=${deleteConference}>Delete conference</a></td>
                 </c:if>
             </tr>
         </c:forEach>

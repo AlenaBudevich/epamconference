@@ -7,7 +7,6 @@ import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -29,27 +28,8 @@ public class ConferenceService {
         dao.addConference(conference);
     }
 
-    public void updateConferenceInfo(String  conferenceId, String conferenceName, String conferenceDescription,
-                                     String maxNumberParticipants, Timestamp conferenceBeginning, Timestamp conferenceEnd,
-                                     String conferenceCountry, String conferenceCity, String conferenceAddress,
-                                     String conferenceContent)
-            throws ServiceException, SQLException {
-        Conference conference = new Conference();
-        conference.setConferenceId(Long.parseLong(conferenceId));
-        conference.setConferenceName(conferenceName);
-        conference.setConferenceDescription(conferenceDescription);
-        conference.setMaxNumberParticipants(Integer.parseInt(maxNumberParticipants));
-        conference.setConferenceBeginning(conferenceBeginning);
-        conference.setConferenceEnd(conferenceEnd);
-        conference.setConferenceCountry(conferenceCountry);
-        conference.setConferenceCity(conferenceCity);
-        conference.setConferenceAddress(conferenceAddress);
-        conference.setConferenceContent(conferenceContent);
+    public void updateConferenceInfo(Conference conference) throws ServiceException, SQLException {
         dao.updateConferenceInfo(conference);
-    }
-
-    public void assignStatusToConference(String conferenceId, String conferenceStatus) throws ServiceException, SQLException {
-        dao.assignStatusToConference(Long.parseLong(conferenceId), conferenceStatus);
     }
 
     public void deleteConference(String conferenceId) throws ServiceException, SQLException {
