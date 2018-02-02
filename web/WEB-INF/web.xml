@@ -5,4 +5,23 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
            version="3.1">
 
+    <servlet>
+        <servlet-name>Servlet</servlet-name>
+        <servlet-class>by.budevich.conference.controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Servlet</servlet-name>
+        <url-pattern>/Servlet</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>by.budevich.conference.filter.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <servlet-name>Servlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
