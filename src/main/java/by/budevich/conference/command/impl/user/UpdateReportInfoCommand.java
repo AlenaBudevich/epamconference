@@ -26,12 +26,18 @@ public class UpdateReportInfoCommand implements BaseCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
         long reportId = Long.parseLong(request.getParameter("reportId"));
         Report report = ReportService.getInstance().findReportById(reportId);
-        report.setReportName(request.getParameter("reportName"));
-        report.setReportTheses(request.getParameter("reportTheses"));
-        report.setReportContent(request.getParameter("reportContent"));
-        ReportService.getInstance().updateReportInfo(report);
+        String reportName = request.getParameter("reportName");
+        if (ReportService.getInstance().findReportByName(reportName) == null) {
 
-        return ViewUserReportsCommand.getInstance().getPage(request, response);
+            report.setReportName(reportName);
+            report.setReportTheses(request.getParameter("reportTheses"));
+            report.setReportContent(request.getParameter("reportContent"));
+            ReportService.getInstance().updateReportInfo(report);
+
+            return ViewUserReportsCommand.getInstance().getPage(request, response);
+        } else {
+            return "jsp/error.jsp";
+        }
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {

@@ -6,12 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form name="sendMessageForm">
+<script src="js/validation.js"></script>
+<form name="sendMessageForm" onsubmit="return validateSendMessageForm()">
     <input type="hidden" name="command" value="sendMessage" />
     <br/>User login:<br/>
     <input type="text" name="login" value=""/>
     <br/>Message text:<br/>
-    <input type="text" name="messageText" value="null"/>
+    <input type="text" name="messageText" value=""/>
     <br/>Message content:<br/>
     <input type="text" name="messageContent" value=""/>
     <br/>

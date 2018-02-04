@@ -31,9 +31,15 @@ public class AddSectionCommand implements BaseCommand {
             Conference conference = ConferenceService.getInstance().findConferenceByName(conferenceName);
             long conferenceId = conference.getConferenceId();
             String sectionName = request.getParameter("sectionName");
-            SectionService.getInstance().addBasicSectionInfo(conferenceId, sectionName);
-            request.setAttribute("conference", conference);
-            return ViewAllConferencesCommand.getInstance().getPage(request, response);
+
+            if (SectionService.getInstance().findSectionsByName(sectionName) == null) {
+
+                SectionService.getInstance().addBasicSectionInfo(conferenceId, sectionName);
+                request.setAttribute("conference", conference);
+                return ViewAllConferencesCommand.getInstance().getPage(request, response);
+            } else {
+                return "jsp/error.jsp";
+            }
         } else {
             return "jsp/error.jsp";
         }

@@ -5,6 +5,12 @@
   Time: 17:41
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="header">
@@ -21,3 +27,10 @@
         <li><a href="controller?command=viewallconferences">Main</a></li>
     </ul>
 </div>
+
+<form>
+    <select id="language" name="language" onchange="submit()">
+        <option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
+        <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
+    </select>
+</form>

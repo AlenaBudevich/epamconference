@@ -9,15 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html><head><title>Registration</title></head>
 <body>
+<script src="js/validation.js"></script>
 <%@include file="header.jsp"%>
 <br>
 <h1>Registration</h1>
-<form name="registrationForm">
-    <input type="hidden" name="command" value="registration" />
+<form name="registrationForm" onsubmit="return validateRegistrationForm()">
+    <input type="hidden" name="command" value="registration"/>
     Login:<br/>
     <input type="text" name="login" value=""/>
     <br/>Password:<br/>
     <input type="password" name="password" value=""/>
+    <br/>Repeat password:<br/>
+    <input type="password" name="repeatpassword" value=""/>
     <br/>Email:<br/>
     <input type="text" name="email" value=""/>
     <br/>

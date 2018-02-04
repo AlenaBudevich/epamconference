@@ -25,10 +25,7 @@ public class AddBasicReportInfoCommand implements BaseCommand {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
         String reportName = request.getParameter("reportName");
-        if (ReportService.getInstance().findReportByName(reportName)!=null){
-            return "jsp/error.jsp";
-        }
-        else {
+        if (ReportService.getInstance().findReportByName(reportName)== null){
             String reportTheses = request.getParameter("reportTheses");
             ReportService.getInstance().addBasicReportInfo(reportName, reportTheses);
 
@@ -36,6 +33,10 @@ public class AddBasicReportInfoCommand implements BaseCommand {
             Report report = ReportService.getInstance().findReportByName(reportName);
             ReportService.getInstance().addReportTo("user", id, report.getReportId());
             return ViewUserReportsCommand.getInstance().getPage(request, response);
+
+        }
+        else {
+            return "jsp/error.jsp";
         }
     }
 

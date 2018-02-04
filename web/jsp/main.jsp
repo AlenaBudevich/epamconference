@@ -13,7 +13,7 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<br>
+<fmt:message key="signup.text.welcome" />
 <h1>Main</h1>
 <c:set var="userId" value="${userId}"/>
 <c:set var="role" value="${role}"/>

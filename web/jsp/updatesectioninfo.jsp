@@ -5,14 +5,17 @@
   Time: 18:00
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Update section info</title>
 </head>
 <body>
+<script src="js/validation.js"></script>
+<%@include file="header.jsp" %>
 <h1>Update section info</h1>
-<form name="updateSectionInfoForm">
+<form name="updateSectionInfoForm" onsubmit="return validateUpdateSectionForm()">
     <input type="hidden" name="command" value="updatesectioninfo" />
     <input type="hidden" name="sectionId" value="${section.sectionId}" />
     Section name:<br/>
@@ -37,5 +40,7 @@
     <br/>
     <input type="submit" value="Update section" formmethod="post" formaction="controller"/>
 </form>
+<br>
+<%@include file="usermenu.jsp" %>
 </body>
 </html>

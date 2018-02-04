@@ -29,19 +29,26 @@ public class UpdateSectionInfoCommand implements BaseCommand {
             throws ServiceException, SQLException, DAOException {
         String sectionId = request.getParameter("sectionId");
         Section section = SectionService.getInstance().findSectionById(sectionId);
-        section.setSectionName(request.getParameter("sectionName"));
-        int maxNumberReports = Integer.parseInt(request.getParameter("maxNumberReports"));
-        section.setMaxNumberReports(maxNumberReports);
-        Timestamp sectionBeginning = Timestamp.valueOf(request.getParameter("sectionBeginning"));
-        section.setSectionBeginning(sectionBeginning);
-        Timestamp sectionEnd = Timestamp.valueOf(request.getParameter("sectionEnd"));
-        section.setSectionEnd(sectionEnd);
-        section.setSectionAddress(request.getParameter("sectionAddress"));
-        section.setSectionContent(request.getParameter("sectionContent"));
-        section.setSectionStatus(request.getParameter("sectionStatus"));
+        String sectionName = request.getParameter("sectionName");
+        if (SectionService.getInstance().findSectionsByName(sectionName) == null) {
 
-        SectionService.getInstance().updateSectionInfo(section);
-        return ViewAllConferencesCommand.getInstance().getPage(request, response);
+            section.setSectionName(sectionName);
+            int maxNumberReports = Integer.parseInt(request.getParameter("maxNumberReports"));
+            section.setMaxNumberReports(maxNumberReports);
+            Timestamp sectionBeginning = Timestamp.valueOf(request.getParameter("sectionBeginning"));
+            section.setSectionBeginning(sectionBeginning);
+            Timestamp sectionEnd = Timestamp.valueOf(request.getParameter("sectionEnd"));
+            section.setSectionEnd(sectionEnd);
+            section.setSectionAddress(request.getParameter("sectionAddress"));
+            section.setSectionContent(request.getParameter("sectionContent"));
+            section.setSectionStatus(request.getParameter("sectionStatus"));
+
+            SectionService.getInstance().updateSectionInfo(section);
+            return ViewAllConferencesCommand.getInstance().getPage(request, response);
+        }
+        else {
+            return "jsp/error.jsp";
+        }
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response)

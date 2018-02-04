@@ -26,25 +26,31 @@ public class UpdateConferenceInfoCommand implements BaseCommand {
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
+        String conferenceId = request.getParameter("conferenceId");
+        Conference conference = ConferenceService.getInstance().findConferenceById(conferenceId);
         String conferenceName = request.getParameter("conferenceName");
-        Conference conference = ConferenceService.getInstance().findConferenceByName(conferenceName);
-        conference.setConferenceName(conferenceName);
-        conference.setConferenceDescription(request.getParameter("conferenceDescription"));
-        int maxNumberParticipants = Integer.parseInt(request.getParameter("maxNumberParticipants"));
-        conference.setMaxNumberParticipants(maxNumberParticipants);
-        Timestamp conferenceBeginning = Timestamp.valueOf(request.getParameter("conferenceBeginning"));
-        conference.setConferenceBeginning(conferenceBeginning);
-        Timestamp conferenceEnd = Timestamp.valueOf(request.getParameter("conferenceEnd"));
-        conference.setConferenceBeginning(conferenceEnd);
-        conference.setConferenceCountry(request.getParameter("conferenceCountry"));
-        conference.setConferenceCity(request.getParameter("conferenceCity"));
-        conference.setConferenceAddress(request.getParameter("conferenceAddress"));
-        conference.setConferenceContent(request.getParameter("conferenceContent"));
-        conference.setConferenceStatus(request.getParameter("conferenceStatus"));
+        if (ConferenceService.getInstance().findConferenceByName(conferenceName) == null) {
+            conference.setConferenceName(conferenceName);
+            conference.setConferenceDescription(request.getParameter("conferenceDescription"));
+            int maxNumberParticipants = Integer.parseInt(request.getParameter("maxNumberParticipants"));
+            conference.setMaxNumberParticipants(maxNumberParticipants);
+            Timestamp conferenceBeginning = Timestamp.valueOf(request.getParameter("conferenceBeginning"));
+            conference.setConferenceBeginning(conferenceBeginning);
+            Timestamp conferenceEnd = Timestamp.valueOf(request.getParameter("conferenceEnd"));
+            conference.setConferenceBeginning(conferenceEnd);
+            conference.setConferenceCountry(request.getParameter("conferenceCountry"));
+            conference.setConferenceCity(request.getParameter("conferenceCity"));
+            conference.setConferenceAddress(request.getParameter("conferenceAddress"));
+            conference.setConferenceContent(request.getParameter("conferenceContent"));
+            conference.setConferenceStatus(request.getParameter("conferenceStatus"));
 
-        ConferenceService.getInstance().updateConferenceInfo(conference);
+            ConferenceService.getInstance().updateConferenceInfo(conference);
 
-        return ViewAllConferencesCommand.getInstance().getPage(request, response);
+            return ViewAllConferencesCommand.getInstance().getPage(request, response);
+        }
+        else{
+            return "jsp/error.jsp";
+        }
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {

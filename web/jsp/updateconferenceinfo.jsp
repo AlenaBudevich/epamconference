@@ -5,15 +5,19 @@
   Time: 15:00
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Update conference info</title>
 </head>
 <body>
+<script src="js/validation.js"></script>
+<%@include file="header.jsp" %>
 <h1>Update conference info</h1>
-<form name="updateConferenceInfoForm">
+<form name="updateConferenceInfoForm" onsubmit="return validateUpdateConferenceForm()">
     <input type="hidden" name="command" value="updateconferenceinfo" />
+    <input type="hidden" name="conferenceId" value="${conference.conferenceId}" />
     Conference name:<br/>
     <input type="text" name="conferenceName" value="${conference.conferenceName}"/>
     <br/>Conference description:<br/>
@@ -42,5 +46,7 @@
     <br/>
     <input type="submit" value="Update conference" formmethod="post" formaction="controller"/>
 </form>
+<br>
+<%@include file="usermenu.jsp" %>
 </body>
 </html>

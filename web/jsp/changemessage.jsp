@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="js/validation.js"></script>
 <h1>Update report info</h1>
-<form name="changeMessageForm">
+<form name="changeMessageForm" onsubmit="return validateChangeMessageForm()">
     <input type="hidden" name="command" value="changeMessage" />
     <input type="hidden" name="messageId" value="${message.messageId}" />
     <br/>Message text:<br/>
