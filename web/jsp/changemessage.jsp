@@ -16,5 +16,5 @@
     <br/>Message content:<br/>
     <input type="text" name="messageContent" value="${message.messageContent}"/>
     <br/>
-    <input type="submit" value="Change message" formmethod="post" formaction="controller"/>
+    <input class="button-primary" type="submit" value="Change" formmethod="post" formaction="controller"/>
 </form>

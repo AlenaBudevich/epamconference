@@ -15,5 +15,5 @@
     <br/>Report name:<br/>
     <input type="text" name="reportName" value=""/>
     <br/>
-    <input type="submit" value="Add info" formaction="controller" formmethod="post"/>
+    <input class="button-primary" type="submit" value="Add" formaction="controller" formmethod="post"/>
 </form>

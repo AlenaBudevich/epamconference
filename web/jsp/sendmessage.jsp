@@ -16,5 +16,5 @@
     <br/>Message content:<br/>
     <input type="text" name="messageContent" value=""/>
     <br/>
-    <input type="submit" value="Send" formmethod="post" formaction="controller"/>
+    <input class="button-primary" type="submit" value="Send" formmethod="post" formaction="controller"/>
 </form>

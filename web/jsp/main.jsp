@@ -10,19 +10,22 @@
 <html>
 <head>
     <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/skeleton.css">
 </head>
 <body>
 <%@include file="header.jsp" %>
-<fmt:message key="signup.text.welcome" />
-<h1>Main</h1>
-<c:set var="userId" value="${userId}"/>
-<c:set var="role" value="${role}"/>
-<c:if test="${not empty userId}">
-    <h3>hi, ${login}</h3>
-    <h3>You are ${role}</h3>
-</c:if>
-<br>
-<div>
+<div class="row" align="center">
+    <fmt:message key="signup.text.welcome"/>
+    <h3>Main</h3>
+    <c:set var="userId" value="${userId}"/>
+    <c:set var="role" value="${role}"/>
+    <c:if test="${not empty userId}">
+        <h3>hi, ${login}</h3>
+        <h3>You are ${role}</h3>
+    </c:if>
+    <br>
     <table>
         <tr>
             <th>conferenceName</th>
@@ -36,26 +39,37 @@
                 <td><c:out value="${current.conferenceDescription}"/></td>
                 <td><c:out value="${current.maxNumberParticipants}"/></td>
                 <td><c:out value="${current.conferenceCountry}"/></td>
-                <c:if test="${not empty userId}">
-                    <c:url value="controller?command=viewconferencesections" var="viewSections">
-                        <c:param name="conferenceId" value="${current.conferenceId}"/>
-                    </c:url>
-                    <td><a href=${viewSections}>More info>></a></td>
-                </c:if>
                 <c:if test="${role == 'ADMIN'}">
-                    <c:url value="controller?command=updateconferenceinfo" var="updateConference">
-                        <c:param name="conferenceId" value="${current.conferenceId}"/>
-                    </c:url>
-                    <td><a href=${updateConference}>Update conference</a></td>
-                    <c:url value="controller?command=deleteconference" var="deleteConference">
-                        <c:param name="conferenceId" value="${current.conferenceId}"/>
-                    </c:url>
-                    <td><a href=${deleteConference}>Delete conference</a></td>
+                    <td>
+                        <form>
+                            <input type="hidden" name="command" value="updateconferenceinfo"/>
+                            <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
+                            <input type="submit" value="Update" formmethod="get" formaction="controller"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form>
+                            <input type="hidden" name="command" value="deleteconference"/>
+                            <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
+                            <input type="submit" value="Delete" formmethod="get" formaction="controller"/>
+                        </form>
+                    </td>
+                </c:if>
+                <c:if test="${not empty userId}">
+
+                    <td>
+                        <form>
+                            <input type="hidden" name="command" value="viewconferencesections"/>
+                            <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
+                            <input type="submit" value="More info" formmethod="get" formaction="controller"/>
+                        </form>
+                    </td>
                 </c:if>
             </tr>
         </c:forEach>
     </table>
 </div>
+
 <br>
 <%@include file="usermenu.jsp" %>
 </body>

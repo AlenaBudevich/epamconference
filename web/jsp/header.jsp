@@ -7,30 +7,31 @@
 --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
-<fmt:setLocale value="${language}" />
-<fmt:setBundle basename="text" />
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="header">
-    <ul>
-        <c:set var="userId" value="${userId}"/>
-        <c:if test="${not empty userId}">
-            <li><a href="controller?command=logout">Log out</a></li>
-        </c:if>
-        <c:if test="${empty userId}">
-            <li><a href="controller?command=login">Log in</a></li>
 
-            <li><a href="controller?command=registration">Registration</a></li>
-        </c:if>
-        <li><a href="controller?command=viewallconferences">Main</a></li>
-    </ul>
+<div class="topnav">
+    <a class="active" href="controller?command=viewallconferences">Conference</a>
+    <c:set var="userId" value="${userId}"/>
+    <c:if test="${not empty userId}">
+        <a href="controller?command=logout">Log out</a>
+    </c:if>
+    <c:if test="${empty userId}">
+        <a href="controller?command=login">Log in</a>
+        <a href="controller?command=registration">Registration</a>
+    </c:if>
+
+    <%--<form>--%>
+        <%--<select id="language" name="language" onchange="submit()">--%>
+            <%--<option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>--%>
+            <%--<option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>--%>
+        <%--</select>--%>
+    <%--</form>--%>
 </div>
-
-<form>
-    <select id="language" name="language" onchange="submit()">
-        <option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
-        <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
-    </select>
-</form>
+<br>

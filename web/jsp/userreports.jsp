@@ -10,62 +10,69 @@
 <html>
 <head>
     <title>User reports</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/skeleton.css">
 </head>
 <body>
 <%@include file="header.jsp" %>
-<br>
-<c:set var="report" value="${report}"/>
-<c:if test="${not empty report}">
-    <%@include file="updatereportinfo.jsp" %>
-</c:if>
-<br>
-<c:set var="addReport" value="${addReport}"/>
-<c:if test="${not empty addReport}">
-    <%@include file="addreport.jsp" %>
-</c:if>
+<div class="row" align="center">
+    <c:set var="report" value="${report}"/>
+    <c:if test="${not empty report}">
+        <%@include file="updatereportinfo.jsp" %>
+    </c:if>
+    <c:set var="addReport" value="${addReport}"/>
+    <c:if test="${not empty addReport}">
+        <%@include file="addreport.jsp" %>
+    </c:if>
 
-<br>
-<c:set var="addSectionReport" value="${addSectionReport}"/>
-<c:if test="${not empty addSectionReport}">
-    <%@include file="addsectionreport.jsp" %>
-</c:if>
+    <br>
+    <c:set var="addSectionReport" value="${addSectionReport}"/>
+    <c:if test="${not empty addSectionReport}">
+        <%@include file="addsectionreport.jsp" %>
+    </c:if>
 
-<c:set var="deleteSectionReport" value="${deleteSectionReport}"/>
-<c:if test="${not empty deleteSectionReport}">
-    <%@include file="deletesectionreport.jsp" %>
-</c:if>
+    <c:set var="deleteSectionReport" value="${deleteSectionReport}"/>
+    <c:if test="${not empty deleteSectionReport}">
+        <%@include file="deletesectionreport.jsp" %>
+    </c:if>
 
-<c:set var="reports" value="${userReports}"/>
-<c:if test="${not empty reports}">
-    <div>
-        <table>
-            <tr>
-                <th>reportName</th>
-                <th>reportTheses</th>
-                <th>reportStatus</th>
-                <th>reportContent</th>
-            </tr>
-            <c:forEach items="${userReports}" var="current">
+    <c:set var="reports" value="${userReports}"/>
+    <c:if test="${not empty reports}">
+        <div>
+            <table>
                 <tr>
-                    <td><c:out value="${current.reportName}"/></td>
-                    <td><c:out value="${current.reportTheses}"/></td>
-                    <td><c:out value="${current.reportStatus}"/></td>
-                    <td><c:out value="${current.reportContent}"/></td>
-
-                    <c:url value="controller?command=updatereportinfo" var="updateReport">
-                        <c:param name="reportId" value="${current.reportId}"/>
-                    </c:url>
-                    <td><a href=${updateReport}>Update report info</a></td>
-
-                    <c:url value="controller?command=deletereport" var="deleteReport">
-                        <c:param name="reportId" value="${current.reportId}"/>
-                    </c:url>
-                    <td><a href=${deleteReport}>Delete report</a></td>
+                    <th>reportName</th>
+                    <th>reportTheses</th>
+                    <th>reportStatus</th>
+                    <th>reportContent</th>
                 </tr>
-            </c:forEach>
-        </table>
-    </div>
-</c:if>
+                <c:forEach items="${userReports}" var="current">
+                    <tr>
+                        <td><c:out value="${current.reportName}"/></td>
+                        <td><c:out value="${current.reportTheses}"/></td>
+                        <td><c:out value="${current.reportStatus}"/></td>
+                        <td><c:out value="${current.reportContent}"/></td>
+                        <td>
+                            <form>
+                                <input type="hidden" name="command" value="updatereportinfo"/>
+                                <input type="hidden" name="reportId" value="${current.reportId}"/>
+                                <input type="submit" value="Update" formmethod="get" formaction="controller"/>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="hidden" name="command" value="deletereport"/>
+                                <input type="hidden" name="reportId" value="${current.reportId}"/>
+                                <input type="submit" value="Delete" formmethod="get" formaction="controller"/>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </c:if>
+</div>
 <br>
 <%@include file="usermenu.jsp" %>
 <br>

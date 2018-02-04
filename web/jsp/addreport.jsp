@@ -15,5 +15,5 @@
     <br/>Report theses:<br/>
     <input type="text" name="reportTheses" value=""/>
     <br/>
-    <input type="submit" value="Add report" formmethod="post" formaction="controller"/>
+    <input class="button-primary" type="submit" value="Add" formmethod="post" formaction="controller"/>
 </form>

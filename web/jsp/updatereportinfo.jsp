@@ -18,6 +18,6 @@
     <br/>Report content:<br/>
     <input type="text" name="reportContent" value="${report.reportContent}"/>
     <br/>
-    <input type="submit" value="Change info" formmethod="post" formaction="controller"/>
+    <input class="button-primary" type="submit" value="Change" formmethod="post" formaction="controller"/>
 </form>
 
