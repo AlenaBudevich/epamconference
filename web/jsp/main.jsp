@@ -5,6 +5,9 @@
   Time: 19:18
   To change this template use File | Settings | File Templates.
 --%>
+
+<%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="${language}">
@@ -17,6 +20,7 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
+
 <div class="row" align="center">
     <fmt:message key="signup.text.welcome"/>
     <h3>Main</h3>
@@ -24,7 +28,7 @@
     <c:set var="role" value="${role}"/>
     <c:if test="${not empty userId}">
         <h3>hi, ${login}</h3>
-        <h3>You are ${role}</h3>
+        <h3><ctg:role role="${role}"/></h3>
     </c:if>
     <br>
     <table>
