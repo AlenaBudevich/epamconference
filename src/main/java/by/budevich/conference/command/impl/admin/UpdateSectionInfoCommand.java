@@ -30,7 +30,8 @@ public class UpdateSectionInfoCommand implements BaseCommand {
         String sectionId = request.getParameter("sectionId");
         Section section = SectionService.getInstance().findSectionById(sectionId);
         String sectionName = request.getParameter("sectionName");
-        if (SectionService.getInstance().findSectionsByName(sectionName) == null) {
+        if (SectionService.getInstance().findSectionsByName(sectionName) == null ||
+                sectionName.equals(section.getSectionName())) {
 
             section.setSectionName(sectionName);
             int maxNumberReports = Integer.parseInt(request.getParameter("maxNumberReports"));

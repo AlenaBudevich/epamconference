@@ -7,7 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="${language}">
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -31,4 +31,3 @@
 </div>
 </body>
 </html>
-

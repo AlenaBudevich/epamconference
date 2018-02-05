@@ -29,7 +29,8 @@ public class UpdateConferenceInfoCommand implements BaseCommand {
         String conferenceId = request.getParameter("conferenceId");
         Conference conference = ConferenceService.getInstance().findConferenceById(conferenceId);
         String conferenceName = request.getParameter("conferenceName");
-        if (ConferenceService.getInstance().findConferenceByName(conferenceName) == null) {
+        if (ConferenceService.getInstance().findConferenceByName(conferenceName) == null ||
+                conferenceName.equals(conference.getConferenceName())) {
             conference.setConferenceName(conferenceName);
             conference.setConferenceDescription(request.getParameter("conferenceDescription"));
             int maxNumberParticipants = Integer.parseInt(request.getParameter("maxNumberParticipants"));
