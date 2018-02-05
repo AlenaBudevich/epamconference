@@ -33,7 +33,5 @@
         <input class="button-primary" type="submit" value="Add" formmethod="post" formaction="controller"/>
     </form>
 </div>
-<br>
-<%@include file="usermenu.jsp" %>
 </body>
 </html>

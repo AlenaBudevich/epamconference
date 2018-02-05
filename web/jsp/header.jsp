@@ -16,13 +16,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!-- Vickom Morozov -->
 <div class="navcont">
     <div class="nav">
         <ul>
             <li>
                 <a class="active" href="controller?command=viewallconferences">CONFERENCE</a>
             </li>
+            <%@include file="usermenu.jsp" %>
             <c:set var="userId" value="${userId}"/>
             <c:if test="${not empty userId}">
                 <li>
@@ -37,7 +37,6 @@
                     <a href="controller?command=registration">REGISTRATION</a>
                 </li>
             </c:if>
-
 
             <%--<li class="drop">--%>
             <%--<a href="#">ABOUT</a>--%>

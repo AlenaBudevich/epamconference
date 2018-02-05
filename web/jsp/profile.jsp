@@ -58,8 +58,6 @@
             <input type="submit" value="Change profile info" formmethod="get" formaction="controller"/>
         </form>
     </div>
-    <br>
-    <%@include file="usermenu.jsp" %>
 </div>
 </body>
 </html>

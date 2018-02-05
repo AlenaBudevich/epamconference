@@ -106,9 +106,6 @@
             </table>
         </div>
     </c:if>
-
 </div>
-<%@include file="usermenu.jsp" %>
-<br>
 </body>
 </html>

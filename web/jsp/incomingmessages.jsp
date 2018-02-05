@@ -17,13 +17,19 @@
 <body>
 <%@include file="header.jsp" %>
 <br>
-<h1>${login}'s incoming messages</h1>
-<br>
-<%@include file="messagemenu.jsp" %>
 <div class="row" align="center">
+    <h3>${login}'s incoming messages</h3>
+</div>
+
+<div class="row">
+
+    <div class="three columns">
+        <%@include file="messagemenu.jsp" %>
+    </div>
+
     <c:set var="messages" value="${messages}"/>
     <c:if test="${not empty messages}">
-        <div>
+        <div class="nine columns">
             <table>
                 <c:forEach items="${messages}" var="current">
                     <tr>
@@ -43,6 +49,7 @@
         </div>
     </c:if>
 </div>
-<%@include file="usermenu.jsp" %>
+
+
 </body>
 </html>

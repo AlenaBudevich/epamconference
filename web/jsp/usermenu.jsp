@@ -10,17 +10,15 @@
 <c:set var="userId" value="${userId}"/>
 <c:set var="role" value="${role}"/>
 <c:if test="${not empty userId}">
-    <div class="usermenu">
-        <ul>
-            <li><a href="controller?command=viewprofileinfo">My profile</a></li>
-            <li><a href="controller?command=viewuserreports">My reports</a></li>
-            <li><a href="controller?command=viewuserincomingmessages">Messages</a></li>
-            <c:if test="${role == 'ADMIN'}">
-                <li><a href="controller?command=viewusers">Users</a></li>
-                <li><a href="controller?command=addconference">Add conference</a></li>
-                <li><a href="controller?command=addsection">Add section</a></li>
-            </c:if>
-        </ul>
-    </div>
+
+    <li><a href="controller?command=viewprofileinfo">MY PROFILE</a></li>
+    <li><a href="controller?command=viewuserreports">MY REPORTS</a></li>
+    <li><a href="controller?command=viewuserincomingmessages">MESSAGES</a></li>
+    <c:if test="${role == 'ADMIN'}">
+        <li><a href="controller?command=viewusers">USERS</a></li>
+        <li><a href="controller?command=addconference">ADD CONFERENCE</a></li>
+        <li><a href="controller?command=addsection">ADD SECTION</a></li>
+    </c:if>
+
 </c:if>
 

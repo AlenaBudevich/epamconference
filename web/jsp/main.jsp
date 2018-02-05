@@ -70,8 +70,5 @@
         </c:forEach>
     </table>
 </div>
-
-<br>
-<%@include file="usermenu.jsp" %>
 </body>
 </html>

@@ -79,6 +79,5 @@
         </div>
     </c:if>
 </div>
-<%@include file="usermenu.jsp" %>
 </body>
 </html>

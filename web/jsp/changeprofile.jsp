@@ -38,6 +38,5 @@
         <input class="button-primary" type="submit" value="Change" formmethod="post" formaction="controller"/>
     </form>
 </div>
-<%@include file="usermenu.jsp" %>
 </body>
 </html>

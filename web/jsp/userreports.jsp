@@ -17,16 +17,19 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
+    <h3>Reports</h3>
+</div>
+<div class="row">
     <c:set var="report" value="${report}"/>
     <c:if test="${not empty report}">
         <%@include file="updatereportinfo.jsp" %>
     </c:if>
+
     <c:set var="addReport" value="${addReport}"/>
     <c:if test="${not empty addReport}">
         <%@include file="addreport.jsp" %>
     </c:if>
 
-    <br>
     <c:set var="addSectionReport" value="${addSectionReport}"/>
     <c:if test="${not empty addSectionReport}">
         <%@include file="addsectionreport.jsp" %>
@@ -39,7 +42,17 @@
 
     <c:set var="reports" value="${userReports}"/>
     <c:if test="${not empty reports}">
-        <div>
+
+        <div class="three columns">
+            <ul class="nav navmenu-nav">
+                <li><a href="controller?command=addbasicreportinfo">Add new report</a></li>
+                <li><a href="controller?command=addsectionreport">Add section-report</a></li>
+                <li><a href="controller?command=deletesectionreport">Delete section-report</a></li>
+            </ul>
+        </div>
+
+
+        <div class="nine columns">
             <table>
                 <tr>
                     <th>reportName</th>
@@ -73,13 +86,5 @@
         </div>
     </c:if>
 </div>
-<br>
-<%@include file="usermenu.jsp" %>
-<br>
-<a href="controller?command=addbasicreportinfo">Add new report</a>
-<br>
-<a href="controller?command=addsectionreport">Add section-report</a>
-<br>
-<a href="controller?command=deletesectionreport">Delete section-report</a>
 </body>
 </html>

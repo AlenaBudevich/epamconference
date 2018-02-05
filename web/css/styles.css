@@ -9,6 +9,7 @@ body {
 
 
 ul, ol, dl {
+    text-align: center;
     padding: 0;
     margin: 0;
 }
@@ -41,7 +42,6 @@ a:hover, a:active, a:focus {
 
 
 .content {
-
     padding: 10px 0;
 }
 
@@ -61,24 +61,12 @@ a:hover, a:active, a:focus {
 }
 /*Basic style*/
 
-
-
-
-
-
-
-
-
 /*menu style*/
 .navcont{
-    width:960px;
     margin:0 auto;
-    background:#fff;
-    height:45px;
 }
 
 .nav {
-    background: transparent url(http://i50.tinypic.com/bj0nm.png) center bottom no-repeat;
     padding-bottom: 7px;
     margin-bottom: 23px;
 }

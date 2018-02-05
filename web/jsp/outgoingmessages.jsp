@@ -17,23 +17,28 @@
 <body>
 <%@include file="header.jsp" %>
 <br>
-<h1>${login}'s outgoing messages</h1>
-<br>
-<%@include file="messagemenu.jsp" %>
 <div class="row" align="center">
+    <h3>${login}'s outgoing messages</h3>
     <c:set var="sendMessage" value="${sendMessage}"/>
     <c:if test="${not empty sendMessage}">
         <%@include file="sendmessage.jsp" %>
     </c:if>
-    <br>
+</div>
+<div class="row">
+
     <c:set var="changeMessage" value="${changeMessage}"/>
     <c:if test="${not empty changeMessage}">
         <%@include file="changemessage.jsp" %>
     </c:if>
-    <br>
+
     <c:set var="messages" value="${messages}"/>
     <c:if test="${not empty messages}">
-        <div>
+
+        <div class="three columns">
+            <%@include file="messagemenu.jsp" %>
+        </div>
+
+        <div class="nine columns">
             <table>
                 <c:forEach items="${messages}" var="current">
                     <tr>
@@ -60,6 +65,5 @@
         </div>
     </c:if>
 </div>
-<%@include file="usermenu.jsp" %>
 </body>
 </html>
