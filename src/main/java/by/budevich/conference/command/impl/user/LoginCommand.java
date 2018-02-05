@@ -6,6 +6,7 @@ import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.UserService;
+import by.budevich.conference.util.SHA256Util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ public class LoginCommand implements BaseCommand{
         String password = request.getParameter("password");
         User user = UserService.getInstance().findUserByLogin(login);
         if (user==null) return "jsp/error.jsp";
-        if (user.getPassword().equals(password)) {
+        if (user.getPassword().equals(SHA256Util.encrypt(password))) {
             request.getSession().setAttribute("login", user.getLogin());
             request.getSession().setAttribute("role", user.getRole());
             request.getSession().setAttribute("userId", user.getUserId());

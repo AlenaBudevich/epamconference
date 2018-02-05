@@ -5,6 +5,7 @@ import by.budevich.conference.dao.impl.UserDAO;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
+import by.budevich.conference.util.SHA256Util;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class UserService {
 
     public void addUser(String login, String password, String email) throws ServiceException, SQLException, DAOException {
         try {
-            User user = new User(login, password, email);
+            User user = new User(login, SHA256Util.encrypt(password), email);
             dao.addUser(user);
         } catch (DAOException e) {
             throw new ServiceException("Can't add user to a database ", e);
