@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.admin;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ConferenceService;
@@ -23,12 +24,14 @@ public class DeleteConferenceCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
         return null;
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        String conferenceId = request.getParameter("conferenceId");
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
+        String conferenceId = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_ID);
         ConferenceService.getInstance().deleteConference(conferenceId);
         return ViewAllConferencesCommand.getInstance().getPage(request, response);
     }

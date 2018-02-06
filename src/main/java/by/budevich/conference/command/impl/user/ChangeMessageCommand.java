@@ -1,6 +1,8 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Message;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
@@ -23,21 +25,23 @@ public class ChangeMessageCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
-        long messageId = Long.parseLong(request.getParameter("messageId"));
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
+        long messageId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_MESSAGE_ID));
         Message message = MessageService.getInstance().findMessageById(messageId);
-        message.setMessageText(request.getParameter("messageText"));
-        message.setMessageContent(request.getParameter("messageContent"));
+        message.setMessageText(request.getParameter(ParameterConst.PARAMETER_MESSAGE_TEXT));
+        message.setMessageContent(request.getParameter(ParameterConst.PARAMETER_MESSAGE_CONTENT));
         MessageService.getInstance().updateSendedMessage(message);
 
         return ViewUserOutgoingMessagesCommand.getInstance().getPage(request, response);
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        long messageId = Long.parseLong(request.getParameter("messageId"));
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
+        long messageId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_MESSAGE_ID));
         Message message = MessageService.getInstance().findMessageById(messageId);
-        request.setAttribute("message", message);
-        request.setAttribute("changeMessage", true);
+        request.setAttribute(AttributeConst.ATTR_MESSAGE, message);
+        request.setAttribute(AttributeConst.ATTR_CHANGE_MESSAGE, true);
         return ViewUserOutgoingMessagesCommand.getInstance().getPage(request, response);
     }
 }

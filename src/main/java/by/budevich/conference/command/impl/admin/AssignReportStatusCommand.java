@@ -2,6 +2,8 @@ package by.budevich.conference.command.impl.admin;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.command.impl.user.ViewSectionReportsCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ReportService;
@@ -23,17 +25,19 @@ public class AssignReportStatusCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
-        long reportId = Long.parseLong(request.getParameter("reportId"));
-        String status = request.getParameter("status");
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
+        long reportId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_REPORT_ID));
+        String status = request.getParameter(ParameterConst.PARAMETER_STATUS);
         ReportService.getInstance().assignStatusToReport(reportId, status);
-        System.out.println(request.getParameter("sectionId"));
+        System.out.println(request.getParameter(ParameterConst.PARAMETER_SECTION_ID));
         return ViewSectionReportsCommand.getInstance().getPage(request, response);
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        long reportId = Long.parseLong(request.getParameter("changeId"));
-        request.setAttribute("changeId", reportId);
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
+        long reportId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_CHANGE_ID));
+        request.setAttribute(AttributeConst.ATTR_CHANGE_ID, reportId);
         return ViewSectionReportsCommand.getInstance().getPage(request, response);
     }
 }

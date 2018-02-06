@@ -1,6 +1,9 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
@@ -23,25 +26,27 @@ public class AddBasicReportInfoCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
-        String reportName = request.getParameter("reportName");
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
+        String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
         if (ReportService.getInstance().findReportByName(reportName)== null){
-            String reportTheses = request.getParameter("reportTheses");
+            String reportTheses = request.getParameter(ParameterConst.PARAMETER_REPORT_THESES);
             ReportService.getInstance().addBasicReportInfo(reportName, reportTheses);
 
-            long id = (Long) request.getSession().getAttribute("userId");
+            long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
             Report report = ReportService.getInstance().findReportByName(reportName);
-            ReportService.getInstance().addReportTo("user", id, report.getReportId());
+            ReportService.getInstance().addReportTo(ParameterConst.PARAMETER_USER, id, report.getReportId());
             return ViewUserReportsCommand.getInstance().getPage(request, response);
 
         }
         else {
-            return "jsp/error.jsp";
+            return PageConst.PAGE_ERROR;
         }
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        request.setAttribute("addReport", true);
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
+        request.setAttribute(AttributeConst.ATTR_ADD_REPORT, true);
         return ViewUserReportsCommand.getInstance().getPage(request, response);
     }
 }

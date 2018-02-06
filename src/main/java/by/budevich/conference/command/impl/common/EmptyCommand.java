@@ -1,6 +1,7 @@
 package by.budevich.conference.command.impl.common;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.PageConst;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +20,7 @@ public class EmptyCommand implements BaseCommand {
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = "/index.jsp";
-        return page;
+        return PageConst.PAGE_INDEX;
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) {

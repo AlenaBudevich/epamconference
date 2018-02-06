@@ -1,6 +1,8 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.entity.Message;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
@@ -30,13 +32,13 @@ public class ViewUserOutgoingMessagesCommand implements BaseCommand {
 
     public String getPage(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServiceException, DAOException {
-        if (request.getSession().getAttribute("userId") != null) {
-            long id = (Long) request.getSession().getAttribute("userId");
+        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
+            long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
             ArrayList<Message> userMessages = MessageService.getInstance().showOutgoingMessagesByUserId(id);
-            request.setAttribute("messages", userMessages);
-            return "jsp/outgoingmessages.jsp";
+            request.setAttribute(AttributeConst.ATTR_MESSAGES, userMessages);
+            return PageConst.PAGE_OUTGOING_MESSAGES;
         } else {
-            return "jsp/error.jsp";
+            return PageConst.PAGE_ERROR;
         }
     }
 }

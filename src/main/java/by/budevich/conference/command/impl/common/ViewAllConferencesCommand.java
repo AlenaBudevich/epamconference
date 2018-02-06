@@ -1,6 +1,8 @@
 package by.budevich.conference.command.impl.common;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.entity.Conference;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
@@ -24,15 +26,16 @@ public class ViewAllConferencesCommand implements BaseCommand{
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException {
         return null;
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
         ArrayList<Conference> conferences= ConferenceService.getInstance().showConferences();
-        request.setAttribute("conferences", conferences);
-        String page = "jsp/main.jsp";
-        return page;
+        request.setAttribute(AttributeConst.ATTR_CONFERENCES, conferences);
+        return PageConst.PAGE_MAIN;
     }
 
 }

@@ -1,6 +1,8 @@
 package by.budevich.conference.command.impl.admin;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
@@ -24,14 +26,16 @@ public class ViewUsersCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
         return null;
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
         ArrayList<User> users = UserService.getInstance().showUsers();
-        request.setAttribute("users", users);
-        return "jsp/viewusers.jsp";
+        request.setAttribute(AttributeConst.ATTR_USERS, users);
+        return PageConst.PAGE_VIEW_USERS;
 
     }
 }

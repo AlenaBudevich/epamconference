@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.admin;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.SectionService;
@@ -30,7 +31,7 @@ public class DeleteSectionCommand implements BaseCommand {
 
     public String getPage(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServiceException, DAOException {
-        String sectionId = request.getParameter("sectionId");
+        String sectionId = request.getParameter(ParameterConst.PARAMETER_SECTION_ID);
         SectionService.getInstance().deleteSection(sectionId);
         return ViewAllConferencesCommand.getInstance().getPage(request, response);
     }

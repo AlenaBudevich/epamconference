@@ -1,6 +1,9 @@
 package by.budevich.conference.command.impl.common;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.UserService;
@@ -22,28 +25,30 @@ public class RegistrationCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
+        String login = request.getParameter(ParameterConst.PARAMETER_LOGIN);
+        String password = request.getParameter(ParameterConst.PARAMETER_PASSWORD);
+        String email = request.getParameter(ParameterConst.PARAMETER_EMAIL);
 
         if (UserService.getInstance().findUserByLogin(login)!=null) {
-            return "jsp/error.jsp";
+            return PageConst.PAGE_ERROR;
         }
         else
         {
             UserService.getInstance().addUser(login, password, email);
-            return "jsp/login.jsp";}
+            return PageConst.PAGE_LOGIN;
+        }
 
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException {
-        if (request.getSession().getAttribute("userId") != null) {
-            return "jsp/error.jsp";
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException {
+        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
+            return PageConst.PAGE_ERROR;
         }
         else {
-            return "jsp/registration.jsp";
+            return PageConst.PAGE_REGISTRATION;
         }
     }
-
 }

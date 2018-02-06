@@ -1,6 +1,9 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.entity.Section;
 import by.budevich.conference.exception.DAOException;
@@ -27,32 +30,32 @@ public class AddSectionReportCommand implements BaseCommand {
 
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServiceException, SQLException, DAOException {
-        String role = (String) request.getSession().getAttribute("role");
-        long userId = (Long)request.getSession().getAttribute("userId");
-        String reportName = request.getParameter("reportName");
+        String role = (String) request.getSession().getAttribute(AttributeConst.ATTR_ROLE);
+        long userId = (Long)request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
+        String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
         Report report = ReportService.getInstance().findReportByName(reportName);
         if (report==null) {
-            return  "jsp/error.jsp";
+            return PageConst.PAGE_ERROR;
         }
         long reportId = report.getReportId();
         int ownReport = ReportService.getInstance().checkUserReport(reportId, userId);
-        if (role.equalsIgnoreCase("ADMIN") || ownReport!=0){
-            String sectionName = request.getParameter("sectionName");
+        if (role.equalsIgnoreCase(ParameterConst.PARAMETER_ROLE_ADMIN) || ownReport!=0){
+            String sectionName = request.getParameter(ParameterConst.PARAMETER_SECTION_NAME);
             Section section = SectionService.getInstance().findSectionsByName(sectionName);
             if (section==null) {
-                return  "jsp/error.jsp";
+                return  PageConst.PAGE_ERROR;
             }
             long sectionId = section.getSectionId();
-            ReportService.getInstance().addReportTo("section", sectionId, reportId);
+            ReportService.getInstance().addReportTo(ParameterConst.PARAMETER_SECTION, sectionId, reportId);
             return ViewUserReportsCommand.getInstance().getPage(request, response);
         }else {
-            return "jsp/error.jsp";
+            return PageConst.PAGE_ERROR;
         }
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServiceException, DAOException {
-        request.setAttribute("addSectionReport", true);
+        request.setAttribute(AttributeConst.ATTR_ADD_SECTION_REPORT, true);
         return ViewUserReportsCommand.getInstance().getPage(request, response);
     }
 }

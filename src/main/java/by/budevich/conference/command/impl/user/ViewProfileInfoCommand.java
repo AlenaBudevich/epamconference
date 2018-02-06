@@ -1,6 +1,8 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
@@ -23,21 +25,23 @@ public class ViewProfileInfoCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
         return null;
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        if (request.getSession().getAttribute("userId") != null) {
-            long id = (Long) request.getSession().getAttribute("userId");
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
+        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
+            long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
             User user = UserService.getInstance().findUserById(id);
-            request.setAttribute("email", user.getEmail());
-            request.setAttribute("phoneNumber", user.getPhoneNumber());
-            request.setAttribute("avatar", user.getAvatar());
-            request.setAttribute("firstName", user.getFirstName());
-            request.setAttribute("lastName", user.getLastName());
-            request.setAttribute("surname", user.getSurname());
-            return "jsp/profile.jsp";
-        } else return "jsp/error.jsp";
+            request.setAttribute(AttributeConst.ATTR_EMAIL, user.getEmail());
+            request.setAttribute(AttributeConst.ATTR_PHONE_NUMBER, user.getPhoneNumber());
+            request.setAttribute(AttributeConst.ATTR_AVATAR, user.getAvatar());
+            request.setAttribute(AttributeConst.ATTR_FIRST_NAME, user.getFirstName());
+            request.setAttribute(AttributeConst.ATTR_LAST_NAME, user.getLastName());
+            request.setAttribute(AttributeConst.ATTR_SURNAME, user.getSurname());
+            return PageConst.PAGE_PROFILE;
+        } else return PageConst.PAGE_ERROR;
     }
 }

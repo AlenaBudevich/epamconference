@@ -1,6 +1,9 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.PageConst;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.entity.Section;
 import by.budevich.conference.exception.DAOException;
@@ -32,12 +35,12 @@ public class ViewSectionReportsCommand implements BaseCommand {
 
     public String getPage(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServiceException, DAOException {
-        String sectionId = request.getParameter("sectionId");
+        String sectionId = request.getParameter(ParameterConst.PARAMETER_SECTION_ID);
         Section section = SectionService.getInstance().findSectionById(sectionId);
         ArrayList<Report> sectionReports = ReportService.getInstance().
-                showReportsByAnyId("section", Long.parseLong(sectionId));
-        request.setAttribute("section", section);
-        request.setAttribute("reports", sectionReports);
-        return "jsp/section.jsp";
+                showReportsByAnyId(ParameterConst.PARAMETER_SECTION, Long.parseLong(sectionId));
+        request.setAttribute(AttributeConst.ATTR_SECTION, section);
+        request.setAttribute(AttributeConst.ATTR_REPORTS, sectionReports);
+        return PageConst.PAGE_SECTION;
     }
 }

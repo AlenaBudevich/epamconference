@@ -14,12 +14,16 @@ public class RoleTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        String userRole = null;
-        userRole = "You are " + role;
         try {
+            String userRole = null;
+            if ("ADMIN".equalsIgnoreCase(role)) {
+                userRole = "Hi, " + role;
+            } else {
+                userRole = "Welcome, " + role;
+            }
             pageContext.getOut().write(userRole);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new JspException(e.getMessage());
         }
         return SKIP_BODY;
     }

@@ -1,6 +1,7 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
+import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ReportService;
@@ -22,12 +23,14 @@ public class DeleteReportCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException, SQLException, DAOException {
         return null;
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServiceException, DAOException {
-        String reportId = request.getParameter("reportId");
+    public String getPage(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServiceException, DAOException {
+        String reportId = request.getParameter(ParameterConst.PARAMETER_REPORT_ID);
         ReportService.getInstance().deleteReport(reportId);
         return ViewUserReportsCommand.getInstance().getPage(request, response);
     }
