@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MessageDAO implements BaseMessageDAO {
     private static MessageDAO instance = new MessageDAO();
 
-    public static MessageDAO getInstance(){
+    public static MessageDAO getInstance() {
         return instance;
     }
 
@@ -27,7 +27,7 @@ public class MessageDAO implements BaseMessageDAO {
 
     private static final String SQL_DELETE_MESSAGE = " DELETE FROM message WHERE messageID = ?";
 
-    private static final String SQL_UPDATE_SENDED_MESSAGE = "UPDATE message SET messageText = ?,"+
+    private static final String SQL_UPDATE_SENDED_MESSAGE = "UPDATE message SET messageText = ?," +
             " messageContent = ? " +
             "WHERE messageID = ?";
 
@@ -53,89 +53,156 @@ public class MessageDAO implements BaseMessageDAO {
 
     private Message initMessage(ResultSet resultSet) throws SQLException {
         Message message = new Message();
-        message.setMessageId(resultSet.getLong(1));
-        message.setMessageTime(resultSet.getTimestamp(2));
-        message.setMessageText(resultSet.getString(3));
-        message.setMessageContent(resultSet.getString(4));
-        message.setSendId(resultSet.getLong(5));
-        message.setReceiveId(resultSet.getLong(6));
+        if (resultSet.next()) {
+            message.setMessageId(resultSet.getLong(1));
+            message.setMessageTime(resultSet.getTimestamp(2));
+            message.setMessageText(resultSet.getString(3));
+            message.setMessageContent(resultSet.getString(4));
+            message.setSendId(resultSet.getLong(5));
+            message.setReceiveId(resultSet.getLong(6));
+        }
         return message;
     }
 
     private ArrayList<Message> initMessageTable(ResultSet resultSet) throws SQLException {
         ArrayList<Message> messages = new ArrayList<Message>();
-        Message message;
         while (resultSet.next()) {
-            message = initMessage(resultSet);
+            Message message = new Message();
+            message.setMessageId(resultSet.getLong(1));
+            message.setMessageTime(resultSet.getTimestamp(2));
+            message.setMessageText(resultSet.getString(3));
+            message.setMessageContent(resultSet.getString(4));
+            message.setSendId(resultSet.getLong(5));
+            message.setReceiveId(resultSet.getLong(6));
             messages.add(message);
         }
         return messages;
     }
 
     public void sendMessage(Message message) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_MESSAGE);
-        preparedStatement.setLong(1, message.getMessageId());
-        preparedStatement.setString(2, message.getMessageText());
-        preparedStatement.setString(3, message.getMessageContent());
-        preparedStatement.setLong(4, message.getSendId());
-        preparedStatement.setLong(5, message.getReceiveId());
-        preparedStatement.executeUpdate();
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_MESSAGE);
+            preparedStatement.setLong(1, message.getMessageId());
+            preparedStatement.setString(2, message.getMessageText());
+            preparedStatement.setString(3, message.getMessageContent());
+            preparedStatement.setLong(4, message.getSendId());
+            preparedStatement.setLong(5, message.getReceiveId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException occurred while sending message", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
     }
 
     public void deleteMessage(long messageId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_MESSAGE);
-        preparedStatement.setLong(1, messageId);
-        preparedStatement.executeUpdate();
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_MESSAGE);
+            preparedStatement.setLong(1, messageId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException occurred while deleting message in a database", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
     }
 
     public void updateSendedMessage(Message message) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_SENDED_MESSAGE);
-        preparedStatement.setString(1, message.getMessageText());
-        preparedStatement.setString(2, message.getMessageContent());
-        preparedStatement.setLong(3, message.getMessageId());
-        preparedStatement.executeUpdate();
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_SENDED_MESSAGE);
+            preparedStatement.setString(1, message.getMessageText());
+            preparedStatement.setString(2, message.getMessageContent());
+            preparedStatement.setLong(3, message.getMessageId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException occurred while updating message in a database", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
     }
 
     public Message findMessageById(long messageId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_MESSAGE_BY_ID);
-        preparedStatement.setLong(1,messageId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            return initMessage(resultSet);
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        Message message = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_MESSAGE_BY_ID);
+            preparedStatement.setLong(1, messageId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            message = initMessage(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Cant' find message with such id ", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
         }
-        else {
-            return null;
-        }
+        return message;
     }
 
     public ArrayList<Message> showUsersDialog(long sendId, long receiveId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_USERS_DIALOG);
-        preparedStatement.setLong(1, sendId);
-        preparedStatement.setLong(2, receiveId);
-        preparedStatement.setLong(3, sendId);
-        preparedStatement.setLong(4, receiveId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return initMessageTable(resultSet);
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        ArrayList<Message> messages = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_USERS_DIALOG);
+            preparedStatement.setLong(1, sendId);
+            preparedStatement.setLong(2, receiveId);
+            preparedStatement.setLong(3, sendId);
+            preparedStatement.setLong(4, receiveId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            messages = initMessageTable(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Cant' find such dialog ", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
+        return messages;
     }
 
     public ArrayList<Message> showIncomingMessagesByUserId(long userId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_INCOMING_MESSAGES_BY_USER_ID);
-        preparedStatement.setLong(1, userId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return initMessageTable(resultSet);
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        ArrayList<Message> messages = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_INCOMING_MESSAGES_BY_USER_ID);
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            messages = initMessageTable(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Cant' find such messages ", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
+        return messages;
+
     }
 
     public ArrayList<Message> showOutgoingMessagesByUserId(long userId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_OUTGOING_MESSAGES_BY_USER_ID);
-        preparedStatement.setLong(1, userId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return initMessageTable(resultSet);
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        ArrayList<Message> messages = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SHOW_OUTGOING_MESSAGES_BY_USER_ID);
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            messages = initMessageTable(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Cant' find such messages ", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
+        return messages;
     }
 }

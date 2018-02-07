@@ -28,23 +28,23 @@ public class ConferenceService {
         dao.addConference(conference);
     }
 
-    public void updateConferenceInfo(Conference conference) throws ServiceException, SQLException {
+    public void updateConferenceInfo(Conference conference) throws ServiceException, SQLException, DAOException {
         dao.updateConferenceInfo(conference);
     }
 
-    public void deleteConference(String conferenceId) throws ServiceException, SQLException {
+    public void deleteConference(String conferenceId) throws ServiceException, SQLException, DAOException {
         dao.deleteConference(Long.parseLong(conferenceId));
     }
 
-    public ArrayList<Conference> showConferences() throws ServiceException, SQLException {
+    public ArrayList<Conference> showConferences() throws ServiceException, SQLException, DAOException {
         return dao.showConferences();
     }
 
-    public Conference findConferenceById(String conferenceId) throws ServiceException, SQLException {
+    public Conference findConferenceById(String conferenceId) throws ServiceException, SQLException, DAOException {
         return dao.findConferenceById(Long.parseLong(conferenceId));
     }
 
-    public Conference findConferenceByName(String conferenceName) throws ServiceException, SQLException {
+    public Conference findConferenceByName(String conferenceName) throws ServiceException, SQLException, DAOException {
         return dao.findConferenceByName(conferenceName);
     }
 

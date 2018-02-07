@@ -15,7 +15,7 @@ public class UserDAO implements BaseUserDAO {
 
     private static UserDAO instance = new UserDAO();
 
-    public static UserDAO getInstance(){
+    public static UserDAO getInstance() {
         return instance;
     }
 
@@ -48,8 +48,9 @@ public class UserDAO implements BaseUserDAO {
     private static final String SQL_DELETE_USER = " DELETE FROM user WHERE userID = ?";
 
     public void addUser(User user) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_USER);
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_USER);
             preparedStatement.setLong(1, user.getUserId());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
@@ -61,91 +62,152 @@ public class UserDAO implements BaseUserDAO {
             preparedStatement.setString(9, user.getLastName());
             preparedStatement.setString(10, user.getSurname());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException occurred while adding user to a database", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
     }
 
-    public User findUserByLogin (String login) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
-        preparedStatement.setString(1,login);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            return initUser(resultSet);
+    public User findUserByLogin(String login) throws DAOException, SQLException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        User user = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            user = initUser(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Cant' find user with such login ", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
         }
-        else {
-            return null;
-        }
+        return user;
     }
 
     public User findUserById(long userId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_ID);
-        preparedStatement.setLong(1,userId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            return initUser(resultSet);
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        User user = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_ID);
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            user = initUser(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Cant' find user with such id ", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
         }
-        else {
-            return null;
-        }
+        return user;
     }
 
     public void updateUserInfo(User user) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_INFO);
-        preparedStatement.setString(1, user.getEmail());
-        preparedStatement.setInt(2, user.getPhoneNumber());
-        preparedStatement.setString(3, user.getAvatar());
-        preparedStatement.setString(4, user.getFirstName());
-        preparedStatement.setString(5, user.getLastName());
-        preparedStatement.setString(6, user.getSurname());
-        preparedStatement.setLong(7, user.getUserId());
-        preparedStatement.executeUpdate();
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_INFO);
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setInt(2, user.getPhoneNumber());
+            preparedStatement.setString(3, user.getAvatar());
+            preparedStatement.setString(4, user.getFirstName());
+            preparedStatement.setString(5, user.getLastName());
+            preparedStatement.setString(6, user.getSurname());
+            preparedStatement.setLong(7, user.getUserId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException occurred while updating user info in a database", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
     }
 
     public void assignRoleToUser(long userId, String role) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_ROLE);
-        System.out.println(userId+role);
-        preparedStatement.setString(1,role);
-        preparedStatement.setLong(2,userId);
-        preparedStatement.executeUpdate();
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_ROLE);
+            System.out.println(userId + role);
+            preparedStatement.setString(1, role);
+            preparedStatement.setLong(2, userId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException occurred while banning user in a database", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
     }
 
     public ArrayList<User> showUsers() throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery(SQL_VIEW_USER_TABLE);
-        ArrayList<User> userList = initUserTable(result);
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        ArrayList<User> userList = null;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(SQL_VIEW_USER_TABLE);
+            userList = initUserTable(result);
+        } catch (SQLException e) {
+            throw new DAOException("Can't initialize user list", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
         return userList;
     }
 
     public void deleteUser(long userId) throws DAOException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER);
-        preparedStatement.setLong(1, userId);
-        preparedStatement.executeUpdate();
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER);
+            preparedStatement.setLong(1, userId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException occurred while deleting user info in a database", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnection(connection);
+            }
+        }
     }
 
     private User initUser(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setUserId(resultSet.getLong(1));
-        user.setLogin(resultSet.getString(2));
-        user.setPassword(resultSet.getString(3));
-        user.setEmail(resultSet.getString(4));
-        user.setRole(resultSet.getString(5));
-        user.setPhoneNumber(resultSet.getInt(6));
-        user.setAvatar(resultSet.getString(7));
-        user.setFirstName(resultSet.getString(8));
-        user.setLastName(resultSet.getString(9));
-        user.setSurname(resultSet.getString(10));
+        if (resultSet.next()) {
+            user.setUserId(resultSet.getLong(1));
+            user.setLogin(resultSet.getString(2));
+            user.setPassword(resultSet.getString(3));
+            user.setEmail(resultSet.getString(4));
+            user.setRole(resultSet.getString(5));
+            user.setPhoneNumber(resultSet.getInt(6));
+            user.setAvatar(resultSet.getString(7));
+            user.setFirstName(resultSet.getString(8));
+            user.setLastName(resultSet.getString(9));
+            user.setSurname(resultSet.getString(10));
+        }
         return user;
     }
 
     private ArrayList<User> initUserTable(ResultSet resultSet) throws SQLException {
         ArrayList<User> users = new ArrayList<User>();
-        User user;
         while (resultSet.next()) {
-            user = initUser(resultSet);
+            User user = new User();
+            user.setUserId(resultSet.getLong(1));
+            user.setLogin(resultSet.getString(2));
+            user.setPassword(resultSet.getString(3));
+            user.setEmail(resultSet.getString(4));
+            user.setRole(resultSet.getString(5));
+            user.setPhoneNumber(resultSet.getInt(6));
+            user.setAvatar(resultSet.getString(7));
+            user.setFirstName(resultSet.getString(8));
+            user.setLastName(resultSet.getString(9));
+            user.setSurname(resultSet.getString(10));
             users.add(user);
         }
         return users;

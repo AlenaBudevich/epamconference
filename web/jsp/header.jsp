@@ -60,11 +60,11 @@
 </div>
 
 
-<%--<form >--%>
-<%--<select id="language" name="language" onchange="submit()">--%>
-<%--<option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>--%>
-<%--<option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>--%>
-<%--</select>--%>
-<%--</form>--%>
+
+<select id="language" name="language" onchange="submit()">
+<option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
+<option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
+</select>
+
 
 <br>
