@@ -40,16 +40,17 @@
         <%@include file="deletesectionreport.jsp" %>
     </c:if>
 
+    <div class="three columns">
+        <ul class="nav navmenu-nav">
+            <li><a href="controller?command=addbasicreportinfo">Add new report</a></li>
+            <li><a href="controller?command=addsectionreport">Add section-report</a></li>
+            <li><a href="controller?command=deletesectionreport">Delete section-report</a></li>
+        </ul>
+    </div>
+
     <c:set var="reports" value="${userReports}"/>
     <c:if test="${not empty reports}">
 
-        <div class="three columns">
-            <ul class="nav navmenu-nav">
-                <li><a href="controller?command=addbasicreportinfo">Add new report</a></li>
-                <li><a href="controller?command=addsectionreport">Add section-report</a></li>
-                <li><a href="controller?command=deletesectionreport">Delete section-report</a></li>
-            </ul>
-        </div>
 
 
         <div class="nine columns">

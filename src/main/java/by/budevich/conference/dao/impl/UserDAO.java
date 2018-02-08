@@ -47,7 +47,7 @@ public class UserDAO implements BaseUserDAO {
 
     private static final String SQL_DELETE_USER = " DELETE FROM user WHERE userID = ?";
 
-    public void addUser(User user) throws DAOException, SQLException {
+    public void addUser(User user) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_USER);
@@ -71,7 +71,7 @@ public class UserDAO implements BaseUserDAO {
         }
     }
 
-    public User findUserByLogin(String login) throws DAOException, SQLException {
+    public User findUserByLogin(String login) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         User user = null;
         try {
@@ -89,7 +89,7 @@ public class UserDAO implements BaseUserDAO {
         return user;
     }
 
-    public User findUserById(long userId) throws DAOException, SQLException {
+    public User findUserById(long userId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         User user = null;
         try {
@@ -107,7 +107,7 @@ public class UserDAO implements BaseUserDAO {
         return user;
     }
 
-    public void updateUserInfo(User user) throws DAOException, SQLException {
+    public void updateUserInfo(User user) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_INFO);
@@ -128,7 +128,7 @@ public class UserDAO implements BaseUserDAO {
         }
     }
 
-    public void assignRoleToUser(long userId, String role) throws DAOException, SQLException {
+    public void assignRoleToUser(long userId, String role) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_ROLE);
@@ -145,7 +145,7 @@ public class UserDAO implements BaseUserDAO {
         }
     }
 
-    public ArrayList<User> showUsers() throws DAOException, SQLException {
+    public ArrayList<User> showUsers() throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<User> userList = null;
         try {
@@ -162,14 +162,14 @@ public class UserDAO implements BaseUserDAO {
         return userList;
     }
 
-    public void deleteUser(long userId) throws DAOException, SQLException {
+    public void deleteUser(long userId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER);
             preparedStatement.setLong(1, userId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while deleting user info in a database", e);
+            throw new DAOException("SQLException occurred while deleting user info from a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);

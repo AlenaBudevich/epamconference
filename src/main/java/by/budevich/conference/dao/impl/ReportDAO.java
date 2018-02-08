@@ -104,7 +104,7 @@ public class ReportDAO implements BaseReportDAO {
         return reports;
     }
 
-    public ArrayList<Report> showReports() throws DAOException, SQLException {
+    public ArrayList<Report> showReports() throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Report> reportList = null;
         try {
@@ -122,7 +122,7 @@ public class ReportDAO implements BaseReportDAO {
     }
 
 
-    public Report findReportById(long id) throws DAOException, SQLException {
+    public Report findReportById(long id) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Report report = null;
         try {
@@ -140,7 +140,7 @@ public class ReportDAO implements BaseReportDAO {
         return report;
     }
 
-    public void addBasicReportInfo(Report report) throws DAOException, SQLException {
+    public void addBasicReportInfo(Report report) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_BASIC_REPORT_INFO);
@@ -156,7 +156,7 @@ public class ReportDAO implements BaseReportDAO {
         }
     }
 
-    public ArrayList<Report> showReportsByAnyId(String entity, long id) throws DAOException, SQLException {
+    public ArrayList<Report> showReportsByAnyId(String entity, long id) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         ArrayList<Report> reports = null;
@@ -181,7 +181,7 @@ public class ReportDAO implements BaseReportDAO {
         return reports;
     }
 
-    public Report findReportByName(String reportName) throws DAOException, SQLException {
+    public Report findReportByName(String reportName) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Report report = null;
         try {
@@ -199,7 +199,7 @@ public class ReportDAO implements BaseReportDAO {
         return report;
     }
 
-    public void assignStatusToReport(long reportId, String reportStatus) throws DAOException, SQLException {
+    public void assignStatusToReport(long reportId, String reportStatus) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_STATUS_TO_REPORT);
@@ -207,7 +207,7 @@ public class ReportDAO implements BaseReportDAO {
             preparedStatement.setLong(2, reportId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while changing reort status in a database", e);
+            throw new DAOException("SQLException occurred while changing report status in a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);
@@ -215,7 +215,7 @@ public class ReportDAO implements BaseReportDAO {
         }
     }
 
-    public void updateReportInfo(Report report) throws DAOException, SQLException {
+    public void updateReportInfo(Report report) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_REPORT_INFO);
@@ -233,14 +233,14 @@ public class ReportDAO implements BaseReportDAO {
         }
     }
 
-    public void deleteReport(long reportId) throws DAOException, SQLException {
+    public void deleteReport(long reportId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_REPORT);
             preparedStatement.setLong(1, reportId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while deleting report in a database", e);
+            throw new DAOException("SQLException occurred while deleting report from a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);
@@ -248,7 +248,7 @@ public class ReportDAO implements BaseReportDAO {
         }
     }
 
-    public void addReportTo(String entity, long id, long reportId) throws SQLException, DAOException {
+    public void addReportTo(String entity, long id, long reportId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -269,7 +269,7 @@ public class ReportDAO implements BaseReportDAO {
         }
     }
 
-    public void deleteReportFrom(String entity, long reportId, long id) throws SQLException, DAOException {
+    public void deleteReportFrom(String entity, long reportId, long id) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -282,7 +282,7 @@ public class ReportDAO implements BaseReportDAO {
             preparedStatement.setLong(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while deleting report in a database", e);
+            throw new DAOException("SQLException occurred while deleting report from a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);
@@ -290,7 +290,7 @@ public class ReportDAO implements BaseReportDAO {
         }
     }
 
-    public int checkUserReport(long reportId, long userId) throws DAOException, SQLException {
+    public int checkUserReport(long reportId, long userId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         int checkUserReport = 0;
         try {

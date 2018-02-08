@@ -4,7 +4,6 @@ import by.budevich.conference.dao.BaseUserDAO;
 import by.budevich.conference.dao.impl.UserDAO;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.util.SHA256Util;
 
 import java.sql.SQLException;
@@ -25,62 +24,32 @@ public class UserService {
         return instance;
     }
 
-    public void addUser(String login, String password, String email) throws ServiceException, SQLException, DAOException {
-        try {
-            User user = new User(login, SHA256Util.encrypt(password), email);
-            dao.addUser(user);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't add user to a database ", e);
-        }
+    public void addUser(String login, String password, String email) throws SQLException, DAOException {
+        User user = new User(login, SHA256Util.encrypt(password), email);
+        dao.addUser(user);
     }
 
-    public User findUserByLogin(String login) throws ServiceException, SQLException {
-        try {
-            return dao.findUserByLogin(login);
-        } catch (DAOException e) {
-            throw new ServiceException("There's no user with such login ", e);
-        }
+    public User findUserByLogin(String login) throws SQLException, DAOException {
+        return dao.findUserByLogin(login);
     }
 
-    public void updateUserInfo(User user)
-            throws ServiceException, SQLException {
-        try {
-            dao.updateUserInfo(user);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't update user in service method ", e);
-        }
+    public void updateUserInfo(User user) throws SQLException, DAOException {
+        dao.updateUserInfo(user);
     }
 
-    public User findUserById(long userId) throws ServiceException, SQLException {
-        try {
-            return dao.findUserById(userId);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find user with such id ", e);
-        }
+    public User findUserById(long userId) throws SQLException, DAOException {
+        return dao.findUserById(userId);
     }
 
-    public void assignRoleToUser(long userId, String role) throws ServiceException, SQLException {
-        try {
-            dao.assignRoleToUser(userId, role);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't assign new role for user with id ", e);
-        }
+    public void assignRoleToUser(long userId, String role) throws SQLException, DAOException {
+        dao.assignRoleToUser(userId, role);
     }
 
-    public ArrayList<User> showUsers() throws ServiceException, SQLException {
-        try {
-            return dao.showUsers();
-        } catch (DAOException e) {
-            throw new ServiceException("Can't show user table ", e);
-        }
+    public ArrayList<User> showUsers() throws SQLException, DAOException {
+        return dao.showUsers();
     }
 
-    public void deleteUser(String userId) throws ServiceException, SQLException {
-        try {
-            dao.deleteUser(Long.parseLong(userId));
-        } catch (DAOException e) {
-            throw new ServiceException("Can't delete user in service method ", e);
-        }
-
+    public void deleteUser(String userId) throws SQLException, DAOException {
+        dao.deleteUser(Long.parseLong(userId));
     }
 }

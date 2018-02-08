@@ -47,7 +47,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
             " FROM сonference" +
             " WHERE conferenceName = ?";
 
-    public void addConference(Conference conference) throws SQLException, DAOException {
+    public void addConference(Conference conference) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_CONFERENCE);
@@ -73,7 +73,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
 
     }
 
-    public void updateConferenceInfo(Conference conference) throws SQLException, DAOException {
+    public void updateConferenceInfo(Conference conference) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_CONFERENCE_INFO);
@@ -90,7 +90,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
             preparedStatement.setLong(11, conference.getConferenceId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while updating user to a database", e);
+            throw new DAOException("SQLException occurred while updating user in a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);
@@ -98,14 +98,14 @@ public class ConferenceDAO implements BaseConferenceDAO {
         }
     }
 
-    public void deleteConference(long conferenceId) throws SQLException, DAOException {
+    public void deleteConference(long conferenceId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_CONFERENCE);
             preparedStatement.setLong(1, conferenceId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while updating user to a database", e);
+            throw new DAOException("SQLException occurred while updating user from a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);
@@ -113,7 +113,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
         }
     }
 
-    public ArrayList<Conference> showConferences() throws SQLException, DAOException {
+    public ArrayList<Conference> showConferences() throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Conference> conferenceList = null;
         try {
@@ -130,7 +130,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
         return conferenceList;
     }
 
-    public Conference findConferenceById(long conferenceId) throws SQLException, DAOException {
+    public Conference findConferenceById(long conferenceId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Conference conference = null;
         try {
@@ -148,7 +148,7 @@ public class ConferenceDAO implements BaseConferenceDAO {
         return conference;
     }
 
-    public Conference findConferenceByName(String conferenceName) throws SQLException, DAOException {
+    public Conference findConferenceByName(String conferenceName) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Conference conference = null;
         try {

@@ -79,7 +79,7 @@ public class MessageDAO implements BaseMessageDAO {
         return messages;
     }
 
-    public void sendMessage(Message message) throws DAOException, SQLException {
+    public void sendMessage(Message message) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_MESSAGE);
@@ -98,14 +98,14 @@ public class MessageDAO implements BaseMessageDAO {
         }
     }
 
-    public void deleteMessage(long messageId) throws DAOException, SQLException {
+    public void deleteMessage(long messageId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_MESSAGE);
             preparedStatement.setLong(1, messageId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while deleting message in a database", e);
+            throw new DAOException("SQLException occurred while deleting message from a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);
@@ -113,7 +113,7 @@ public class MessageDAO implements BaseMessageDAO {
         }
     }
 
-    public void updateSendedMessage(Message message) throws DAOException, SQLException {
+    public void updateSendedMessage(Message message) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_SENDED_MESSAGE);
@@ -130,7 +130,7 @@ public class MessageDAO implements BaseMessageDAO {
         }
     }
 
-    public Message findMessageById(long messageId) throws DAOException, SQLException {
+    public Message findMessageById(long messageId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Message message = null;
         try {
@@ -148,7 +148,7 @@ public class MessageDAO implements BaseMessageDAO {
         return message;
     }
 
-    public ArrayList<Message> showUsersDialog(long sendId, long receiveId) throws DAOException, SQLException {
+    public ArrayList<Message> showUsersDialog(long sendId, long receiveId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Message> messages = null;
         try {
@@ -169,7 +169,7 @@ public class MessageDAO implements BaseMessageDAO {
         return messages;
     }
 
-    public ArrayList<Message> showIncomingMessagesByUserId(long userId) throws DAOException, SQLException {
+    public ArrayList<Message> showIncomingMessagesByUserId(long userId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Message> messages = null;
         try {
@@ -188,7 +188,7 @@ public class MessageDAO implements BaseMessageDAO {
 
     }
 
-    public ArrayList<Message> showOutgoingMessagesByUserId(long userId) throws DAOException, SQLException {
+    public ArrayList<Message> showOutgoingMessagesByUserId(long userId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Message> messages = null;
         try {

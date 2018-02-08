@@ -4,7 +4,6 @@ import by.budevich.conference.dao.BaseMessageDAO;
 import by.budevich.conference.dao.impl.MessageDAO;
 import by.budevich.conference.entity.Message;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,61 +23,34 @@ public class MessageService {
         return instance;
     }
 
-    public void sendMessage(Message message) throws ServiceException, SQLException, DAOException {
-        try {
-            dao.sendMessage(message);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't send message ", e);
-        }
+    public void sendMessage(Message message) throws SQLException, DAOException {
+        dao.sendMessage(message);
     }
 
-    public void deleteMessage(long messageId) throws ServiceException, SQLException {
-        try {
-            dao.deleteMessage(messageId);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't delete such message ", e);
-        }
+    public void deleteMessage(long messageId) throws DAOException, SQLException {
+        dao.deleteMessage(messageId);
+
     }
 
-    public void updateSendedMessage(Message message) throws ServiceException, SQLException, DAOException {
-        try {
-            dao.updateSendedMessage(message);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't update message in service method ", e);
-        }
+    public void updateSendedMessage(Message message) throws SQLException, DAOException {
+        dao.updateSendedMessage(message);
     }
 
-    public Message findMessageById(long messageId) throws ServiceException, SQLException {
-        try {
-            return dao.findMessageById(messageId);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find message with such id ", e);
-        }
+    public Message findMessageById(long messageId) throws SQLException, DAOException {
+        return dao.findMessageById(messageId);
     }
 
-    public ArrayList<Message> showUsersDialog(String sendId, String receiveId) throws ServiceException, SQLException {
-        try {
-            long sendUserId = Long.parseLong(sendId);
-            long receiveUserId = Long.parseLong(receiveId);
-            return dao.showUsersDialog(sendUserId, receiveUserId);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find such dialog ", e);
-        }
+    public ArrayList<Message> showUsersDialog(String sendId, String receiveId) throws SQLException, DAOException {
+        long sendUserId = Long.parseLong(sendId);
+        long receiveUserId = Long.parseLong(receiveId);
+        return dao.showUsersDialog(sendUserId, receiveUserId);
     }
 
-    public ArrayList<Message> showIncomingMessagesByUserId(long userId) throws ServiceException, SQLException {
-        try {
-            return dao.showIncomingMessagesByUserId(userId);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find message(s) with such userId ", e);
-        }
+    public ArrayList<Message> showIncomingMessagesByUserId(long userId) throws SQLException, DAOException {
+        return dao.showIncomingMessagesByUserId(userId);
     }
 
-    public ArrayList<Message> showOutgoingMessagesByUserId(long userId) throws ServiceException, SQLException {
-        try {
-            return dao.showOutgoingMessagesByUserId(userId);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find message(s) with such userId ", e);
-        }
+    public ArrayList<Message> showOutgoingMessagesByUserId(long userId) throws SQLException, DAOException {
+        return dao.showOutgoingMessagesByUserId(userId);
     }
 }

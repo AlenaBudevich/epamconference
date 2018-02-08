@@ -82,7 +82,7 @@ public class SectionDAO implements BaseSectionDAO {
         return sections;
     }
 
-    public void addSectionInfo(Section section) throws DAOException, SQLException {
+    public void addSectionInfo(Section section) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_SECTION_INFO);
@@ -105,7 +105,7 @@ public class SectionDAO implements BaseSectionDAO {
         }
     }
 
-    public void updateSectionInfo(Section section) throws DAOException, SQLException {
+    public void updateSectionInfo(Section section) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_SECTION_INFO);
@@ -128,14 +128,14 @@ public class SectionDAO implements BaseSectionDAO {
         }
     }
 
-    public void deleteSection(long sectionId) throws DAOException, SQLException {
+    public void deleteSection(long sectionId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_SECTION);
             preparedStatement.setLong(1, sectionId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("SQLException occurred while deleting section info in a database", e);
+            throw new DAOException("SQLException occurred while deleting section info from a database", e);
         } finally {
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnection(connection);
@@ -143,7 +143,7 @@ public class SectionDAO implements BaseSectionDAO {
         }
     }
 
-    public ArrayList<Section> showSections() throws DAOException, SQLException {
+    public ArrayList<Section> showSections() throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Section> sectionList = null;
         try {
@@ -160,7 +160,7 @@ public class SectionDAO implements BaseSectionDAO {
         return sectionList;
     }
 
-    public ArrayList<Section> showSectionsByConferenceId(long conferenceId) throws DAOException, SQLException {
+    public ArrayList<Section> showSectionsByConferenceId(long conferenceId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Section> sections = null;
         try {
@@ -178,7 +178,7 @@ public class SectionDAO implements BaseSectionDAO {
         return sections;
     }
 
-    public Section findSectionById(long sectionId) throws DAOException, SQLException {
+    public Section findSectionById(long sectionId) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Section section = null;
         try {
@@ -196,7 +196,7 @@ public class SectionDAO implements BaseSectionDAO {
         return section;
     }
 
-    public Section findSectionByName(String sectionName) throws DAOException, SQLException {
+    public Section findSectionByName(String sectionName) throws DAOException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Section section = null;
         try {

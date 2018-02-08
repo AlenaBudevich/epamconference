@@ -4,7 +4,6 @@ import by.budevich.conference.dao.BaseReportDAO;
 import by.budevich.conference.dao.impl.ReportDAO;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,82 +23,48 @@ public class ReportService {
         return instance;
     }
 
-    public ArrayList<Report> showReports() throws ServiceException, SQLException {
-        try {
-            return dao.showReports();
-        } catch (DAOException e) {
-            throw new ServiceException("Can't show report table ", e);
-        }
+    public ArrayList<Report> showReports() throws SQLException, DAOException {
+        return dao.showReports();
     }
 
-    public Report findReportById(long reportId) throws ServiceException, SQLException {
-        try {
-            return dao.findReportById(reportId);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find report with such id ", e);
-        }
+    public Report findReportById(long reportId) throws SQLException, DAOException {
+        return dao.findReportById(reportId);
     }
 
-    public void addBasicReportInfo(String reportName, String reportTheses) throws ServiceException,
-            SQLException, DAOException {
-        try {
-            Report report = new Report(reportName, reportTheses);
-            dao.addBasicReportInfo(report);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't add report to a database ", e);
-        }
+    public void addBasicReportInfo(String reportName, String reportTheses) throws SQLException, DAOException {
+        Report report = new Report(reportName, reportTheses);
+        dao.addBasicReportInfo(report);
     }
 
-    public ArrayList<Report> showReportsByAnyId(String entity, long id) throws ServiceException, SQLException {
-        try {
-            return dao.showReportsByAnyId(entity, id);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't show report table by such id", e);
-        }
+    public ArrayList<Report> showReportsByAnyId(String entity, long id) throws SQLException, DAOException {
+        return dao.showReportsByAnyId(entity, id);
     }
 
-    public Report findReportByName(String reportName) throws ServiceException, SQLException {
-        try {
-            return dao.findReportByName(reportName);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find report(s) with such name ", e);
-        }
+    public Report findReportByName(String reportName) throws SQLException, DAOException {
+        return dao.findReportByName(reportName);
     }
 
-    public void assignStatusToReport(long reportId, String reportStatus) throws ServiceException, SQLException {
-        try {
-            dao.assignStatusToReport(reportId, reportStatus);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't assign new status for report with id ", e);
-        }
+    public void assignStatusToReport(long reportId, String reportStatus) throws SQLException, DAOException {
+        dao.assignStatusToReport(reportId, reportStatus);
     }
 
-    public void updateReportInfo(Report report)
-            throws ServiceException, SQLException {
-        try {
-            dao.updateReportInfo(report);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't update report in service method ", e);
-        }
+    public void updateReportInfo(Report report) throws SQLException, DAOException {
+        dao.updateReportInfo(report);
     }
 
-    public void deleteReport(String reportId) throws ServiceException, SQLException {
-        try {
-            dao.deleteReport(Long.parseLong(reportId));
-        } catch (DAOException e) {
-            throw new ServiceException("Can't delete report in service method ", e);
-        }
+    public void deleteReport(String reportId) throws SQLException, DAOException {
+        dao.deleteReport(Long.parseLong(reportId));
     }
 
     public void addReportTo(String entity, long id, long reportId) throws SQLException, DAOException {
         dao.addReportTo(entity, id, reportId);
     }
 
-    public void deleteReportFrom(String entity, long reportId, long id) throws ServiceException, SQLException, DAOException {
+    public void deleteReportFrom(String entity, long reportId, long id) throws SQLException, DAOException {
         dao.deleteReportFrom(entity, reportId, id);
     }
 
-    public int checkUserReport(long reportId, long userId) throws ServiceException, SQLException, DAOException {
+    public int checkUserReport(long reportId, long userId) throws SQLException, DAOException {
         return dao.checkUserReport(reportId, userId);
     }
 }

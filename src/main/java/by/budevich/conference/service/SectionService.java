@@ -4,7 +4,6 @@ import by.budevich.conference.dao.BaseSectionDAO;
 import by.budevich.conference.dao.impl.SectionDAO;
 import by.budevich.conference.entity.Section;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,61 +23,32 @@ public class SectionService {
         return instance;
     }
 
-    public void addBasicSectionInfo(long conferenceId, String sectionName) throws ServiceException,
-            SQLException, DAOException {
-        try {
-            Section section = new Section(conferenceId, sectionName);
-            dao.addSectionInfo(section);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't add section to a database ", e);
-        }
+    public void addBasicSectionInfo(long conferenceId, String sectionName) throws SQLException, DAOException {
+        Section section = new Section(conferenceId, sectionName);
+        dao.addSectionInfo(section);
     }
 
-    public void updateSectionInfo(Section section) throws ServiceException, SQLException {
-        try {
-            dao.updateSectionInfo(section);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't update section in service method ", e);
-        }
+    public void updateSectionInfo(Section section) throws SQLException, DAOException {
+        dao.updateSectionInfo(section);
     }
 
-    public void deleteSection(String sectionId) throws ServiceException, SQLException {
-        try {
-            dao.deleteSection(Long.parseLong(sectionId));
-        } catch (DAOException e) {
-            throw new ServiceException("Can't delete section in service method ", e);
-        }
+    public void deleteSection(String sectionId) throws SQLException, DAOException {
+        dao.deleteSection(Long.parseLong(sectionId));
     }
 
-    public ArrayList<Section> showSections() throws ServiceException, SQLException {
-        try {
-            return dao.showSections();
-        } catch (DAOException e) {
-            throw new ServiceException("Can't show section table ", e);
-        }
+    public ArrayList<Section> showSections() throws SQLException, DAOException {
+        return dao.showSections();
     }
 
-    public ArrayList<Section> showSectionsByConferenceId(String conferenceId) throws ServiceException, SQLException {
-        try {
-            return dao.showSectionsByConferenceId(Long.parseLong(conferenceId));
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find section(s) with such conferenceId ", e);
-        }
+    public ArrayList<Section> showSectionsByConferenceId(String conferenceId) throws SQLException, DAOException {
+        return dao.showSectionsByConferenceId(Long.parseLong(conferenceId));
     }
 
-    public Section findSectionsByName(String sectionName) throws ServiceException, SQLException {
-        try {
-            return dao.findSectionByName(sectionName);
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find section(s) with such name ", e);
-        }
+    public Section findSectionsByName(String sectionName) throws SQLException, DAOException {
+        return dao.findSectionByName(sectionName);
     }
 
-    public Section findSectionById(String sectionId) throws ServiceException, SQLException {
-        try {
-            return dao.findSectionById(Long.parseLong(sectionId));
-        } catch (DAOException e) {
-            throw new ServiceException("Can't find section with such id ", e);
-        }
+    public Section findSectionById(String sectionId) throws SQLException, DAOException {
+        return dao.findSectionById(Long.parseLong(sectionId));
     }
 }
