@@ -6,12 +6,10 @@ import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ReportService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 30.01.2018.
@@ -26,8 +24,7 @@ public class UpdateReportInfoCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         long reportId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_REPORT_ID));
         Report report = ReportService.getInstance().findReportById(reportId);
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
@@ -44,8 +41,7 @@ public class UpdateReportInfoCommand implements BaseCommand {
         }
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String reportId = request.getParameter(ParameterConst.PARAMETER_REPORT_ID);
         Report report = ReportService.getInstance().findReportById(Long.parseLong(reportId));
         request.setAttribute(AttributeConst.ATTR_REPORT, report);

@@ -6,12 +6,10 @@ import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Conference;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 01.02.2018.
@@ -26,8 +24,7 @@ public class AddConferenceCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String conferenceName = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_NAME);
         if (ConferenceService.getInstance().findConferenceByName(conferenceName) == null) {
             Conference conference = new Conference();
@@ -44,8 +41,7 @@ public class AddConferenceCommand implements BaseCommand {
 
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         return PageConst.PAGE_ADD_CONFERENCE;
     }
 }

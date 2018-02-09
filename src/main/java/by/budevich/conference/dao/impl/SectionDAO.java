@@ -13,12 +13,6 @@ import java.util.ArrayList;
  */
 public class SectionDAO implements BaseSectionDAO {
 
-    private static SectionDAO instance = new SectionDAO();
-
-    public static SectionDAO getInstance() {
-        return instance;
-    }
-
     private static final String SQL_ADD_SECTION_INFO =
             "INSERT INTO section (sectionID, conferenceID, sectionName, maxNumberReports, sectionBeginning, " +
                     "sectionEnd, sectionAddress, sectionContent, sectionStatus) VALUES (?,?,?,?,?,?,?,?,?)";

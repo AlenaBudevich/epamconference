@@ -7,13 +7,11 @@ import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.entity.Section;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ReportService;
 import by.budevich.conference.service.SectionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 01.02.2018.
@@ -28,8 +26,7 @@ public class DeleteSectionReportCommand implements BaseCommand{
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String role = (String) request.getSession().getAttribute(AttributeConst.ATTR_ROLE);
         long userId = (Long)request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
@@ -53,8 +50,7 @@ public class DeleteSectionReportCommand implements BaseCommand{
         }
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         request.setAttribute(AttributeConst.ATTR_DELETE_SECTION_REPORT, true);
         return ViewUserReportsCommand.getInstance().getPage(request, response);
     }

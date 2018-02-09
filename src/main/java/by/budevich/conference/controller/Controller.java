@@ -2,7 +2,6 @@ package by.budevich.conference.controller;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 21.01.2018.
@@ -30,15 +28,11 @@ public class Controller extends HttpServlet {
         try {
             String page = command.execute(request, response);
             request.getRequestDispatcher(page).forward(request, response);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (DAOException e) {
             e.printStackTrace();
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
             e.printStackTrace();
         }
     }
@@ -49,10 +43,6 @@ public class Controller extends HttpServlet {
         String page = null;
         try {
             page = command.getPage(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ServiceException e) {
-            e.printStackTrace();
         } catch (DAOException e) {
             e.printStackTrace();
         }

@@ -7,12 +7,10 @@ import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Section;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.SectionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
@@ -28,8 +26,7 @@ public class UpdateSectionInfoCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String sectionId = request.getParameter(ParameterConst.PARAMETER_SECTION_ID);
         Section section = SectionService.getInstance().findSectionById(sectionId);
         String sectionName = request.getParameter(ParameterConst.PARAMETER_SECTION_NAME);
@@ -55,8 +52,7 @@ public class UpdateSectionInfoCommand implements BaseCommand {
         }
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String sectionId = request.getParameter(ParameterConst.PARAMETER_SECTION_ID);
         Section section = SectionService.getInstance().findSectionById(sectionId);
         request.setAttribute(AttributeConst.ATTR_SECTION, section);

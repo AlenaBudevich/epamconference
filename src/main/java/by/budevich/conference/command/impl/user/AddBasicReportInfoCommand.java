@@ -6,12 +6,10 @@ import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.ReportService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 31.01.2018.
@@ -26,8 +24,7 @@ public class AddBasicReportInfoCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
         if (ReportService.getInstance().findReportByName(reportName)== null){
             String reportTheses = request.getParameter(ParameterConst.PARAMETER_REPORT_THESES);
@@ -44,8 +41,7 @@ public class AddBasicReportInfoCommand implements BaseCommand {
         }
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         request.setAttribute(AttributeConst.ATTR_ADD_REPORT, true);
         return ViewUserReportsCommand.getInstance().getPage(request, response);
     }

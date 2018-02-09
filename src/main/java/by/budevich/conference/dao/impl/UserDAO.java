@@ -13,12 +13,6 @@ import java.util.ArrayList;
  */
 public class UserDAO implements BaseUserDAO {
 
-    private static UserDAO instance = new UserDAO();
-
-    public static UserDAO getInstance() {
-        return instance;
-    }
-
     private static final String SQL_ADD_USER =
             "INSERT INTO user (userID, login, password, email, role, phoneNumber," +
                     "avatar, firstName, lastName, surname) VALUES (?,?,?,?,?,?,?,?,?,?)";

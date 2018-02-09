@@ -15,11 +15,6 @@ import java.util.ArrayList;
  * Created by Asus on 25.01.2018.
  */
 public class MessageDAO implements BaseMessageDAO {
-    private static MessageDAO instance = new MessageDAO();
-
-    public static MessageDAO getInstance() {
-        return instance;
-    }
 
     private static final String SQL_ADD_MESSAGE =
             "INSERT INTO message (messageID, messageText, messageContent, sendID, receiveID)" +

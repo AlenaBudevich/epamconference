@@ -7,13 +7,11 @@ import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.UserService;
 import by.budevich.conference.util.SHA256Util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 22.01.2018.
@@ -26,12 +24,11 @@ public class LoginCommand implements BaseCommand{
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String login = request.getParameter(ParameterConst.PARAMETER_LOGIN);
         String password = request.getParameter(ParameterConst.PARAMETER_PASSWORD);
         User user = UserService.getInstance().findUserByLogin(login);
-        if (user==null) {
+        if (user.getLogin()==null) {
             return PageConst.PAGE_ERROR;
         }
         if (user.getPassword().equals(SHA256Util.encrypt(password))) {
@@ -43,8 +40,7 @@ public class LoginCommand implements BaseCommand{
         else return PageConst.PAGE_ERROR;
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
             return PageConst.PAGE_ERROR;
         }

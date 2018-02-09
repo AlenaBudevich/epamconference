@@ -37,34 +37,14 @@
                     <a href="controller?command=registration">REGISTRATION</a>
                 </li>
             </c:if>
-
-            <%--<li class="drop">--%>
-            <%--<a href="#">ABOUT</a>--%>
-
-            <%--<div class="dropdownContain">--%>
-            <%--<div class="dropOut">--%>
-
-            <%--<ul>--%>
-            <%--<li>ABOUT ME</li>--%>
-            <%--<li>ABOUT ME</li>--%>
-            <%--<li>ABOUT ME</li>--%>
-            <%--<li>ABOUT ME</li>--%>
-            <%--</ul>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-
-            <%--</li>--%>
-
+            <li>
+                <form>
+                    <select id="language" name="language" onchange="submit()">
+                        <option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
+                        <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
+                    </select>
+                </form>
+            </li>
         </ul>
     </div>
 </div>
-
-
-
-<select id="language" name="language" onchange="submit()">
-<option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
-<option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
-</select>
-
-
-<br>

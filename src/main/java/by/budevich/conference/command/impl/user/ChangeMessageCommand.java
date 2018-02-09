@@ -5,12 +5,10 @@ import by.budevich.conference.constant.AttributeConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Message;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.MessageService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 31.01.2018.
@@ -25,8 +23,7 @@ public class ChangeMessageCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         long messageId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_MESSAGE_ID));
         Message message = MessageService.getInstance().findMessageById(messageId);
         message.setMessageText(request.getParameter(ParameterConst.PARAMETER_MESSAGE_TEXT));
@@ -36,8 +33,7 @@ public class ChangeMessageCommand implements BaseCommand {
         return ViewUserOutgoingMessagesCommand.getInstance().getPage(request, response);
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         long messageId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_MESSAGE_ID));
         Message message = MessageService.getInstance().findMessageById(messageId);
         request.setAttribute(AttributeConst.ATTR_MESSAGE, message);

@@ -6,12 +6,10 @@ import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * Created by Asus on 29.01.2018.
@@ -26,8 +24,7 @@ public class ChangeProfileInfoCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
         User user = UserService.getInstance().findUserById(id);
         user.setEmail(request.getParameter(ParameterConst.PARAMETER_EMAIL));
@@ -40,8 +37,7 @@ public class ChangeProfileInfoCommand implements BaseCommand {
         return ViewProfileInfoCommand.getInstance().getPage(request,response);
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
         User user = UserService.getInstance().findUserById(id);
         request.setAttribute(AttributeConst.ATTR_EMAIL, user.getEmail());

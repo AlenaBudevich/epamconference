@@ -26,6 +26,10 @@
 </div>
 <div class="row">
 
+    <div class="three columns">
+        <%@include file="messagemenu.jsp" %>
+    </div>
+
     <c:set var="changeMessage" value="${changeMessage}"/>
     <c:if test="${not empty changeMessage}">
         <%@include file="changemessage.jsp" %>
@@ -34,9 +38,6 @@
     <c:set var="messages" value="${messages}"/>
     <c:if test="${not empty messages}">
 
-        <div class="three columns">
-            <%@include file="messagemenu.jsp" %>
-        </div>
 
         <div class="nine columns">
             <table>

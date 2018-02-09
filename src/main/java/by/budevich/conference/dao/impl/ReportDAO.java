@@ -16,11 +16,6 @@ import java.util.ArrayList;
  * Created by Asus on 23.01.2018.
  */
 public class ReportDAO implements BaseReportDAO {
-    private static ReportDAO instance = new ReportDAO();
-
-    public static ReportDAO getInstance() {
-        return instance;
-    }
 
     private static final String SQL_ADD_BASIC_REPORT_INFO =
             "INSERT INTO report (reportName, reportTheses) VALUES (?,?)";

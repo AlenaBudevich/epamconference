@@ -5,12 +5,10 @@ import by.budevich.conference.constant.AttributeConst;
 import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
-import by.budevich.conference.exception.ServiceException;
 import by.budevich.conference.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -26,13 +24,11 @@ public class ViewUsersCommand implements BaseCommand {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServiceException, SQLException, DAOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 
-    public String getPage(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServiceException, DAOException {
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         ArrayList<User> users = UserService.getInstance().showUsers();
         request.setAttribute(AttributeConst.ATTR_USERS, users);
         return PageConst.PAGE_VIEW_USERS;

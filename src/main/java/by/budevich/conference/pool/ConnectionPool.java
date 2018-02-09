@@ -130,12 +130,4 @@ public class ConnectionPool {
             throw new ConnectionPoolException("Can't destroy connection pool.", e);
         }
     }
-
-//    public static Connection getConnection() throws SQLException {
-//        ResourceBundle resource = ResourceBundle.getBundle("database");
-//        String url = resource.getString("db.url");
-//        String user = resource.getString("db.user");
-//        String pass = resource.getString("db.password");
-//        return DriverManager.getConnection(url, user, pass);
-//    }
 }

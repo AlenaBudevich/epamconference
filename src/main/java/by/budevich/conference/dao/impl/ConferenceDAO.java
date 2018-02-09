@@ -12,11 +12,6 @@ import java.util.ArrayList;
  * Created by Asus on 24.01.2018.
  */
 public class ConferenceDAO implements BaseConferenceDAO {
-    private static ConferenceDAO instance = new ConferenceDAO();
-
-    public static ConferenceDAO getInstance() {
-        return instance;
-    }
 
     private static final String SQL_ADD_CONFERENCE =
             "INSERT INTO сonference (conferenceID, conferenceName, conferenceDescription, " +
