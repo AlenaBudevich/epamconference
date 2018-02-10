@@ -293,7 +293,9 @@ public class ReportDAO implements BaseReportDAO {
             preparedStatement.setLong(1, reportId);
             preparedStatement.setLong(2, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            checkUserReport = resultSet.getInt(1);
+            if(resultSet.next()) {
+                checkUserReport = resultSet.getInt(1);
+            }
         } catch (SQLException e) {
             throw new DAOException("SQLException occurred while counting user reports in a database", e);
         } finally {

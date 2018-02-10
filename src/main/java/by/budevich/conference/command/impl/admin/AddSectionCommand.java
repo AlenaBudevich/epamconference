@@ -28,12 +28,12 @@ public class AddSectionCommand implements BaseCommand {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String conferenceName = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_NAME);
-        if (ConferenceService.getInstance().findConferenceByName(conferenceName) != null) {
+        if (ConferenceService.getInstance().findConferenceByName(conferenceName).getConferenceName() != null) {
             Conference conference = ConferenceService.getInstance().findConferenceByName(conferenceName);
             long conferenceId = conference.getConferenceId();
             String sectionName = request.getParameter(ParameterConst.PARAMETER_SECTION_NAME);
 
-            if (SectionService.getInstance().findSectionsByName(sectionName) == null) {
+            if (SectionService.getInstance().findSectionsByName(sectionName).getSectionName() == null) {
 
                 SectionService.getInstance().addBasicSectionInfo(conferenceId, sectionName);
                 request.setAttribute(AttributeConst.ATTR_CONFERENCE, conference);

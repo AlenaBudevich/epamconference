@@ -26,7 +26,7 @@ public class AddBasicReportInfoCommand implements BaseCommand {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
-        if (ReportService.getInstance().findReportByName(reportName)== null){
+        if (ReportService.getInstance().findReportByName(reportName).getReportName()== null){
             String reportTheses = request.getParameter(ParameterConst.PARAMETER_REPORT_THESES);
             ReportService.getInstance().addBasicReportInfo(reportName, reportTheses);
 

@@ -25,7 +25,7 @@
         <br/>Email:<br/>
         <input type="text" name="email" value="${email}"/>
         <br/>Phone number:<br/>
-        <input type="text" name="phoneNumber" value="${phoneNumber}"/>
+        <input type="text" name="phoneNumber" value="${phoneNumber}" pattern="[0-9]+"/>
         <br/>Avatar:<br/>
         <input type="text" name="avatar" value="${avatar}"/>
         <br/>First Name:<br/>

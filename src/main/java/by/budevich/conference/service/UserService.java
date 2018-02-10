@@ -5,6 +5,8 @@ import by.budevich.conference.dao.impl.UserDAO;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.util.SHA256Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -12,6 +14,7 @@ import java.util.ArrayList;
  * Created by Asus on 22.01.2018.
  */
 public class UserService {
+    static final Logger LOGGER = LogManager.getLogger(UserService.class);
     private BaseUserDAO dao;
     private static UserService instance = new UserService();
 
@@ -32,6 +35,7 @@ public class UserService {
     }
 
     public User findUserByLogin(String login) throws DAOException {
+        LOGGER.info("The findUserByLogin() method is called with the input data:" + login);
         return dao.findUserByLogin(login);
     }
 

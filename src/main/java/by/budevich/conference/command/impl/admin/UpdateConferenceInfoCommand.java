@@ -30,7 +30,7 @@ public class UpdateConferenceInfoCommand implements BaseCommand {
         String conferenceId = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_ID);
         Conference conference = ConferenceService.getInstance().findConferenceById(conferenceId);
         String conferenceName = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_NAME);
-        if (ConferenceService.getInstance().findConferenceByName(conferenceName) == null ||
+        if (ConferenceService.getInstance().findConferenceByName(conferenceName).getConferenceName() == null ||
                 conferenceName.equals(conference.getConferenceName())) {
             conference.setConferenceName(conferenceName);
             conference.setConferenceDescription(request.getParameter(ParameterConst.PARAMETER_CONFERENCE_DESCRIPTION));

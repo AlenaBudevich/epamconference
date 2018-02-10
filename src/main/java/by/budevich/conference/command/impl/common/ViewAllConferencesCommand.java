@@ -29,6 +29,7 @@ public class ViewAllConferencesCommand implements BaseCommand{
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+
         ArrayList<Conference> conferences= ConferenceService.getInstance().showConferences();
         request.setAttribute(AttributeConst.ATTR_CONFERENCES, conferences);
         return PageConst.PAGE_MAIN;

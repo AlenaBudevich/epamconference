@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * Created by Asus on 24.01.2018.
  */
 public class ConferenceService {
+
     private BaseConferenceDAO dao;
     private static ConferenceService instance = new ConferenceService();
 

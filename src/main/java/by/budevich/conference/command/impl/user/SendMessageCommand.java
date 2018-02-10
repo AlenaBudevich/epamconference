@@ -29,7 +29,7 @@ public class SendMessageCommand implements BaseCommand {
 
         long sendId = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
         String login = request.getParameter(ParameterConst.PARAMETER_LOGIN);
-        if (UserService.getInstance().findUserByLogin(login) != null) {
+        if (UserService.getInstance().findUserByLogin(login).getLogin() != null) {
             long receiveId = UserService.getInstance().findUserByLogin(login).getUserId();
             String messageText = request.getParameter(ParameterConst.PARAMETER_MESSAGE_TEXT);
             Message message = new Message();

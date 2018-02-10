@@ -19,7 +19,8 @@
 <div class="row" align="center">
     <h3>Reports</h3>
 </div>
-<div class="row">
+
+<div class="row" align="center">
     <c:set var="report" value="${report}"/>
     <c:if test="${not empty report}">
         <%@include file="updatereportinfo.jsp" %>
@@ -30,16 +31,17 @@
         <%@include file="addreport.jsp" %>
     </c:if>
 
-    <c:set var="addSectionReport" value="${addSectionReport}"/>
-    <c:if test="${not empty addSectionReport}">
-        <%@include file="addsectionreport.jsp" %>
-    </c:if>
-
     <c:set var="deleteSectionReport" value="${deleteSectionReport}"/>
     <c:if test="${not empty deleteSectionReport}">
         <%@include file="deletesectionreport.jsp" %>
     </c:if>
+    <c:set var="addSectionReport" value="${addSectionReport}"/>
+    <c:if test="${not empty addSectionReport}">
+        <%@include file="addsectionreport.jsp" %>
+    </c:if>
+</div>
 
+<div class="row">
     <div class="three columns">
         <ul class="nav navmenu-nav">
             <li><a href="controller?command=addbasicreportinfo">Add new report</a></li>
@@ -50,7 +52,6 @@
 
     <c:set var="reports" value="${userReports}"/>
     <c:if test="${not empty reports}">
-
 
 
         <div class="nine columns">

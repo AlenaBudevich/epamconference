@@ -28,7 +28,7 @@ public class RegistrationCommand implements BaseCommand {
         String password = request.getParameter(ParameterConst.PARAMETER_PASSWORD);
         String email = request.getParameter(ParameterConst.PARAMETER_EMAIL);
 
-        if (UserService.getInstance().findUserByLogin(login)!=null) {
+        if (UserService.getInstance().findUserByLogin(login).getLogin()!=null) {
             return PageConst.PAGE_ERROR;
         }
         else

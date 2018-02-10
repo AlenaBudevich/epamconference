@@ -28,8 +28,8 @@ public class UpdateReportInfoCommand implements BaseCommand {
         long reportId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_REPORT_ID));
         Report report = ReportService.getInstance().findReportById(reportId);
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
-        if (ReportService.getInstance().findReportByName(reportName) == null ||
-                reportName.equals(report.getReportName())) {
+        if (reportName.equals(report.getReportName()) ||
+                ReportService.getInstance().findReportByName(reportName).getReportName()==null) {
             report.setReportName(reportName);
             report.setReportTheses(request.getParameter(ParameterConst.PARAMETER_REPORT_THESES));
             report.setReportContent(request.getParameter(ParameterConst.PARAMETER_REPORT_CONTENT));

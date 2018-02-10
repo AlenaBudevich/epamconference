@@ -28,7 +28,12 @@ public class ChangeProfileInfoCommand implements BaseCommand {
         long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
         User user = UserService.getInstance().findUserById(id);
         user.setEmail(request.getParameter(ParameterConst.PARAMETER_EMAIL));
-        user.setPhoneNumber(Integer.parseInt(request.getParameter(ParameterConst.PARAMETER_PHONE_NUMBER)));
+        if  (!request.getParameter(ParameterConst.PARAMETER_PHONE_NUMBER).equals("")) {
+            user.setPhoneNumber(Integer.parseInt(request.getParameter(ParameterConst.PARAMETER_PHONE_NUMBER)));
+        }
+        else {
+            user.setPhoneNumber(0);
+        }
         user.setAvatar(request.getParameter(ParameterConst.PARAMETER_AVATAR));
         user.setFirstName(request.getParameter(ParameterConst.PARAMETER_FIRST_NAME));
         user.setLastName(request.getParameter(ParameterConst.PARAMETER_LAST_NAME));

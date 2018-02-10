@@ -31,7 +31,7 @@ public class AddSectionReportCommand implements BaseCommand {
         long userId = (Long)request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
         Report report = ReportService.getInstance().findReportByName(reportName);
-        if (report==null) {
+        if (report.getReportName()==null) {
             return PageConst.PAGE_ERROR;
         }
         long reportId = report.getReportId();

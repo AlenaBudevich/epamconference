@@ -23,17 +23,17 @@
     <c:if test="${not empty sendMessage}">
         <%@include file="sendmessage.jsp" %>
     </c:if>
+
+    <c:set var="changeMessage" value="${changeMessage}"/>
+    <c:if test="${not empty changeMessage}">
+        <%@include file="changemessage.jsp" %>
+    </c:if>
 </div>
 <div class="row">
 
     <div class="three columns">
         <%@include file="messagemenu.jsp" %>
     </div>
-
-    <c:set var="changeMessage" value="${changeMessage}"/>
-    <c:if test="${not empty changeMessage}">
-        <%@include file="changemessage.jsp" %>
-    </c:if>
 
     <c:set var="messages" value="${messages}"/>
     <c:if test="${not empty messages}">

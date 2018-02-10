@@ -30,7 +30,7 @@ public class UpdateSectionInfoCommand implements BaseCommand {
         String sectionId = request.getParameter(ParameterConst.PARAMETER_SECTION_ID);
         Section section = SectionService.getInstance().findSectionById(sectionId);
         String sectionName = request.getParameter(ParameterConst.PARAMETER_SECTION_NAME);
-        if (SectionService.getInstance().findSectionsByName(sectionName) == null ||
+        if (SectionService.getInstance().findSectionsByName(sectionName).getSectionName() == null ||
                 sectionName.equals(section.getSectionName())) {
 
             section.setSectionName(sectionName);

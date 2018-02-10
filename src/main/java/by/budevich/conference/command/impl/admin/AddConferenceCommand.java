@@ -26,7 +26,8 @@ public class AddConferenceCommand implements BaseCommand {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         String conferenceName = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_NAME);
-        if (ConferenceService.getInstance().findConferenceByName(conferenceName) == null) {
+        if (ConferenceService.getInstance().findConferenceByName(conferenceName).
+                getConferenceName() == null) {
             Conference conference = new Conference();
             conference.setConferenceName(conferenceName);
             conference.setConferenceDescription(request.getParameter(ParameterConst.PARAMETER_CONFERENCE_DESCRIPTION));
