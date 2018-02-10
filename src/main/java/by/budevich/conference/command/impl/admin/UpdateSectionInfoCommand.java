@@ -3,6 +3,7 @@ package by.budevich.conference.command.impl.admin;
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
 import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ErrorMessageConst;
 import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Section;
@@ -53,6 +54,7 @@ public class UpdateSectionInfoCommand implements BaseCommand {
             return ViewAllConferencesCommand.getInstance().getPage(request, response);
         }
         else {
+            request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_ADD_SECTION);
             return PageConst.PAGE_ERROR;
         }
     }

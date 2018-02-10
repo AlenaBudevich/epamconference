@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.common;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ErrorMessageConst;
 import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.exception.DAOException;
@@ -34,6 +35,7 @@ public class RegistrationCommand implements BaseCommand {
         String email = request.getParameter(ParameterConst.PARAMETER_EMAIL);
 
         if (UserService.getInstance().findUserByLogin(login).getLogin()!=null) {
+            request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_REGISTRATION);
             return PageConst.PAGE_ERROR;
         }
         else
@@ -47,11 +49,6 @@ public class RegistrationCommand implements BaseCommand {
     public String getPage(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("The getPage() method is called");
 
-        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
-            return PageConst.PAGE_ERROR;
-        }
-        else {
-            return PageConst.PAGE_REGISTRATION;
-        }
+        return PageConst.PAGE_REGISTRATION;
     }
 }

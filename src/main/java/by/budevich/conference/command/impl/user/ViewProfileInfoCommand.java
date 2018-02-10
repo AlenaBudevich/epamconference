@@ -20,29 +20,28 @@ public class ViewProfileInfoCommand implements BaseCommand {
 
     public static ViewProfileInfoCommand instance = new ViewProfileInfoCommand();
 
-    private ViewProfileInfoCommand() {}
+    private ViewProfileInfoCommand() {
+    }
 
     public static ViewProfileInfoCommand getInstance() {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response){
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         LOGGER.info("The getPage() method is called");
 
-        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
-            long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
-            User user = UserService.getInstance().findUserById(id);
-            request.setAttribute(AttributeConst.ATTR_EMAIL, user.getEmail());
-            request.setAttribute(AttributeConst.ATTR_PHONE_NUMBER, user.getPhoneNumber());
-            request.setAttribute(AttributeConst.ATTR_AVATAR, user.getAvatar());
-            request.setAttribute(AttributeConst.ATTR_FIRST_NAME, user.getFirstName());
-            request.setAttribute(AttributeConst.ATTR_LAST_NAME, user.getLastName());
-            request.setAttribute(AttributeConst.ATTR_SURNAME, user.getSurname());
-            return PageConst.PAGE_PROFILE;
-        } else return PageConst.PAGE_ERROR;
+        long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
+        User user = UserService.getInstance().findUserById(id);
+        request.setAttribute(AttributeConst.ATTR_EMAIL, user.getEmail());
+        request.setAttribute(AttributeConst.ATTR_PHONE_NUMBER, user.getPhoneNumber());
+        request.setAttribute(AttributeConst.ATTR_AVATAR, user.getAvatar());
+        request.setAttribute(AttributeConst.ATTR_FIRST_NAME, user.getFirstName());
+        request.setAttribute(AttributeConst.ATTR_LAST_NAME, user.getLastName());
+        request.setAttribute(AttributeConst.ATTR_SURNAME, user.getSurname());
+        return PageConst.PAGE_PROFILE;
     }
 }

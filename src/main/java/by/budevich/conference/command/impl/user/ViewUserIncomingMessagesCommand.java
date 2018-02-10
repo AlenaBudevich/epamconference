@@ -21,7 +21,8 @@ public class ViewUserIncomingMessagesCommand implements BaseCommand {
 
     public static ViewUserIncomingMessagesCommand instance = new ViewUserIncomingMessagesCommand();
 
-    private ViewUserIncomingMessagesCommand() {}
+    private ViewUserIncomingMessagesCommand() {
+    }
 
     public static ViewUserIncomingMessagesCommand getInstance() {
         return instance;
@@ -34,13 +35,9 @@ public class ViewUserIncomingMessagesCommand implements BaseCommand {
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         LOGGER.info("The getPage() method is called");
 
-        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
-            long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
-            ArrayList<Message> userMessages = MessageService.getInstance().showIncomingMessagesByUserId(id);
-            request.setAttribute(AttributeConst.ATTR_MESSAGES, userMessages);
-            return PageConst.PAGE_INCOMING_MESSAGES;
-        } else {
-            return PageConst.PAGE_ERROR;
-        }
+        long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
+        ArrayList<Message> userMessages = MessageService.getInstance().showIncomingMessagesByUserId(id);
+        request.setAttribute(AttributeConst.ATTR_MESSAGES, userMessages);
+        return PageConst.PAGE_INCOMING_MESSAGES;
     }
 }

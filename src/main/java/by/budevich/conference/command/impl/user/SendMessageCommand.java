@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ErrorMessageConst;
 import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Message;
@@ -43,8 +44,8 @@ public class SendMessageCommand implements BaseCommand {
             message.setMessageContent(request.getParameter(ParameterConst.PARAMETER_MESSAGE_CONTENT));
             MessageService.getInstance().sendMessage(message);
             return ViewUserOutgoingMessagesCommand.getInstance().getPage(request, response);
-
         } else {
+            request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_LOGIN);
             return PageConst.PAGE_ERROR;
         }
 

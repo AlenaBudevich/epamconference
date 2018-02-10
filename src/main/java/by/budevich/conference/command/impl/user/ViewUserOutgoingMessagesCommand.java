@@ -21,26 +21,23 @@ public class ViewUserOutgoingMessagesCommand implements BaseCommand {
 
     public static ViewUserOutgoingMessagesCommand instance = new ViewUserOutgoingMessagesCommand();
 
-    private ViewUserOutgoingMessagesCommand() {}
+    private ViewUserOutgoingMessagesCommand() {
+    }
 
     public static ViewUserOutgoingMessagesCommand getInstance() {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response){
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         LOGGER.info("The getPage() method is called");
 
-        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
-            long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
-            ArrayList<Message> userMessages = MessageService.getInstance().showOutgoingMessagesByUserId(id);
-            request.setAttribute(AttributeConst.ATTR_MESSAGES, userMessages);
-            return PageConst.PAGE_OUTGOING_MESSAGES;
-        } else {
-            return PageConst.PAGE_ERROR;
-        }
+        long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
+        ArrayList<Message> userMessages = MessageService.getInstance().showOutgoingMessagesByUserId(id);
+        request.setAttribute(AttributeConst.ATTR_MESSAGES, userMessages);
+        return PageConst.PAGE_OUTGOING_MESSAGES;
     }
 }

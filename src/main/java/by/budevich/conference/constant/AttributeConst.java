@@ -33,4 +33,7 @@ public class AttributeConst {
     public static final String ATTR_FIRST_NAME = "firstName";
     public static final String ATTR_LAST_NAME = "lastName";
     public static final String ATTR_SURNAME = "surname";
+
+    public static final String ATTR_ERROR = "error";
+
 }

@@ -22,25 +22,23 @@ public class ViewUserReportsCommand implements BaseCommand {
 
     public static ViewUserReportsCommand instance = new ViewUserReportsCommand();
 
-    private ViewUserReportsCommand() {}
+    private ViewUserReportsCommand() {
+    }
 
     public static ViewUserReportsCommand getInstance() {
         return instance;
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response){
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
         LOGGER.info("The getPage() method is called");
 
-        if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
-            long id = (Long)request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
-            ArrayList<Report> userReports= ReportService.getInstance().showReportsByAnyId(ParameterConst.PARAMETER_USER, id);
-            request.setAttribute(AttributeConst.ATTR_USER_REPORTS, userReports);
-            return PageConst.PAGE_USER_REPORTS;
-        }
-        else return PageConst.PAGE_ERROR;
+        long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
+        ArrayList<Report> userReports = ReportService.getInstance().showReportsByAnyId(ParameterConst.PARAMETER_USER, id);
+        request.setAttribute(AttributeConst.ATTR_USER_REPORTS, userReports);
+        return PageConst.PAGE_USER_REPORTS;
     }
 }

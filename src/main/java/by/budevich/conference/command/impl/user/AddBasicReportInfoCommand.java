@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ErrorMessageConst;
 import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
@@ -43,6 +44,7 @@ public class AddBasicReportInfoCommand implements BaseCommand {
 
         }
         else {
+            request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_ADD_REPORT);
             return PageConst.PAGE_ERROR;
         }
     }

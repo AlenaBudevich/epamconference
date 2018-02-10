@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ErrorMessageConst;
 import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
@@ -36,7 +37,8 @@ public class DeleteSectionReportCommand implements BaseCommand{
         long userId = (Long)request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
         Report report = ReportService.getInstance().findReportByName(reportName);
-        if (report==null) {
+        if (report.getReportName()==null) {
+            request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_REPORT);
             return PageConst.PAGE_ERROR;
         }
         long reportId = report.getReportId();
@@ -44,13 +46,15 @@ public class DeleteSectionReportCommand implements BaseCommand{
         if (role.equalsIgnoreCase(ParameterConst.PARAMETER_ROLE_ADMIN) || ownReport!=0){
             String sectionName = request.getParameter(ParameterConst.PARAMETER_SECTION_NAME);
             Section section = SectionService.getInstance().findSectionsByName(sectionName);
-            if (section==null) {
+            if (section.getSectionName()==null) {
+                request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_SECTION);
                 return  PageConst.PAGE_ERROR;
             }
             long sectionId = section.getSectionId();
             ReportService.getInstance().deleteReportFrom(ParameterConst.PARAMETER_SECTION, reportId , sectionId);
             return ViewUserReportsCommand.getInstance().getPage(request, response);
         }else {
+            request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_DELETE_SECTION_REPORT);
             return PageConst.PAGE_ERROR;
         }
     }

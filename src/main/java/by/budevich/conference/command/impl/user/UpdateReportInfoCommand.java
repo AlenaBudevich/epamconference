@@ -2,6 +2,7 @@ package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.constant.AttributeConst;
+import by.budevich.conference.constant.ErrorMessageConst;
 import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
@@ -39,9 +40,9 @@ public class UpdateReportInfoCommand implements BaseCommand {
             report.setReportTheses(request.getParameter(ParameterConst.PARAMETER_REPORT_THESES));
             report.setReportContent(request.getParameter(ParameterConst.PARAMETER_REPORT_CONTENT));
             ReportService.getInstance().updateReportInfo(report);
-
             return ViewUserReportsCommand.getInstance().getPage(request, response);
         } else {
+            request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_ADD_REPORT);
             return PageConst.PAGE_ERROR;
         }
     }
