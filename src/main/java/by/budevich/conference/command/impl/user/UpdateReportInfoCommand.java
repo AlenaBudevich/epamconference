@@ -7,6 +7,8 @@ import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Report;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.service.ReportService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,16 +17,19 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Asus on 30.01.2018.
  */
 public class UpdateReportInfoCommand implements BaseCommand {
+    static final Logger LOGGER = LogManager.getLogger(UpdateReportInfoCommand.class);
+
     public static UpdateReportInfoCommand instance = new UpdateReportInfoCommand();
 
-    private UpdateReportInfoCommand() {
-    }
+    private UpdateReportInfoCommand() {}
 
     public static UpdateReportInfoCommand getInstance() {
         return instance;
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The execute() method is called");
+
         long reportId = Long.parseLong(request.getParameter(ParameterConst.PARAMETER_REPORT_ID));
         Report report = ReportService.getInstance().findReportById(reportId);
         String reportName = request.getParameter(ParameterConst.PARAMETER_REPORT_NAME);
@@ -42,6 +47,8 @@ public class UpdateReportInfoCommand implements BaseCommand {
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The getPage() method is called");
+
         String reportId = request.getParameter(ParameterConst.PARAMETER_REPORT_ID);
         Report report = ReportService.getInstance().findReportById(Long.parseLong(reportId));
         request.setAttribute(AttributeConst.ATTR_REPORT, report);

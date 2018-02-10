@@ -4,14 +4,20 @@ import by.budevich.conference.dao.BaseUserDAO;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.pool.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  * Created by Asus on 15.01.2018.
  */
 public class UserDAO implements BaseUserDAO {
+    static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
 
     private static final String SQL_ADD_USER =
             "INSERT INTO user (userID, login, password, email, role, phoneNumber," +
@@ -37,11 +43,14 @@ public class UserDAO implements BaseUserDAO {
 
     private static final String SQL_VIEW_USER_TABLE = "SELECT userID, login, password, email, " +
             "role, phoneNumber, avatar, firstName, lastName, surname " +
-            "FROM user ";
+            "FROM user " +
+            "WHERE userID <> ?";
 
     private static final String SQL_DELETE_USER = " DELETE FROM user WHERE userID = ?";
 
     public void addUser(User user) throws DAOException {
+        LOGGER.info("The addUser() method is called with the input data:" + user.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_USER);
@@ -66,6 +75,8 @@ public class UserDAO implements BaseUserDAO {
     }
 
     public User findUserByLogin(String login) throws DAOException {
+        LOGGER.info("The findUserByLogin() method is called with the input data:" + login);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         User user = null;
         try {
@@ -84,6 +95,8 @@ public class UserDAO implements BaseUserDAO {
     }
 
     public User findUserById(long userId) throws DAOException {
+        LOGGER.info("The findUserById() method is called with the input data:" + userId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         User user = null;
         try {
@@ -102,6 +115,8 @@ public class UserDAO implements BaseUserDAO {
     }
 
     public void updateUserInfo(User user) throws DAOException {
+        LOGGER.info("The updateUserInfo() method is called with the input data:" + user.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_INFO);
@@ -123,10 +138,11 @@ public class UserDAO implements BaseUserDAO {
     }
 
     public void assignRoleToUser(long userId, String role) throws DAOException {
+        LOGGER.info("The assignRoleToUser() method is called with the input data:" + userId + ", "+role);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_ROLE);
-            System.out.println(userId + role);
             preparedStatement.setString(1, role);
             preparedStatement.setLong(2, userId);
             preparedStatement.executeUpdate();
@@ -139,13 +155,16 @@ public class UserDAO implements BaseUserDAO {
         }
     }
 
-    public ArrayList<User> showUsers() throws DAOException {
+    public ArrayList<User> showUsers(long userId) throws DAOException {
+        LOGGER.info("The showUsers() method is called with the input data:" + userId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<User> userList = null;
         try {
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(SQL_VIEW_USER_TABLE);
-            userList = initUserTable(result);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_VIEW_USER_TABLE);
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            userList = initUserTable(resultSet);
         } catch (SQLException e) {
             throw new DAOException("Can't initialize user list", e);
         } finally {
@@ -157,6 +176,8 @@ public class UserDAO implements BaseUserDAO {
     }
 
     public void deleteUser(long userId) throws DAOException {
+        LOGGER.info("The deleteUser() method is called with the input data:" + userId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER);
@@ -172,6 +193,8 @@ public class UserDAO implements BaseUserDAO {
     }
 
     private User initUser(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initUser() method is called");
+
         User user = new User();
         if (resultSet.next()) {
             user.setUserId(resultSet.getLong(1));
@@ -189,6 +212,8 @@ public class UserDAO implements BaseUserDAO {
     }
 
     private ArrayList<User> initUserTable(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initUserTable() method is called");
+
         ArrayList<User> users = new ArrayList<User>();
         while (resultSet.next()) {
             User user = new User();

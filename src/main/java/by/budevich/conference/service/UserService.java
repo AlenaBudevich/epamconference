@@ -30,6 +30,7 @@ public class UserService {
     }
 
     public void addUser(String login, String password, String email) throws DAOException {
+        LOGGER.info("The addUser() method is called with the input data:" + login + ", "+password+", "+email);
         User user = new User(login, SHA256Util.encrypt(password), email);
         dao.addUser(user);
     }
@@ -40,22 +41,27 @@ public class UserService {
     }
 
     public void updateUserInfo(User user) throws DAOException {
+        LOGGER.info("The updateUserInfo() method is called with the input data:" + user.toString());
         dao.updateUserInfo(user);
     }
 
     public User findUserById(long userId) throws DAOException {
+        LOGGER.info("The findUserById() method is called with the input data:" + userId);
         return dao.findUserById(userId);
     }
 
     public void assignRoleToUser(long userId, String role) throws DAOException {
+        LOGGER.info("The assignRoleToUser() method is called with the input data:" + userId+", "+role);
         dao.assignRoleToUser(userId, role);
     }
 
-    public ArrayList<User> showUsers() throws DAOException {
-        return dao.showUsers();
+    public ArrayList<User> showUsers(long userId) throws DAOException {
+        LOGGER.info("The showUsers() method is called with the input data:" + userId);
+        return dao.showUsers(userId);
     }
 
     public void deleteUser(String userId) throws DAOException {
+        LOGGER.info("The deleteUser() method is called with the input data:" + userId);
         dao.deleteUser(Long.parseLong(userId));
     }
 }

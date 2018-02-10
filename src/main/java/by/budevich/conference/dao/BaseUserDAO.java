@@ -15,5 +15,5 @@ public interface BaseUserDAO {
     void assignRoleToUser(long userId, String role) throws DAOException;
     User findUserByLogin(String login) throws DAOException;
     User findUserById(long userId) throws DAOException;
-    ArrayList<User> showUsers() throws DAOException;
+    ArrayList<User> showUsers(long userId) throws DAOException;
 }

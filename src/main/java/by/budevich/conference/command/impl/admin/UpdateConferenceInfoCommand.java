@@ -8,6 +8,8 @@ import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Conference;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.service.ConferenceService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,16 +19,19 @@ import java.sql.Timestamp;
  * Created by Asus on 01.02.2018.
  */
 public class UpdateConferenceInfoCommand implements BaseCommand {
+    static final Logger LOGGER = LogManager.getLogger(UpdateConferenceInfoCommand.class);
+
     public static UpdateConferenceInfoCommand instance = new UpdateConferenceInfoCommand();
 
-    private UpdateConferenceInfoCommand() {
-    }
+    private UpdateConferenceInfoCommand() {}
 
     public static UpdateConferenceInfoCommand getInstance() {
         return instance;
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The execute() method is called");
+
         String conferenceId = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_ID);
         Conference conference = ConferenceService.getInstance().findConferenceById(conferenceId);
         String conferenceName = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_NAME);
@@ -56,6 +61,8 @@ public class UpdateConferenceInfoCommand implements BaseCommand {
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The getPage() method is called");
+
         String conferenceId = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_ID);
         Conference conference = ConferenceService.getInstance().findConferenceById(conferenceId);
         request.setAttribute(AttributeConst.ATTR_CONFERENCE, conference);

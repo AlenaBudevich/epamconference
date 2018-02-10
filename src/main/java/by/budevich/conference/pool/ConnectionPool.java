@@ -2,6 +2,8 @@ package by.budevich.conference.pool;
 
 import by.budevich.conference.constant.DBConst;
 import by.budevich.conference.exception.ConnectionPoolException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import java.sql.Connection;
@@ -20,6 +22,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by Asus on 15.01.2018.
  */
 public class ConnectionPool {
+    static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static Lock lock = new ReentrantLock();
 
     private BlockingQueue<Connection> availableConnectionsQueue;
@@ -47,7 +50,6 @@ public class ConnectionPool {
             finally {
                 lock.unlock();
             }
-
         }
         return instance;
     }
@@ -66,7 +68,7 @@ public class ConnectionPool {
         } catch(NumberFormatException e){
             this.connectionAmount = DBConst.DEFAULT_AMOUNT;
         } catch (MissingResourceException e){
-            //logger.fatal("JDBC: Can't find resource bundle ", e);
+            LOGGER.fatal("JDBC: Can't find resource bundle ", e);
             throw new RuntimeException("JDBC: Can't find resource bundle", e);
         } catch (ConnectionPoolException e) {
             throw new RuntimeException("JDBC: Incorrect initialization of the class");
@@ -75,14 +77,14 @@ public class ConnectionPool {
 
     @PostConstruct
     private void initPool() throws ConnectionPoolException {
-        //logger.info("Creating pool pool");
+        LOGGER.info("Creating pool pool");
         try {
             Class.forName(locationOfDriver);
             Locale.setDefault(Locale.ENGLISH);
             for(int i=0; i < connectionAmount; i++) {
                 Connection connection = DriverManager.getConnection(url, user, password);
                 availableConnectionsQueue.put(connection);
-                //logger.info("Connection "+ i +" is created and put into the queue.");
+                LOGGER.info("Connection "+ i +" is created and put into the queue.");
             }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("JDBC: Can't find driver class ", e);
@@ -99,34 +101,34 @@ public class ConnectionPool {
             connection = availableConnectionsQueue.take();
             usedConnectionsQueue.put(connection);
         } catch (InterruptedException e) {
-            //logger.error("Interrupted exception occurred while taking connection from the pool ", e);
+            LOGGER.error("Interrupted exception occurred while taking connection from the pool ", e);
         }
-        //logger.info("Connection is taken.");
+        LOGGER.info("Connection is taken.");
         return connection;
     }
 
     public void returnConnection(Connection connection) {
         try {
-            //logger.info("Trying to return connection to the connection pool...");
+            LOGGER.info("Trying to return connection to the connection pool...");
             availableConnectionsQueue.put(connection);
             usedConnectionsQueue.remove(connection);
-            //logger.info("Connection is successfully returned.");
+            LOGGER.info("Connection is successfully returned.");
         } catch (InterruptedException e) {
-            //logger.error("InterruptedException occurred while returning a connection");
+            LOGGER.error("InterruptedException occurred while returning a connection");
         }
 
     }
 
     public void destroyPool() throws ConnectionPoolException {
-        //logger.info("Destroying connection pool.");
+        LOGGER.info("Destroying connection pool.");
         try {
             for (int i = 0; i < connectionAmount; i++) {
                 Connection connection = ConnectionPool.getInstance().getConnection();
                 connection.close();
-                //logger.info("Connection "+ i +" is destroyed.");
+                LOGGER.info("Connection "+ i +" is destroyed.");
             }
         } catch (SQLException e) {
-            //logger.warn("Can't destroy connection pool.");
+            LOGGER.warn("Can't destroy connection pool.");
             throw new ConnectionPoolException("Can't destroy connection pool.", e);
         }
     }

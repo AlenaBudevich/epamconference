@@ -9,6 +9,8 @@ import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.service.UserService;
 import by.budevich.conference.util.SHA256Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Asus on 22.01.2018.
  */
 public class LoginCommand implements BaseCommand{
+    static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
+
     public static LoginCommand instance = new LoginCommand();
     private LoginCommand(){}
 
@@ -25,6 +29,8 @@ public class LoginCommand implements BaseCommand{
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The execute() method is called");
+
         String login = request.getParameter(ParameterConst.PARAMETER_LOGIN);
         String password = request.getParameter(ParameterConst.PARAMETER_PASSWORD);
         User user = UserService.getInstance().findUserByLogin(login);
@@ -41,6 +47,8 @@ public class LoginCommand implements BaseCommand{
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The getPage() method is called");
+
         if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
             return PageConst.PAGE_ERROR;
         }

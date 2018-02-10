@@ -2,6 +2,8 @@ package by.budevich.conference.controller;
 
 import by.budevich.conference.command.BaseCommand;
 import by.budevich.conference.exception.DAOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "controller", urlPatterns = "/controller")
 public class Controller extends HttpServlet {
+    static final Logger LOGGER = LogManager.getLogger(Controller.class);
     public Controller() {
         super();
     }
@@ -23,6 +26,8 @@ public class Controller extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.info("The doPost() method is called");
+
         CommandFactory commandFactory = new CommandFactory();
         BaseCommand command = commandFactory.defineCommand(request);
         try {
@@ -38,6 +43,8 @@ public class Controller extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("The doGet() method is called");
+
         CommandFactory commandFactory = new CommandFactory();
         BaseCommand command = commandFactory.defineCommand(request);
         String page = null;

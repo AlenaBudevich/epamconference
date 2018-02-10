@@ -1,13 +1,11 @@
 package by.budevich.conference.dao.impl;
 
-/**
- * Created by Asus on 24.01.2018.
- */
-
 import by.budevich.conference.dao.BaseReportDAO;
 import by.budevich.conference.entity.*;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.pool.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,6 +14,8 @@ import java.util.ArrayList;
  * Created by Asus on 23.01.2018.
  */
 public class ReportDAO implements BaseReportDAO {
+    static final Logger LOGGER = LogManager.getLogger(ReportDAO.class);
+
 
     private static final String SQL_ADD_BASIC_REPORT_INFO =
             "INSERT INTO report (reportName, reportTheses) VALUES (?,?)";
@@ -74,6 +74,8 @@ public class ReportDAO implements BaseReportDAO {
             "SELECT COUNT(reportID) FROM reportuser WHERE reportID = ? AND userID = ? ";
 
     private Report initReport(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initReport() method is called");
+
         Report report = new Report();
         if (resultSet.next()) {
             report.setReportId(resultSet.getLong(1));
@@ -86,6 +88,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     private ArrayList<Report> initReportTable(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initReportTable() method is called");
+
         ArrayList<Report> reports = new ArrayList<Report>();
         while (resultSet.next()) {
             Report report = new Report();
@@ -100,6 +104,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public ArrayList<Report> showReports() throws DAOException {
+        LOGGER.info("The showReports() method is called");
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Report> reportList = null;
         try {
@@ -118,6 +124,8 @@ public class ReportDAO implements BaseReportDAO {
 
 
     public Report findReportById(long id) throws DAOException {
+        LOGGER.info("The findReportById() method is called with the input data:" + id);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         Report report = null;
         try {
@@ -136,6 +144,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public void addBasicReportInfo(Report report) throws DAOException {
+        LOGGER.info("The addBasicReportInfo() method is called with the input data:" + report.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_BASIC_REPORT_INFO);
@@ -152,6 +162,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public ArrayList<Report> showReportsByAnyId(String entity, long id) throws DAOException {
+        LOGGER.info("The showReportsByAnyId() method is called with the input data:" + entity+", "+id);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         ArrayList<Report> reports = null;
@@ -177,6 +189,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public Report findReportByName(String reportName) throws DAOException {
+        LOGGER.info("The findReportByName() method is called with the input data:" + reportName);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         Report report = null;
         try {
@@ -195,6 +209,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public void assignStatusToReport(long reportId, String reportStatus) throws DAOException {
+        LOGGER.info("The assignStatusToReport() method is called with the input data:" + reportId+", "+reportStatus);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ASSIGN_STATUS_TO_REPORT);
@@ -211,6 +227,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public void updateReportInfo(Report report) throws DAOException {
+        LOGGER.info("The updateReportInfo() method is called with the input data:" + report.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_REPORT_INFO);
@@ -229,6 +247,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public void deleteReport(long reportId) throws DAOException {
+        LOGGER.info("The deleteReport() method is called with the input data:" + reportId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_REPORT);
@@ -244,6 +264,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public void addReportTo(String entity, long id, long reportId) throws DAOException {
+        LOGGER.info("The addReportTo() method is called with the input data:" + entity+", "+reportId+", "+id);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -265,8 +287,10 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public void deleteReportFrom(String entity, long reportId, long id) throws DAOException {
+        LOGGER.info("The deleteReportFrom() method is called with the input data:" + entity+", "+reportId+", "+id);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         try {
             if (entity.equalsIgnoreCase(EntityEnum.USER.name())) {
                 preparedStatement = connection.prepareStatement(SQL_DELETE_REPORT_FROM_USER);
@@ -286,6 +310,8 @@ public class ReportDAO implements BaseReportDAO {
     }
 
     public int checkUserReport(long reportId, long userId) throws DAOException {
+        LOGGER.info("The checkUserReport() method is called with the input data:" + reportId+", "+userId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         int checkUserReport = 0;
         try {

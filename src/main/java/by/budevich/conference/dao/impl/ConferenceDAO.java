@@ -4,6 +4,8 @@ import by.budevich.conference.dao.BaseConferenceDAO;
 import by.budevich.conference.entity.Conference;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.pool.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
  * Created by Asus on 24.01.2018.
  */
 public class ConferenceDAO implements BaseConferenceDAO {
+    static final Logger LOGGER = LogManager.getLogger(ConferenceDAO.class);
+
 
     private static final String SQL_ADD_CONFERENCE =
             "INSERT INTO сonference (conferenceID, conferenceName, conferenceDescription, " +
@@ -43,6 +47,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
             " WHERE conferenceName = ?";
 
     public void addConference(Conference conference) throws DAOException {
+        LOGGER.info("The addConference() method is called with the input data:" + conference.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_CONFERENCE);
@@ -69,6 +75,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     public void updateConferenceInfo(Conference conference) throws DAOException {
+        LOGGER.info("The updateConferenceInfo() method is called with the input data:" + conference.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_CONFERENCE_INFO);
@@ -94,6 +102,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     public void deleteConference(long conferenceId) throws DAOException {
+        LOGGER.info("The deleteConference() method is called with the input data:" + conferenceId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_CONFERENCE);
@@ -109,6 +119,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     public ArrayList<Conference> showConferences() throws DAOException {
+        LOGGER.info("The showConferences() method is called");
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Conference> conferenceList = null;
         try {
@@ -126,6 +138,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     public Conference findConferenceById(long conferenceId) throws DAOException {
+        LOGGER.info("The findConferenceById() method is called with the input data:" + conferenceId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         Conference conference = null;
         try {
@@ -144,6 +158,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     public Conference findConferenceByName(String conferenceName) throws DAOException {
+        LOGGER.info("The findConferenceByName() method is called with the input data:" + conferenceName);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         Conference conference = null;
         try {
@@ -162,6 +178,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     private Conference initConference(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initConference() method is called");
+
         Conference conference = new Conference();
         if (resultSet.next()) {
             conference.setConferenceId(resultSet.getLong(1));
@@ -181,6 +199,8 @@ public class ConferenceDAO implements BaseConferenceDAO {
     }
 
     private ArrayList<Conference> initConferenceTable(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initConferenceTable() method is called");
+
         ArrayList<Conference> conferences = new ArrayList<Conference>();
         while (resultSet.next()) {
             Conference conference = new Conference();

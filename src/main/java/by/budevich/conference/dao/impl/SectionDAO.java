@@ -4,6 +4,8 @@ import by.budevich.conference.dao.BaseSectionDAO;
 import by.budevich.conference.entity.Section;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.pool.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
  * Created by Asus on 24.01.2018.
  */
 public class SectionDAO implements BaseSectionDAO {
+    static final Logger LOGGER = LogManager.getLogger(SectionDAO.class);
+
 
     private static final String SQL_ADD_SECTION_INFO =
             "INSERT INTO section (sectionID, conferenceID, sectionName, maxNumberReports, sectionBeginning, " +
@@ -43,6 +47,8 @@ public class SectionDAO implements BaseSectionDAO {
             "WHERE sectionName = ?";
 
     private Section initSection(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initSection() method is called");
+
         Section section = new Section();
         while (resultSet.next()) {
             section.setSectionId(resultSet.getLong(1));
@@ -59,6 +65,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     private ArrayList<Section> initSectionTable(ResultSet resultSet) throws SQLException {
+        LOGGER.info("The initSectionTable() method is called");
+
         ArrayList<Section> sections = new ArrayList<Section>();
         while (resultSet.next()) {
             Section section = new Section();
@@ -77,6 +85,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     public void addSectionInfo(Section section) throws DAOException {
+        LOGGER.info("The addSectionInfo() method is called with the input data:" + section.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_SECTION_INFO);
@@ -100,6 +110,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     public void updateSectionInfo(Section section) throws DAOException {
+        LOGGER.info("The updateSectionInfo() method is called with the input data:" + section.toString());
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_SECTION_INFO);
@@ -123,6 +135,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     public void deleteSection(long sectionId) throws DAOException {
+        LOGGER.info("The deleteSection() method is called with the input data:" + sectionId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_SECTION);
@@ -138,6 +152,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     public ArrayList<Section> showSections() throws DAOException {
+        LOGGER.info("The showSections() method is called");
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Section> sectionList = null;
         try {
@@ -155,6 +171,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     public ArrayList<Section> showSectionsByConferenceId(long conferenceId) throws DAOException {
+        LOGGER.info("The showSectionsByConferenceId() method is called with the input data:" + conferenceId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         ArrayList<Section> sections = null;
         try {
@@ -173,6 +191,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     public Section findSectionById(long sectionId) throws DAOException {
+        LOGGER.info("The findSectionById() method is called with the input data:" + sectionId);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         Section section = null;
         try {
@@ -191,6 +211,8 @@ public class SectionDAO implements BaseSectionDAO {
     }
 
     public Section findSectionByName(String sectionName) throws DAOException {
+        LOGGER.info("The findSectionByName() method is called with the input data:" + sectionName);
+
         Connection connection = ConnectionPool.getInstance().getConnection();
         Section section = null;
         try {

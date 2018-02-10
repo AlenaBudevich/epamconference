@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class EmptyCommand implements BaseCommand {
     private static EmptyCommand instance = new EmptyCommand();
 
-    private EmptyCommand() {
-    }
+    private EmptyCommand() {}
 
     public static EmptyCommand getInstance() {
         return instance;

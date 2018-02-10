@@ -7,6 +7,8 @@ import by.budevich.conference.constant.ParameterConst;
 import by.budevich.conference.entity.Conference;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.service.ConferenceService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Asus on 01.02.2018.
  */
 public class AddConferenceCommand implements BaseCommand {
+    static final Logger LOGGER = LogManager.getLogger(AddConferenceCommand.class);
+
     private static AddConferenceCommand instance = new AddConferenceCommand();
 
     private AddConferenceCommand() {
@@ -25,6 +29,8 @@ public class AddConferenceCommand implements BaseCommand {
     }
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The execute() method is called");
+
         String conferenceName = request.getParameter(ParameterConst.PARAMETER_CONFERENCE_NAME);
         if (ConferenceService.getInstance().findConferenceByName(conferenceName).
                 getConferenceName() == null) {
@@ -43,6 +49,8 @@ public class AddConferenceCommand implements BaseCommand {
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The getPage() method is called");
+
         return PageConst.PAGE_ADD_CONFERENCE;
     }
 }

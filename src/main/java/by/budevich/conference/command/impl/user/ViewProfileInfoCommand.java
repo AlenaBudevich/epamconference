@@ -6,6 +6,8 @@ import by.budevich.conference.constant.PageConst;
 import by.budevich.conference.entity.User;
 import by.budevich.conference.exception.DAOException;
 import by.budevich.conference.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +16,11 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Asus on 29.01.2018.
  */
 public class ViewProfileInfoCommand implements BaseCommand {
+    static final Logger LOGGER = LogManager.getLogger(ViewProfileInfoCommand.class);
+
     public static ViewProfileInfoCommand instance = new ViewProfileInfoCommand();
 
-    private ViewProfileInfoCommand() {
-    }
+    private ViewProfileInfoCommand() {}
 
     public static ViewProfileInfoCommand getInstance() {
         return instance;
@@ -28,6 +31,8 @@ public class ViewProfileInfoCommand implements BaseCommand {
     }
 
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws DAOException {
+        LOGGER.info("The getPage() method is called");
+
         if (request.getSession().getAttribute(AttributeConst.ATTR_USER_ID) != null) {
             long id = (Long) request.getSession().getAttribute(AttributeConst.ATTR_USER_ID);
             User user = UserService.getInstance().findUserById(id);
