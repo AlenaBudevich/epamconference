@@ -9,7 +9,7 @@
 
 <c:set var="language"
        value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
-       scope="session"/>
+       scope="application"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="text"/>
 
@@ -20,7 +20,7 @@
     <div class="nav">
         <ul>
             <li>
-                <a class="active" href="controller?command=viewallconferences"><fmt:message key="header.text.conference"/></a>
+                <a class="active" href="../index.jsp"><fmt:message key="header.text.conference"/></a>
             </li>
             <%@include file="usermenu.jsp" %>
             <c:set var="userId" value="${userId}"/>
@@ -37,14 +37,6 @@
                     <a href="controller?command=registration"><fmt:message key="header.text.registration"/></a>
                 </li>
             </c:if>
-            <li>
-                <form>
-                    <select id="language" name="language" onchange="submit()">
-                        <option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
-                        <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
-                    </select>
-                </form>
-            </li>
         </ul>
     </div>
 </div>

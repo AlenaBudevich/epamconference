@@ -1,7 +1,6 @@
 package by.budevich.conference.command.impl.user;
 
 import by.budevich.conference.command.BaseCommand;
-import by.budevich.conference.command.impl.common.ViewAllConferencesCommand;
 import by.budevich.conference.constant.AttributeConst;
 import by.budevich.conference.constant.ErrorMessageConst;
 import by.budevich.conference.constant.PageConst;
@@ -45,7 +44,7 @@ public class LoginCommand implements BaseCommand {
             request.getSession().setAttribute(AttributeConst.ATTR_LOGIN, user.getLogin());
             request.getSession().setAttribute(AttributeConst.ATTR_ROLE, user.getRole());
             request.getSession().setAttribute(AttributeConst.ATTR_USER_ID, user.getUserId());
-            return ViewAllConferencesCommand.getInstance().getPage(request, response);
+            return ViewProfileInfoCommand.getInstance().getPage(request, response);
         } else {
             request.setAttribute(AttributeConst.ATTR_ERROR, ErrorMessageConst.ERROR_PASSWORD);
             return PageConst.PAGE_ERROR;

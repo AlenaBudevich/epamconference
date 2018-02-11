@@ -34,6 +34,6 @@ public class LogoutCommand implements BaseCommand {
 
         HttpSession session = request.getSession();
         session.invalidate();
-        return ViewAllConferencesCommand.getInstance().getPage(request, response);
+        return LoginCommand.getInstance().getPage(request, response);
     }
 }

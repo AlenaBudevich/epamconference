@@ -23,6 +23,17 @@
 
 <div class="row" align="center">
     <h3><fmt:message key="main.text.main"/></h3>
+
+    <div><h5><fmt:message key="main.text.language"/></h5></div>
+    <div>
+        <form>
+            <select id="language" name="language" onchange="submit()">
+                <option value="ru" ${language == 'ru' ? 'selected' : ''}>RU</option>
+                <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
+            </select>
+        </form>
+    </div>
+
     <c:set var="userId" value="${userId}"/>
     <c:set var="role" value="${role}"/>
     <c:if test="${not empty userId}">
@@ -48,14 +59,16 @@
                         <form>
                             <input type="hidden" name="command" value="updateconferenceinfo"/>
                             <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
-                            <input type="submit" value=<fmt:message key="main.text.update"/> formmethod="get" formaction="controller"/>
+                            <input type="submit" value=
+                                <fmt:message key="main.text.update"/> formmethod="get" formaction="controller"/>
                         </form>
                     </td>
                     <td>
                         <form>
                             <input type="hidden" name="command" value="deleteconference"/>
                             <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
-                            <input type="submit" value=<fmt:message key="main.text.delete"/> formmethod="get" formaction="controller"/>
+                            <input type="submit" value=
+                                <fmt:message key="main.text.delete"/> formmethod="get" formaction="controller"/>
                         </form>
                     </td>
                 </c:if>
@@ -65,7 +78,8 @@
                         <form>
                             <input type="hidden" name="command" value="viewconferencesections"/>
                             <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
-                            <input type="submit" value=<fmt:message key="main.text.moreinfo"/> formmethod="get" formaction="controller"/>
+                            <input type="submit" value=
+                                <fmt:message key="main.text.moreinfo"/> formmethod="get" formaction="controller"/>
                         </form>
                     </td>
                 </c:if>
