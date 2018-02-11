@@ -18,23 +18,23 @@
 <script src="js/validation.js"></script>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Update section info</h3>
+    <h3><fmt:message key="updatesection.text.updatesection"/></h3>
     <form name="updateSectionInfoForm" onsubmit="return validateUpdateSectionForm()">
         <input type="hidden" name="command" value="updatesectioninfo"/>
         <input type="hidden" name="sectionId" value="${section.sectionId}"/>
-        Section name:<br/>
-        <input type="text" name="sectionName" value="${section.sectionName}"/>
-        <br/>Max number reports:<br/>
-        <input type="number" name="maxNumberReports" value="${section.maxNumberReports}"/>
-        <br/>Section beginning:<br/>
-        <input type="datetime" name="sectionBeginning" value="${section.sectionBeginning}"/>
-        <br/>Section end:<br/>
-        <input type="datetime" name="sectionEnd" value="${section.sectionEnd}"/>
-        <br/>Section address:<br/>
-        <input type="text" name="sectionAddress" value="${section.sectionAddress}"/>
-        <br/>Section content:<br/>
-        <input type="text" name="sectionContent" value="${section.sectionContent}"/>
-        <br/>Section status:<br/>
+        <label for="sectionname"><fmt:message key="updatesection.label.sectionname"/>:</label>
+        <input type="text" id="sectionname" name="sectionName" value="${section.sectionName}"/>
+        <label for="maxnumberreports"><fmt:message key="updatesection.label.maxnumberreports"/>:</label>
+        <input type="number" id="maxnumberreports" name="maxNumberReports" value="${section.maxNumberReports}"/>
+        <label for="sectionbeginning"><fmt:message key="updatesection.label.sectionbeginning"/>:</label>
+        <input type="datetime" id="sectionbeginning" name="sectionBeginning" value="${section.sectionBeginning}"/>
+        <label for="sectionend"><fmt:message key="updatesection.label.sectionend"/>:</label>
+        <input type="datetime" id="sectionend" name="sectionEnd" value="${section.sectionEnd}"/>
+        <label for="sectionaddress"><fmt:message key="updatesection.label.sectionaddress"/>:</label>
+        <input type="text" id="sectionaddress" name="sectionAddress" value="${section.sectionAddress}"/>
+        <label for="sectioncontent"><fmt:message key="updatesection.label.sectioncontent"/>:</label>
+        <input type="text" id="sectioncontent" name="sectionContent" value="${section.sectionContent}"/>
+        <label><fmt:message key="updatesection.label.sectionstatus"/>:</label>
         <select name="sectionStatus">
             <option value="RECRUITED">RECRUITED</option>
             <option value="ACCEPTED">ACCEPTED</option>
@@ -42,7 +42,7 @@
             <option value="COMPLETED">COMPLETED</option>
         </select>
         <br>
-        <input class="button-primary" type="submit" value="Update" formmethod="post" formaction="controller"/>
+        <input class="button-primary" type="submit" value=<fmt:message key="updatesection.text.updatesection"/> formmethod="post" formaction="controller"/>
     </form>
 </div>
 </body>

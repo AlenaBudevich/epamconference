@@ -17,21 +17,21 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>View users</h3>
+    <h3><fmt:message key="users.text.users"/></h3>
     <c:set var="changeId" value="${changeId}"/>
     <c:set var="users" value="${users}"/>
     <c:if test="${not empty users}">
         <div>
             <table>
                 <tr>
-                    <th>login</th>
-                    <th>email</th>
-                    <th>phoneNumber</th>
-                    <th>avatar</th>
-                    <th>firstName</th>
-                    <th>lastName</th>
-                    <th>surname</th>
-                    <th>role</th>
+                    <th><fmt:message key="users.text.login"/></th>
+                    <th><fmt:message key="users.text.email"/></th>
+                    <th><fmt:message key="users.text.phonenumber"/></th>
+                    <th><fmt:message key="users.text.avatar"/></th>
+                    <th><fmt:message key="users.text.firstname"/></th>
+                    <th><fmt:message key="users.text.lastname"/></th>
+                    <th><fmt:message key="users.text.surname"/></th>
+                    <th><fmt:message key="users.text.role"/></th>
                 </tr>
                 <c:forEach items="${users}" var="current">
                     <tr>
@@ -50,7 +50,7 @@
                                 <form>
                                     <input type="hidden" name="command" value="assignuserrole"/>
                                     <input type="hidden" name="changeId" value="${current.userId}"/>
-                                    <input type="submit" value="Change role" formmethod="get" formaction="controller"/>
+                                    <input type="submit" value=<fmt:message key="users.text.changerole"/> formmethod="get" formaction="controller"/>
                                 </form>
                             </td>
                         </c:if>
@@ -69,7 +69,7 @@
                                 </td>
                                 <td>
                                     <input type="hidden" name="userId" value="${currentId}"/>
-                                    <input type="submit" value="Change" formmethod="post" formaction="controller"/>
+                                    <input type="submit" value=<fmt:message key="users.text.changerole"/> formmethod="post" formaction="controller"/>
                                 </td>
                             </form>
                         </c:if>

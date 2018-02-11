@@ -17,46 +17,46 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Conference</h3>
+    <h3><fmt:message key="conference.text.conference"/></h3>
     <h3>${conference.conferenceName}</h3>
     <c:set var="sections" value="${sections}"/>
     <br>
     <div>
         <table>
             <tr>
-                <th>conferenceDescription</th>
+                <th><fmt:message key="conference.text.conferencedescription"/></th>
                 <td>${conference.conferenceDescription}</td>
             </tr>
             <tr>
-                <th>maxNumberParticipants</th>
+                <th><fmt:message key="conference.text.maxnumberparticipants"/></th>
                 <td>${conference.maxNumberParticipants}</td>
             </tr>
             <tr>
-                <th>conferenceBeginning</th>
+                <th><fmt:message key="conference.text.conferencebeginning"/></th>
                 <td>${conference.conferenceBeginning}</td>
             </tr>
             <tr>
-                <th>conferenceEnd</th>
+                <th><fmt:message key="conference.text.conferenceend"/></th>
                 <td>${conference.conferenceEnd}</td>
             </tr>
             <tr>
-                <th>conferenceCountry</th>
+                <th><fmt:message key="conference.text.conferencecountry"/></th>
                 <td>${conference.conferenceCountry}</td>
             </tr>
             <tr>
-                <th>conferenceCity</th>
+                <th><fmt:message key="conference.text.conferencecity"/></th>
                 <td>${conference.conferenceCity}</td>
             </tr>
             <tr>
-                <th>conferenceAddress</th>
+                <th><fmt:message key="conference.text.conferenceaddress"/></th>
                 <td>${conference.conferenceAddress}</td>
             </tr>
             <tr>
-                <th>conferenceContent</th>
+                <th><fmt:message key="conference.text.conferencecontent"/></th>
                 <td>${conference.conferenceContent}</td>
             </tr>
             <tr>
-                <th>conferenceStatus</th>
+                <th><fmt:message key="conference.text.conferencestatus"/></th>
                 <td>${conference.conferenceStatus}</td>
             </tr>
         </table>
@@ -67,10 +67,10 @@
         <div>
             <table>
                 <tr>
-                    <th>sectionName</th>
-                    <th>sectionBeginning</th>
-                    <th>sectionAddress</th>
-                    <th>sectionStatus</th>
+                    <th><fmt:message key="conference.text.sectionname"/></th>
+                    <th><fmt:message key="conference.text.sectionbeginning"/></th>
+                    <th><fmt:message key="conference.text.sectionaddress"/></th>
+                    <th><fmt:message key="conference.text.sectionstatus"/></th>
                 </tr>
                 <c:forEach items="${sections}" var="current">
                     <tr>
@@ -83,14 +83,14 @@
                                 <form>
                                     <input type="hidden" name="command" value="updatesectioninfo"/>
                                     <input type="hidden" name="sectionId" value="${current.sectionId}"/>
-                                    <input type="submit" value="Update" formmethod="get" formaction="controller"/>
+                                    <input type="submit" value=<fmt:message key="conference.text.update"/> formmethod="get" formaction="controller"/>
                                 </form>
                             </td>
                             <td>
                                 <form>
                                     <input type="hidden" name="command" value="deletesection"/>
                                     <input type="hidden" name="sectionId" value="${current.sectionId}"/>
-                                    <input type="submit" value="Delete" formmethod="get" formaction="controller"/>
+                                    <input type="submit" value=<fmt:message key="conference.text.delete"/> formmethod="get" formaction="controller"/>
                                 </form>
                             </td>
                         </c:if>
@@ -98,7 +98,7 @@
                             <form>
                                 <input type="hidden" name="command" value="viewsectionreports"/>
                                 <input type="hidden" name="sectionId" value="${current.sectionId}"/>
-                                <input type="submit" value="More info" formmethod="get" formaction="controller"/>
+                                <input type="submit" value=<fmt:message key="conference.text.moreinfo"/> formmethod="get" formaction="controller"/>
                             </form>
                         </td>
                     </tr>

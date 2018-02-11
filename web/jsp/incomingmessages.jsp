@@ -18,7 +18,7 @@
 <%@include file="header.jsp" %>
 <br>
 <div class="row" align="center">
-    <h3>${login}'s incoming messages</h3>
+    <h3>${login}'s <fmt:message key="incomingmessages.text.incomingmessages"/></h3>
 </div>
 
 <div class="row">
@@ -40,7 +40,7 @@
                             <form>
                                 <input type="hidden" name="command" value="deletemessage"/>
                                 <input type="hidden" name="messageId" value="${current.messageId}"/>
-                                <input type="submit" value="Delete" formmethod="get" formaction="controller"/>
+                                <input type="submit" value=<fmt:message key="incomingmessages.text.delete"/> formmethod="get" formaction="controller"/>
                             </form>
                         </td>
                     </tr>

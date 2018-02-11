@@ -17,7 +17,7 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Reports</h3>
+    <h3><fmt:message key="userreports.text.userrepoerts"/></h3>
 </div>
 
 <div class="row" align="center">
@@ -44,9 +44,9 @@
 <div class="row">
     <div class="three columns">
         <ul class="nav navmenu-nav">
-            <li><a href="controller?command=addbasicreportinfo">Add new report</a></li>
-            <li><a href="controller?command=addsectionreport">Add section-report</a></li>
-            <li><a href="controller?command=deletesectionreport">Delete section-report</a></li>
+            <li><a href="controller?command=addbasicreportinfo"><fmt:message key="userreports.text.addreport"/></a></li>
+            <li><a href="controller?command=addsectionreport"><fmt:message key="userreports.text.addsectionreport"/></a></li>
+            <li><a href="controller?command=deletesectionreport"><fmt:message key="userreports.text.deletesectionreport"/></a></li>
         </ul>
     </div>
 
@@ -57,10 +57,10 @@
         <div class="nine columns">
             <table>
                 <tr>
-                    <th>reportName</th>
-                    <th>reportTheses</th>
-                    <th>reportStatus</th>
-                    <th>reportContent</th>
+                    <th><fmt:message key="userreports.text.reportname"/></th>
+                    <th><fmt:message key="userreports.text.reporttheses"/></th>
+                    <th><fmt:message key="userreports.text.reportstatus"/></th>
+                    <th><fmt:message key="userreports.text.reportcontent"/></th>
                 </tr>
                 <c:forEach items="${userReports}" var="current">
                     <tr>
@@ -72,14 +72,14 @@
                             <form>
                                 <input type="hidden" name="command" value="updatereportinfo"/>
                                 <input type="hidden" name="reportId" value="${current.reportId}"/>
-                                <input type="submit" value="Update" formmethod="get" formaction="controller"/>
+                                <input type="submit" value=<fmt:message key="userreports.text.update"/> formmethod="get" formaction="controller"/>
                             </form>
                         </td>
                         <td>
                             <form>
                                 <input type="hidden" name="command" value="deletereport"/>
                                 <input type="hidden" name="reportId" value="${current.reportId}"/>
-                                <input type="submit" value="Delete" formmethod="get" formaction="controller"/>
+                                <input type="submit" value=<fmt:message key="userreports.text.delete"/> formmethod="get" formaction="controller"/>
                             </form>
                         </td>
                     </tr>

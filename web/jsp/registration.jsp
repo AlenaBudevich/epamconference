@@ -18,19 +18,19 @@
 <script src="js/validation.js"></script>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Registration</h3>
+    <h3><fmt:message key="registration.text.registration"/></h3>
     <form name="registrationForm" onsubmit="return validateRegistrationForm()">
         <input type="hidden" name="command" value="registration"/>
-        Login:<br/>
-        <input type="text" name="login" value=""/>
-        <br/>Email:<br/>
-        <input type="text" name="email" value=""/>
-        <br/>Password:<br/>
-        <input type="password" name="password" value=""/>
-        <br/>Repeat password:<br/>
-        <input type="password" name="repeatpassword" value=""/>
+        <label for="login"><fmt:message key="registration.label.login"/>:</label>
+        <input type="text" id="login" name="login" value=""/>
+        <label for="email"><fmt:message key="registration.label.email"/>:</label>
+        <input type="text" id="email" name="email" value=""/>
+        <label for="password"><fmt:message key="registration.label.password"/>:</label>
+        <input type="password" id="password" name="password" value=""/>
+        <label for="repeatpassword"><fmt:message key="registration.label.repeatpassword"/>:</label>
+        <input type="password" id="repeatpassword" name="repeatpassword" value=""/>
         <br/>
-        <input class="button-primary" type="submit" value="Registration" formmethod="post" formaction="controller"/>
+        <input class="button-primary" type="submit" value=<fmt:message key="registration.text.registration"/> formmethod="post" formaction="controller"/>
     </form>
 </div>
 </body>

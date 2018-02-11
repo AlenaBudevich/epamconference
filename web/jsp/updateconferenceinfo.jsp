@@ -18,29 +18,29 @@
 <script src="js/validation.js"></script>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Update conference info</h3>
+    <h3><fmt:message key="updateconference.text.updateconference"/></h3>
     <form name="updateConferenceInfoForm" onsubmit="return validateUpdateConferenceForm()">
         <input type="hidden" name="command" value="updateconferenceinfo"/>
         <input type="hidden" name="conferenceId" value="${conference.conferenceId}"/>
-        Conference name:<br/>
-        <input type="text" name="conferenceName" value="${conference.conferenceName}"/>
-        <br/>Conference description:<br/>
-        <input type="text" name="conferenceDescription" value="${conference.conferenceDescription}"/>
-        <br/>Max number participants:<br/>
-        <input type="number" name="maxNumberParticipants" value="${conference.maxNumberParticipants}"/>
-        <br/>Conference beginning:<br/>
-        <input type="datetime" name="conferenceBeginning" value="${conference.conferenceBeginning}"/>
-        <br/>Conference end:<br/>
-        <input type="datetime" name="conferenceEnd" value="${conference.conferenceEnd}"/>
-        <br/>Conference country:<br/>
-        <input type="text" name="conferenceCountry" value="${conference.conferenceCountry}"/>
-        <br/>Conference city:<br/>
-        <input type="text" name="conferenceCity" value="${conference.conferenceCity}"/>
-        <br/>Conference address:<br/>
-        <input type="text" name="conferenceAddress" value="${conference.conferenceAddress}"/>
-        <br/>Conference content:<br/>
-        <input type="text" name="conferenceContent" value="${conference.conferenceContent}"/>
-        <br/>Conference status:<br/>
+        <label for="conferencename"><fmt:message key="updateconference.label.conferencename"/>:</label>
+        <input type="text" id="conferencename" name="conferenceName" value="${conference.conferenceName}"/>
+        <label for="conferencedescription"><fmt:message key="updateconference.label.conferencedescription"/>:</label>
+        <input type="text" id="conferencedescription" name="conferenceDescription" value="${conference.conferenceDescription}"/>
+        <label for="maxnumberparticipants"><fmt:message key="updateconference.label.maxnumberparticipants"/>:</label>
+        <input type="number" id="maxnumberparticipants" name="maxNumberParticipants" value="${conference.maxNumberParticipants}"/>
+        <label for="conferencebegining"><fmt:message key="updateconference.label.conferencebeginning"/>:</label>
+        <input type="datetime" id="conferencebegining" name="conferenceBeginning" value="${conference.conferenceBeginning}"/>
+        <label for="conferenceend"><fmt:message key="updateconference.label.conferenceend"/>:</label>
+        <input type="datetime" id="conferenceend" name="conferenceEnd" value="${conference.conferenceEnd}"/>
+        <label for="conferencecountry"><fmt:message key="updateconference.label.conferencecountry"/>:</label>
+        <input type="text" id="conferencecountry" name="conferenceCountry" value="${conference.conferenceCountry}"/>
+        <label for="conferencecity"><fmt:message key="updateconference.label.conferencecity"/>:</label>
+        <input type="text" id="conferencecity" name="conferenceCity" value="${conference.conferenceCity}"/>
+        <label for="conferenceaddress"><fmt:message key="updateconference.label.conferenceaddress"/>:</label>
+        <input type="text" id="conferenceaddress" name="conferenceAddress" value="${conference.conferenceAddress}"/>
+        <label for="conferencecontent"><fmt:message key="updateconference.label.conferencecontent"/>:</label>
+        <input type="text" id="conferencecontent" name="conferenceContent" value="${conference.conferenceContent}"/>
+        <label><fmt:message key="updateconference.label.conferencestatus"/>:</label>
         <select name="conferenceStatus">
             <option value="RECRUITED">RECRUITED</option>
             <option value="ACCEPTED">ACCEPTED</option>
@@ -48,7 +48,7 @@
             <option value="COMPLETED">COMPLETED</option>
         </select>
         <br/>
-        <input class="button-primary" type="submit" value="Update" formmethod="post" formaction="controller"/>
+        <input class="button-primary" type="submit" value=<fmt:message key="updateconference.text.updateconference"/> formmethod="post" formaction="controller"/>
     </form>
 </div>
 </body>

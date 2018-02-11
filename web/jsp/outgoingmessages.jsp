@@ -18,7 +18,7 @@
 <%@include file="header.jsp" %>
 <br>
 <div class="row" align="center">
-    <h3>${login}'s outgoing messages</h3>
+    <h3>${login}'s <fmt:message key="outgoingmessages.text.outgoingmessages"/></h3>
     <c:set var="sendMessage" value="${sendMessage}"/>
     <c:if test="${not empty sendMessage}">
         <%@include file="sendmessage.jsp" %>
@@ -50,14 +50,14 @@
                             <form>
                                 <input type="hidden" name="command" value="changemessage"/>
                                 <input type="hidden" name="messageId" value="${current.messageId}"/>
-                                <input type="submit" value="Change" formmethod="get" formaction="controller"/>
+                                <input type="submit" value=<fmt:message key="outgoingmessages.text.change"/> formmethod="get" formaction="controller"/>
                             </form>
                         </td>
                         <td>
                             <form>
                                 <input type="hidden" name="command" value="deletemessage"/>
                                 <input type="hidden" name="messageId" value="${current.messageId}"/>
-                                <input type="submit" value="Delete" formmethod="get" formaction="controller"/>
+                                <input type="submit" value=<fmt:message key="outgoingmessages.text.delete"/> formmethod="get" formaction="controller"/>
                             </form>
                         </td>
                     </tr>

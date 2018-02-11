@@ -6,13 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<h1>Delete section-report</h1>
+<h3><fmt:message key="deletesectionreport.text.deletesectionreport"/></h3>
 <form name="deleteSectionReportForm">
     <input type="hidden" name="command" value="deletesectionreport"/>
-    Section name:<br/>
-    <input type="text" name="sectionName" value=""/>
-    <br/>Report name:<br/>
-    <input type="text" name="reportName" value=""/>
+    <label for="sectionname"><fmt:message key="deletesectionreport.label.sectionname"/>:</label>
+    <input type="text" id="sectionname" name="sectionName" value=""/>
+    <label for="reportname"><fmt:message key="deletesectionreport.label.reportname"/>:</label>
+    <input type="text" id="reportname" name="reportName" value=""/>
     <br/>
-    <input class="button-primary" type="submit" value="Delete" formaction="controller" formmethod="post"/>
+    <input class="button-primary" type="submit" value=<fmt:message key="deletesectionreport.text.deletesectionreport"/> formaction="controller" formmethod="post"/>
 </form>

@@ -11,13 +11,13 @@
 <c:set var="role" value="${role}"/>
 <c:if test="${not empty userId}">
 
-    <li><a href="controller?command=viewprofileinfo">MY PROFILE</a></li>
-    <li><a href="controller?command=viewuserreports">MY REPORTS</a></li>
-    <li><a href="controller?command=viewuserincomingmessages">MESSAGES</a></li>
+    <li><a href="controller?command=viewprofileinfo"><fmt:message key="usermenu.text.myprofile"/></a></li>
+    <li><a href="controller?command=viewuserreports"><fmt:message key="usermenu.text.myreports"/></a></li>
+    <li><a href="controller?command=viewuserincomingmessages"><fmt:message key="usermenu.text.messages"/></a></li>
     <c:if test="${role == 'ADMIN'}">
-        <li><a href="controller?command=viewusers">USERS</a></li>
-        <li><a href="controller?command=addconference">ADD CONFERENCE</a></li>
-        <li><a href="controller?command=addsection">ADD SECTION</a></li>
+        <li><a href="controller?command=viewusers"><fmt:message key="usermenu.text.users"/></a></li>
+        <li><a href="controller?command=addconference"><fmt:message key="usermenu.text.addconference"/></a></li>
+        <li><a href="controller?command=addsection"><fmt:message key="usermenu.text.addsection"/></a></li>
     </c:if>
 
 </c:if>

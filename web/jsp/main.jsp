@@ -10,7 +10,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="${language}">
+<html>
 <head>
     <title>Main</title>
 
@@ -22,21 +22,20 @@
 <%@include file="header.jsp" %>
 
 <div class="row" align="center">
-    <fmt:message key="signup.text.welcome"/>
-    <h3>Main</h3>
+    <h3><fmt:message key="main.text.main"/></h3>
     <c:set var="userId" value="${userId}"/>
     <c:set var="role" value="${role}"/>
     <c:if test="${not empty userId}">
-        <h3>hi, ${login}</h3>
+        <h3><fmt:message key="main.text.hi"/> ${login}</h3>
         <h3><ctg:role role="${role}"/></h3>
     </c:if>
     <br>
     <table>
         <tr>
-            <th>conferenceName</th>
-            <th>conferenceDescription</th>
-            <th>maxNumberParticipants</th>
-            <th>conferenceCountry</th>
+            <th><fmt:message key="main.text.conferencename"/></th>
+            <th><fmt:message key="main.text.conferencedescription"/></th>
+            <th><fmt:message key="main.text.maxnumberparticipants"/></th>
+            <th><fmt:message key="main.text.conferencecountry"/></th>
         </tr>
         <c:forEach items="${conferences}" var="current">
             <tr>
@@ -49,14 +48,14 @@
                         <form>
                             <input type="hidden" name="command" value="updateconferenceinfo"/>
                             <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
-                            <input type="submit" value="Update" formmethod="get" formaction="controller"/>
+                            <input type="submit" value=<fmt:message key="main.text.update"/> formmethod="get" formaction="controller"/>
                         </form>
                     </td>
                     <td>
                         <form>
                             <input type="hidden" name="command" value="deleteconference"/>
                             <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
-                            <input type="submit" value="Delete" formmethod="get" formaction="controller"/>
+                            <input type="submit" value=<fmt:message key="main.text.delete"/> formmethod="get" formaction="controller"/>
                         </form>
                     </td>
                 </c:if>
@@ -66,7 +65,7 @@
                         <form>
                             <input type="hidden" name="command" value="viewconferencesections"/>
                             <input type="hidden" name="conferenceId" value="${current.conferenceId}"/>
-                            <input type="submit" value="More info" formmethod="get" formaction="controller"/>
+                            <input type="submit" value=<fmt:message key="main.text.moreinfo"/> formmethod="get" formaction="controller"/>
                         </form>
                     </td>
                 </c:if>

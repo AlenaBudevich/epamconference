@@ -7,14 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="js/validation.js"></script>
-<h1>Update report info</h1>
+<h3><fmt:message key="changemessage.text.changemessage"/></h3>
 <form name="changeMessageForm" onsubmit="return validateChangeMessageForm()">
     <input type="hidden" name="command" value="changeMessage" />
     <input type="hidden" name="messageId" value="${message.messageId}" />
-    <br/>Message text:<br/>
-    <input type="text" name="messageText" value="${message.messageText}"/>
-    <br/>Message content:<br/>
-    <input type="text" name="messageContent" value="${message.messageContent}"/>
+    <label for="messagetext"><fmt:message key="changemessage.label.messagetext"/>:</label>
+    <input type="text" id="messagetext" name="messageText" value="${message.messageText}"/>
+    <label for="messagecontent"><fmt:message key="changemessage.label.messagecontent"/>:</label
+    <input type="text" id="messagecontent" name="messageContent" value="${message.messageContent}"/>
     <br/>
-    <input class="button-primary" type="submit" value="Change" formmethod="post" formaction="controller"/>
+    <input class="button-primary" type="submit" value=<fmt:message key="changemessage.text.changemessage"/> formmethod="post" formaction="controller"/>
 </form>

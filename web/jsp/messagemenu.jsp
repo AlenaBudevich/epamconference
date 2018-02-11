@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="messagemenu">
     <ul>
-        <li><a href="controller?command=sendmessage">New message</a></li>
-        <li><a href="controller?command=viewuserincomingmessages">Incoming messages</a></li>
-        <li><a href="controller?command=viewuseroutgoingmessages">Outgoing messages</a></li>
+        <li><a href="controller?command=sendmessage"><fmt:message key="messagemenu.text.newmessage"/></a></li>
+        <li><a href="controller?command=viewuserincomingmessages"><fmt:message key="messagemenu.text.incomingmessages"/></a></li>
+        <li><a href="controller?command=viewuseroutgoingmessages"><fmt:message key="messagemenu.text.outgoingmessages"/></a></li>
     </ul>
 </div>

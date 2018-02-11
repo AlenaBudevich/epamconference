@@ -20,21 +20,21 @@
     <div class="nav">
         <ul>
             <li>
-                <a class="active" href="controller?command=viewallconferences">CONFERENCE</a>
+                <a class="active" href="controller?command=viewallconferences"><fmt:message key="header.text.conference"/></a>
             </li>
             <%@include file="usermenu.jsp" %>
             <c:set var="userId" value="${userId}"/>
             <c:if test="${not empty userId}">
                 <li>
-                    <a href="controller?command=logout">LOG OUT</a>
+                    <a href="controller?command=logout"><fmt:message key="header.text.logout"/></a>
                 </li>
             </c:if>
             <c:if test="${empty userId}">
                 <li>
-                    <a href="controller?command=login">LOG IN</a>
+                    <a href="controller?command=login"><fmt:message key="header.text.login"/></a>
                 </li>
                 <li>
-                    <a href="controller?command=registration">REGISTRATION</a>
+                    <a href="controller?command=registration"><fmt:message key="header.text.registration"/></a>
                 </li>
             </c:if>
             <li>

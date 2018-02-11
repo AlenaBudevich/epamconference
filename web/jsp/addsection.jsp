@@ -18,15 +18,15 @@
 <script src="js/validation.js"></script>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Add section</h3>
+    <h3><fmt:message key="addsection.text.addsection"/></h3>
     <form name="addSectionForm" onsubmit="return validateAddSectionForm()">
         <input type="hidden" name="command" value="addsection"/>
-        Conference name:<br/>
-        <input type="text" name="conferenceName" value=""/>
-        <br/>Section name:<br/>
-        <input type="text" name="sectionName" value=""/>
+        <label for="conferencename"><fmt:message key="addsection.label.conferencename"/>:</label>
+        <input type="text" id="conferencename" name="conferenceName" value=""/>
+        <label for="sectionname"><fmt:message key="addsection.label.sectionname"/>:</label>
+        <input type="text" id="sectionname" name="sectionName" value=""/>
         <br/>
-        <input class="button-primary" type="submit" value="Add" formmethod="post" formaction="controller"/>
+        <input class="button-primary" type="submit" value=<fmt:message key="addsection.text.addsection"/> formmethod="post" formaction="controller"/>
     </form>
 </div>
 </body>

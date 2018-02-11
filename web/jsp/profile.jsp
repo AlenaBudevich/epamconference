@@ -17,45 +17,45 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Profile</h3>
+    <h3><fmt:message key="profile.text.profile"/></h3>
     <div>
         <table>
             <tr>
-                <th>login</th>
+                <th><fmt:message key="profile.text.login"/></th>
                 <td>${login}</td>
             </tr>
             <tr>
-                <th>email</th>
+                <th><fmt:message key="profile.text.email"/></th>
                 <td>${email}</td>
             </tr>
             <tr>
-                <th>role</th>
+                <th><fmt:message key="profile.text.role"/></th>
                 <td>${role}</td>
             </tr>
             <tr>
-                <th>phoneNumber</th>
+                <th><fmt:message key="profile.text.phonenumber"/></th>
                 <td>${phoneNumber}</td>
             </tr>
             <tr>
-                <th>avatar</th>
+                <th><fmt:message key="profile.text.avatar"/></th>
                 <td>${avatar}</td>
             </tr>
             <tr>
-                <th>firstName</th>
+                <th><fmt:message key="profile.text.firstname"/></th>
                 <td>${firstName}</td>
             </tr>
             <tr>
-                <th>lastName</th>
+                <th><fmt:message key="profile.text.lastname"/></th>
                 <td>${lastName}</td>
             </tr>
             <tr>
-                <th>surname</th>
+                <th><fmt:message key="profile.text.surname"/></th>
                 <td>${surname}</td>
             </tr>
         </table>
         <form>
             <input type="hidden" name="command" value="changeprofileinfo"/>
-            <input type="submit" value="Change profile info" formmethod="get" formaction="controller"/>
+            <input type="submit" value=<fmt:message key="profile.text.change"/> formmethod="get" formaction="controller"/>
         </form>
     </div>
 </div>

@@ -7,13 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="js/validation.js"></script>
-<h1>Add basic report info</h1>
+<h3><fmt:message key="addreport.text.addreport"/></h3>
 <form name="addBasicReportInfoForm" onsubmit="return validateAddReportForm()">
     <input type="hidden" name="command" value="addBasicReportInfo" />
-    <br/>Report name:<br/>
-    <input type="text" name="reportName" value=""/>
-    <br/>Report theses:<br/>
-    <input type="text" name="reportTheses" value=""/>
+    <label for="reportname"><fmt:message key="addreport.label.reportname"/>:</label>
+    <input type="text" id="reportname" name="reportName" value=""/>
+    <label for="reporttheses"><fmt:message key="addreport.label.reporttheses"/>:</label>
+    <input type="text" id="reporttheses" name="reportTheses" value=""/>
     <br/>
-    <input class="button-primary" type="submit" value="Add" formmethod="post" formaction="controller"/>
+    <input class="button-primary" type="submit" value=<fmt:message key="addreport.text.addreport"/> formmethod="post" formaction="controller"/>
 </form>

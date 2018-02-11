@@ -18,24 +18,24 @@
 <script src="js/validation.js"></script>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Change profile info</h3>
+    <h3><fmt:message key="changeprofile.text.changeprofile"/></h3>
     <br>
     <form name="changeProfileInfoForm" onsubmit="return validateChangeProfileForm()">
         <input type="hidden" name="command" value="changeProfileInfo"/>
-        <br/>Email:<br/>
-        <input type="text" name="email" value="${email}"/>
-        <br/>Phone number:<br/>
-        <input type="text" name="phoneNumber" value="${phoneNumber}" pattern="[0-9]+"/>
-        <br/>Avatar:<br/>
-        <input type="text" name="avatar" value="${avatar}"/>
-        <br/>First Name:<br/>
-        <input type="text" name="firstName" value="${firstName}"/>
-        <br/>Last Name:<br/>
-        <input type="text" name="lastName" value="${lastName}"/>
-        <br/>Surname:<br/>
-        <input type="text" name="surname" value="${surname}"/>
+        <label for="email"><fmt:message key="changeprofile.label.email"/>:</label>
+        <input type="text" id="email" name="email" value="${email}"/>
+        <label for="phonenumber"><fmt:message key="changeprofile.label.phonenumber"/>:</label>
+        <input type="text" id="phonenumber" name="phoneNumber" value="${phoneNumber}" pattern="[0-9]+"/>
+        <label for="avatar"><fmt:message key="changeprofile.label.avatar"/>:</label>
+        <input type="text" id="avatar" name="avatar" value="${avatar}"/>
+        <label for="firstname"><fmt:message key="changeprofile.label.firstname"/>:</label>
+        <input type="text" id="firstname" name="firstName" value="${firstName}"/>
+        <label for="lastname"><fmt:message key="changeprofile.label.lastname"/>:</label>
+        <input type="text" id="lastname" name="lastName" value="${lastName}"/>
+        <label for="surname"><fmt:message key="changeprofile.label.surname"/>:</label>
+        <input type="text" id="surname" name="surname" value="${surname}"/>
         <br/>
-        <input class="button-primary" type="submit" value="Change" formmethod="post" formaction="controller"/>
+        <input class="button-primary" type="submit" value=<fmt:message key="changeprofile.text.changeprofile"/> formmethod="post" formaction="controller"/>
     </form>
 </div>
 </body>

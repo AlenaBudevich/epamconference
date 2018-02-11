@@ -17,7 +17,7 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="row" align="center">
-    <h3>Section</h3>
+    <h3><fmt:message key="section.text.section"/></h3>
     <h3>${section.sectionName}</h3>
     <c:set var="changeId" value="${changeId}"/>
     <c:set var="reports" value="${reports}"/>
@@ -25,27 +25,27 @@
     <div>
         <table>
             <tr>
-                <th>maxNumberReports</th>
+                <th><fmt:message key="section.text.maxnumberreports"/></th>
                 <td>${section.maxNumberReports}</td>
             </tr>
             <tr>
-                <th>sectionBeginning</th>
+                <th><fmt:message key="section.text.sectionbeginning"/></th>
                 <td>${section.sectionBeginning}</td>
             </tr>
             <tr>
-                <th>sectionEnd</th>
+                <th><fmt:message key="section.text.sectionend"/></th>
                 <td>${section.sectionEnd}</td>
             </tr>
             <tr>
-                <th>sectionAddress</th>
+                <th><fmt:message key="section.text.sectionaddress"/></th>
                 <td>${section.sectionAddress}</td>
             </tr>
             <tr>
-                <th>sectionContent</th>
+                <th><fmt:message key="section.text.sectioncontent"/></th>
                 <td>${section.sectionContent}</td>
             </tr>
             <tr>
-                <th>sectionStatus</th>
+                <th><fmt:message key="section.text.sectionstatus"/></th>
                 <td>${section.sectionStatus}</td>
             </tr>
         </table>
@@ -56,10 +56,10 @@
         <div>
             <table>
                 <tr>
-                    <th>reportName</th>
-                    <th>reportTheses</th>
-                    <th>reportStatus</th>
-                    <th>reportContent</th>
+                    <th><fmt:message key="section.text.reportname"/></th>
+                    <th><fmt:message key="section.text.reporttheses"/></th>
+                    <th><fmt:message key="section.text.reportstatus"/></th>
+                    <th><fmt:message key="section.text.reportcontent"/></th>
                 </tr>
                 <c:forEach items="${reports}" var="current">
                     <tr>
@@ -76,7 +76,7 @@
                                         <input type="hidden" name="command" value="assignreportstatus"/>
                                         <input type="hidden" name="changeId" value="${current.reportId}"/>
                                         <input type="hidden" name="sectionId" value="${section.sectionId}"/>
-                                        <input type="submit" value="Change status" formmethod="get"
+                                        <input type="submit" value=<fmt:message key="section.text.change"/> formmethod="get"
                                                formaction="controller"/>
                                     </form>
                                 </td>
@@ -95,7 +95,7 @@
                                     </select>
                                     <input type="hidden" name="sectionId" value="${section.sectionId}"/>
                                     <input type="hidden" name="reportId" value="${currentId}"/>
-                                    <input type="submit" value="Change" formmethod="post" formaction="controller"/>
+                                    <input type="submit" value=<fmt:message key="section.text.change"/> formmethod="post" formaction="controller"/>
                                 </form>
                             </td>
                         </c:if>
